@@ -1,0 +1,19 @@
+{
+    "name": "TinyMonsterArena.Application",
+    "rootNamespace": "TinyMonsterArena.Application",
+    "references": [
+        "TinyMonsterArena.Domain",
+        "Unity.InputSystem.IntegrationTests",
+        "Unity.InputSystem.ForUI",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

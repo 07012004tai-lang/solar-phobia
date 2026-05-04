@@ -1,0 +1,10 @@
+{
+  "name": "TinyMonsterArena.Presentation",
+  "rootNamespace": "TinyMonsterArena.Presentation",
+  "references": [
+    "TinyMonsterArena.Domain",
+    "TinyMonsterArena.Application",
+    "TinyMonsterArena.Shared"
+  ],
+  "autoReferenced": false
+}

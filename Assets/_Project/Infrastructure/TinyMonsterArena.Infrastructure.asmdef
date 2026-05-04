@@ -1,0 +1,11 @@
+{
+  "name": "TinyMonsterArena.Infrastructure",
+  "rootNamespace": "TinyMonsterArena.Infrastructure",
+  "references": [
+    "TinyMonsterArena.Domain",
+    "TinyMonsterArena.Application",
+    "TinyMonsterArena.Shared",
+    "Unity.InputSystem"
+  ],
+  "autoReferenced": false
+}
