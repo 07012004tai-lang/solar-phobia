@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="OrderQueueView.uss" />
+    <ui:VisualElement name="order-queue-view" class="panel order-panel">
+        <ui:Label name="order-queue-title" class="panel-title" text="Orders" />
+        <ui:VisualElement name="orders-container" class="orders-container" />
+    </ui:VisualElement>
+</ui:UXML>
+

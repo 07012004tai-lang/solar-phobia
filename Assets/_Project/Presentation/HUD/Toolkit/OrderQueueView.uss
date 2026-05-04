@@ -1,0 +1,31 @@
+﻿.panel {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(96, 83, 62);
+    border-right-color: rgb(96, 83, 62);
+    border-top-color: rgb(96, 83, 62);
+    border-bottom-color: rgb(96, 83, 62);
+    background-color: rgba(15, 12, 8, 0.7);
+}
+
+.order-panel {
+    gap: 8px;
+}
+
+.panel-title {
+    font-size: 15px;
+    unity-font-style: bold;
+    color: rgb(247, 226, 176);
+}
+
+.orders-container {
+    flex-direction: column;
+    gap: 6px;
+}
+

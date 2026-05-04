@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="DialogueView.uss" />
+    <ui:VisualElement name="dialogue-view" class="panel dialogue-panel">
+        <ui:Label name="speaker-label" class="speaker-label" text="" />
+        <ui:Label name="dialogue-text" class="dialogue-text" text="Dialogue will appear here." />
+        <ui:VisualElement name="choices-container" class="choices-container" />
+    </ui:VisualElement>
+</ui:UXML>
+

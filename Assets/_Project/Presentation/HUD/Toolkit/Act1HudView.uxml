@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="Act1HudView.uss" />
+    <ui:VisualElement name="act1-hud-root" class="act1-hud-root">
+        <ui:VisualElement name="status-bar" class="status-bar">
+            <ui:Label name="phase-label" class="status-label" text="Phase: BOOT" />
+            <ui:Label name="kindness-label" class="status-label" text="Kindness: 0" />
+            <ui:Label name="spirit-label" class="status-label" text="Spirit: 0" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="dialogue-view" class="panel dialogue-panel">
+            <ui:Label name="speaker-label" class="speaker-label" text="" />
+            <ui:Label name="dialogue-text" class="dialogue-text" text="Dialogue will appear here." />
+            <ui:VisualElement name="choices-container" class="choices-container" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="order-queue-view" class="panel order-panel">
+            <ui:Label name="order-queue-title" class="panel-title" text="Orders" />
+            <ui:VisualElement name="orders-container" class="orders-container" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
+
