@@ -1,0 +1,11 @@
+﻿{
+  "name": "SolarPhobia.Infrastructure",
+  "rootNamespace": "SolarPhobia.Infrastructure",
+  "references": [
+    "SolarPhobia.Domain",
+    "SolarPhobia.Application",
+    "SolarPhobia.Shared",
+    "Unity.InputSystem"
+  ],
+  "autoReferenced": false
+}

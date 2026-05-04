@@ -1,21 +1,21 @@
 ﻿# Tasks: Act 1 Clean Architecture Foundation
 
 ## Phase 0 - Architecture foundation
-- [ ] Chốt naming/namespace strategy cho code mới (`SolarPhobia.*` hoặc giữ tạm `TinyMonsterArena.*`).
-- [ ] Chốt data strategy: JSON / ScriptableObject / hybrid.
-- [ ] Chốt scene strategy cho Act 1: Boot + Shrine + BeachRun.
-- [ ] Chốt UI/runtime stack: `uGUI + TMP` cho runtime, `UI Toolkit` cho editor/tooling, hoặc migration plan nếu muốn runtime UI Toolkit.
-- [ ] Chốt reactive/event stack: `R3` cho state stream, `MessagePipe` cho cross-layer events, `ObservableCollections` / `ObservableCollections.R3` cho reactive collection binding.
-- [ ] Chốt async/DI/animation stack: `UniTask`, `VContainer`, `DOTween`, `ZLinq`.
-- [ ] Chốt package source strategy: package nào đi qua `Packages/manifest.json` và package nào đang nằm dưới `Assets/Packages/`.
-- [ ] Định nghĩa domain model tối thiểu cho phase, ghost, order, progress, ending.
-- [ ] Định nghĩa repository contracts và service rules cho domain.
-- [ ] Xác định application use cases và command/query objects.
-- [ ] Xác định composition/bootstrap flow và dependency direction.
+- [x] Chốt naming/namespace strategy cho code mới (`SolarPhobia.*`).
+- [x] Chốt data strategy: JSON / ScriptableObject / hybrid.
+- [x] Chốt scene strategy cho Act 1: Boot + Shrine + BeachRun.
+- [x] Chốt UI/runtime stack: `UI Toolkit` cho runtime, `uGUI` chỉ là fallback nếu cần.
+- [x] Chốt reactive/event stack: `R3` cho state stream, `MessagePipe` cho cross-layer events, `ObservableCollections` / `ObservableCollections.R3` cho reactive collection binding.
+- [x] Chốt async/DI/animation stack: `UniTask`, `VContainer`, `DOTween`, `ZLinq`.
+- [x] Chốt package source strategy: giữ Cysharp reactive packages dưới `Assets/Packages/` for now; manifest-managed packages vẫn dùng cho `UniTask`, `ZLinq`, `VContainer`.
+- [x] Định nghĩa domain model tối thiểu cho phase, ghost, order, progress, ending.  
+- [x] Định nghĩa repository contracts và service rules cho domain.
+- [x] Xác định application use cases và command/query objects.
+- [x] Xác định composition/bootstrap flow và dependency direction (placeholder installer created).
 
 ## Phase 1 - Vertical slice planning
 - [ ] Chốt luồng playthrough tối thiểu từ shrine tới shrine.
-- [ ] Chốt UI boundaries cho dialogue, order, phase HUD.
+- [ ] Chốt UI boundaries cho dialogue, order, phase HUD trên UI Toolkit.
 - [ ] Chốt audio responsibilities giữa infrastructure và presentation.
 - [ ] Chốt persistence requirements cho progress, kindness, unlocks.
 

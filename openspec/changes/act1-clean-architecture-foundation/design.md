@@ -126,10 +126,12 @@ Change này không triển khai code game hoàn chỉnh. Nó chốt nền kỹ t
 ## 8. Technology stack decisions
 
 ### Runtime UI
-Khuyến nghị dùng `uGUI + TextMeshPro` cho runtime Act 1 UI, vì:
-- Tài liệu narrative/UI hiện tại đã bám mô hình Canvas/Label/Portrait/Choice.
-- Runtime HUD của game này là thành phần trực tiếp, nhiều trạng thái động, dễ làm hơn với uGUI trong vertical slice.
-- `UI Toolkit` nên ưu tiên cho editor tooling, debug windows, hoặc công cụ nội bộ trước.
+Khuyến nghị dùng `UI Toolkit` cho runtime Act 1 UI, vì:
+- UI của game xoay quanh panel, list, choice buttons, order queue, status labels, rất hợp với `VisualElement` tree.
+- Dễ tách data/state/view hơn khi muốn bind reactive state từ Application sang Presentation.
+- Giảm phụ thuộc vào Canvas layout phức tạp cho vertical slice đầu tiên.
+
+`uGUI` chỉ giữ như phương án fallback nếu cần một widget rất đặc thù; mặc định runtime sẽ đi theo UI Toolkit.
 
 ### Async / orchestration
 - `UniTask`: dùng cho async flows trong `Application` và `Infrastructure` như load dialogue, chuyển scene, fade audio, đợi animation/timer.
@@ -144,7 +146,7 @@ Khuyến nghị dùng `uGUI + TextMeshPro` cho runtime Act 1 UI, vì:
 - Quy ước: tránh dùng cả hai cho cùng một loại signal trong cùng một subsystem; `R3` cho state stream, `MessagePipe` cho domain/application events, `ObservableCollections` cho reactive list/view binding.
 
 ### Data processing
-- `ZLinq`: dùng trong `Application` / `Infrastructure` cho query/filter/map trên collections lớn hoặc hot paths.
+- `ZLinq`: dùng trong `Application` / `Infrastructure` cho query/filter/map trên collections lớn hoặc hot paths; ưu tiên ở các use case như chọn ghost, lọc order, và tổng hợp state.
 
 ### Animation / motion
 - `DOTween`: dùng trong `Presentation` cho UI transitions, portrait fade, dialogue reveal, boss intro, sun/shadow overlay motion.
@@ -152,7 +154,7 @@ Khuyến nghị dùng `uGUI + TextMeshPro` cho runtime Act 1 UI, vì:
 ### Architectural rule of thumb
 - `Domain` không phụ thuộc bất kỳ package nào ở trên.
 - `Application` chỉ phụ thuộc `UniTask` / `ZLinq` nếu cần; không phụ thuộc UI runtime.
-- `Presentation` được phép dùng `R3`, `MessagePipe`, `ObservableCollections`, `DOTween`, `TMP`, `Canvas`.
+- `Presentation` được phép dùng `R3`, `MessagePipe`, `ObservableCollections`, `DOTween`, `UI Toolkit`, `UIDocument`.
 - `Composition` là nơi duy nhất nên biết đầy đủ stack wiring.
 
 ### Package availability note

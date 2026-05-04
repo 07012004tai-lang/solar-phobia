@@ -1,0 +1,6 @@
+﻿{
+  "name": "SolarPhobia.Domain",
+  "rootNamespace": "SolarPhobia.Domain",
+  "references": [],
+  "autoReferenced": false
+}

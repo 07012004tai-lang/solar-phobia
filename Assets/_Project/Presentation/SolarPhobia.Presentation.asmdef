@@ -1,0 +1,10 @@
+﻿{
+  "name": "SolarPhobia.Presentation",
+  "rootNamespace": "SolarPhobia.Presentation",
+  "references": [
+    "SolarPhobia.Domain",
+    "SolarPhobia.Application",
+    "SolarPhobia.Shared"
+  ],
+  "autoReferenced": false
+}
