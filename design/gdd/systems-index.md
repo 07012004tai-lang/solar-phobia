@@ -18,7 +18,7 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | # | System Name | Category | Priority | Status | Design Doc | Depends On |
 |---|-------------|----------|----------|--------|------------|------------|
 | 1 | Game State / Phase State Machine | Core | MVP | Approved | design/gdd/game-state-phase-state-machine.md | — |
-| 2 | NPC/Soul Data Model | Narrative | MVP | Not Started | — | — |
+| 2 | NPC/Soul Data Model | Narrative | MVP | In Review | design/gdd/npc-soul-data-model.md | — |
 | 3 | Map & Spawn Director | Core | MVP | Not Started | — | — |
 | 4 | Health/Stamina & Damage Rules | Core | MVP | Not Started | — | — |
 | 5 | Player Controller | Core | MVP | Not Started | — | Game State / Phase State Machine, Map & Spawn Director |
@@ -140,8 +140,8 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | Metric | Count |
 |--------|-------|
 | Total systems identified | 16 |
-| Design docs started | 1 |
-| Design docs reviewed | 1 |
+| Design docs started | 2 |
+| Design docs reviewed | 2 |
 | Design docs approved | 1 |
 | MVP systems designed | 1/10 |
 | Vertical Slice systems designed | 0/5 |
