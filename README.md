@@ -1,312 +1,198 @@
 <p align="center">
-  <h1 align="center">Claude Code Game Studios</h1>
+  <a href="https://github.com/truong204/Solar-Phobia">
+    <img src="images/logo.png" alt="Solar Phobia Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Solar Phobia: Nắng Gắt</h3>
+
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    A consequence-driven survival game set in a sun-scorched Vietnamese fishing village.
     <br />
-    49 agents. 72 skills. One coordinated AI team.
+    By day, you choose who to save. By night, you run from what you left behind.
+    <br />
+    <br />
+    <a href="https://github.com/truong204/Solar-Phobia/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/truong204/Solar-Phobia/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </p>
 
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-49-blueviolet" alt="49 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-72-green" alt="72 Skills"></a>
-  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-12-orange" alt="12 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
-  <a href="https://www.buymeacoffee.com/donchitos3"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20this%20project-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
-  <a href="https://github.com/sponsors/Donchitos"><img src="https://img.shields.io/badge/GitHub%20Sponsors-Support%20this%20project-ea4aaa?logo=githubsponsors&logoColor=white" alt="GitHub Sponsors"></a>
-</p>
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#gameplay">Gameplay</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
----
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## Why This Exists
+[![Game Screenshot][product-screenshot]](https://example.com)
 
-Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
+I wanted to make a game where your choices actually matter—not in some vague "good ending/bad ending" way, but immediate, gut-punch consequences you feel the same night.
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 49 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+Set in the fictional Làng Chài Hắc Hải, a fishing village cursed by "Nắng Gắt" (Scorching Sun), the game puts you in a tight day/night loop:
 
-The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
+**By day**, you serve three villagers—Linh, Van, and Minh. You've got tea for light, incense for safe zones, offerings for skills. But you can only save two. One must be left behind.
 
----
+**By night**, you flee to the shrine while the abandoned soul hunts you down. Each one becomes a different obstacle:
+- Linh drags you down
+- Van blocks your path
+- Minh fakes shrines to waste your time
 
-## Table of Contents
+You don't lose because the game is hard. You lose because of what you chose.
 
-- [What's Included](#whats-included)
-- [Studio Hierarchy](#studio-hierarchy)
-- [Slash Commands](#slash-commands)
-- [Getting Started](#getting-started)
-- [Upgrading](#upgrading)
-- [Project Structure](#project-structure)
-- [How It Works](#how-it-works)
-- [Design Philosophy](#design-philosophy)
-- [Customization](#customization)
-- [Platform Support](#platform-support)
-- [Community](#community)
-- [Supporting This Project](#supporting-this-project)
-- [License](#license)
+Here's why I built it this way:
+* I wanted players to feel the weight of every decision, not just see a different cutscene
+* The day/night contrast lets me play with hot yellows vs. deep blues, calm ambience vs. escalating tension
+* Keeping it small (3 NPCs, 1 boss, 1 map) means I can polish the hell out of that one loop
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## What's Included
+### Built With
 
-| Category | Count | Description |
-|----------|-------|-------------|
-| **Agents** | 49 | Specialized subagents across design, programming, art, audio, narrative, QA, and production |
-| **Skills** | 72 | Slash commands for every workflow phase (`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done`, etc.) |
-| **Hooks** | 12 | Automated validation on commits, pushes, asset changes, session lifecycle, agent audit trail, and gap detection |
-| **Rules** | 11 | Path-scoped coding standards enforced when editing gameplay, engine, AI, UI, network code, and more |
-| **Templates** | 39 | Document templates for GDDs, UX specs, ADRs, sprint plans, HUD design, accessibility, and more |
+This section lists the major technologies I'm using to build this.
 
-## Studio Hierarchy
+* ![Unity](https://img.shields.io/badge/Unity%206000.3.11f1-100000?style=for-the-badge&logo=unity&logoColor=white)
+* ![C#](https://img.shields.io/badge/C%23%209.0-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+* ![VContainer](https://img.shields.io/badge/VContainer-DI-blue?style=for-the-badge)
+* ![UniTask](https://img.shields.io/badge/UniTask-Async-green?style=for-the-badge)
+* ![DOTween](https://img.shields.io/badge/DOTween-Animation-orange?style=for-the-badge)
 
-Agents are organized into three tiers, matching how real studios operate:
+The code is split into clean layers (Domain → Application → Infrastructure → Presentation) with separate assembly definitions for each, so it stays organized as it grows.
 
-```
-Tier 1 — Directors (Opus)
-  creative-director    technical-director    producer
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Tier 2 — Department Leads (Sonnet)
-  game-designer        lead-programmer       art-director
-  audio-director       narrative-director    qa-lead
-  release-manager      localization-lead
-
-Tier 3 — Specialists (Sonnet/Haiku)
-  gameplay-programmer  engine-programmer     ai-programmer
-  network-programmer   tools-programmer      ui-programmer
-  systems-designer     level-designer        economy-designer
-  technical-artist     sound-designer        writer
-  world-builder        ux-designer           prototyper
-  performance-analyst  devops-engineer       analytics-engineer
-  security-engineer    qa-tester             accessibility-specialist
-  live-ops-designer    community-manager
-```
-
-### Engine Specialists
-
-The template includes agent sets for all three major engines. Use the set that matches your project:
-
-| Engine | Lead Agent | Sub-Specialists |
-|--------|-----------|-----------------|
-| **Godot 4** | `godot-specialist` | GDScript, Shaders, GDExtension |
-| **Unity** | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit |
-| **Unreal Engine 5** | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI |
-
-## Slash Commands
-
-Type `/` in Claude Code to access all 72 skills:
-
-**Onboarding & Navigation**
-`/start` `/help` `/project-stage-detect` `/setup-engine` `/adopt`
-
-**Game Design**
-`/brainstorm` `/map-systems` `/design-system` `/quick-design` `/review-all-gdds` `/propagate-design-change`
-
-**Art & Assets**
-`/art-bible` `/asset-spec` `/asset-audit`
-
-**UX & Interface Design**
-`/ux-design` `/ux-review`
-
-**Architecture**
-`/create-architecture` `/architecture-decision` `/architecture-review` `/create-control-manifest`
-
-**Stories & Sprints**
-`/create-epics` `/create-stories` `/dev-story` `/sprint-plan` `/sprint-status` `/story-readiness` `/story-done` `/estimate`
-
-**Reviews & Analysis**
-`/design-review` `/code-review` `/balance-check` `/content-audit` `/scope-check` `/perf-profile` `/tech-debt` `/gate-check` `/consistency-check`
-
-**QA & Testing**
-`/qa-plan` `/smoke-check` `/soak-test` `/regression-suite` `/test-setup` `/test-helpers` `/test-evidence-review` `/test-flakiness` `/skill-test` `/skill-improve`
-
-**Production**
-`/milestone-review` `/retrospective` `/bug-report` `/bug-triage` `/reverse-document` `/playtest-report`
-
-**Release**
-`/release-checklist` `/launch-checklist` `/changelog` `/patch-notes` `/hotfix`
-
-**Creative & Content**
-`/prototype` `/onboard` `/localize`
-
-**Team Orchestration** (coordinate multiple agents on a single feature)
-`/team-combat` `/team-narrative` `/team-ui` `/team-release` `/team-polish` `/team-audio` `/team-level` `/team-live-ops` `/team-qa`
-
+<!-- GETTING STARTED -->
 ## Getting Started
+
+This is how to get a local copy up and running on your machine.
 
 ### Prerequisites
 
-- [Git](https://git-scm.com/)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
-- **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
+* [Unity 6000.3.11f1 (Unity 6)](https://unity.com/download) – make sure you have this specific version via Unity Hub
+* [Git](https://git-scm.com/)
 
-All hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
+### Installation
 
-### Setup
-
-1. **Clone or use as template**:
-   ```bash
-   git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git my-game
-   cd my-game
+1. Clone the repo
+   ```sh
+   git clone https://github.com/truong204/Solar-Phobia.git
    ```
+2. Open Unity Hub and add the project folder
+3. Open the project with Unity 6000.3.11f1
 
-2. **Open Claude Code** and start a session:
-   ```bash
-   claude
-   ```
+### Running Tests
 
-3. **Run `/start`** — the system asks where you are (no idea, vague concept,
-   clear design, existing work) and guides you to the right workflow. No assumptions.
+Inside Unity Editor:
+- Open **Test Runner**: `Window → General → Test Runner` (or Ctrl+Alt+T)
+- Run EditMode tests from `Assets/_Project/**/Editor/Tests/`
+- Run PlayMode tests from `Assets/_Project/**/Tests/`
 
-   Or jump directly to a specific skill if you already know what you need:
-   - `/brainstorm` — explore game ideas from scratch
-   - `/setup-engine godot 4.6` — configure your engine if you already know
-   - `/project-stage-detect` — analyze an existing project
+Or via command line:
+```sh
+# EditMode tests
+Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform EditMode -testResults results.xml
 
-## Upgrading
-
-Already using an older version of this template? See [UPGRADING.md](UPGRADING.md)
-for step-by-step migration instructions, a breakdown of what changed between
-versions, and which files are safe to overwrite vs. which need a manual merge.
-
-## Project Structure
-
-```
-CLAUDE.md                           # Master configuration
-.claude/
-  settings.json                     # Hooks, permissions, safety rules
-  agents/                           # 49 agent definitions (markdown + YAML frontmatter)
-  skills/                           # 72 slash commands (subdirectory per skill)
-  hooks/                            # 12 hook scripts (bash, cross-platform)
-  rules/                            # 11 path-scoped coding standards
-  statusline.sh                     # Status line script (context%, model, stage, epic breadcrumb)
-  docs/
-    workflow-catalog.yaml           # 7-phase pipeline definition (read by /help)
-    templates/                      # 39 document templates
-src/                                # Game source code
-assets/                             # Art, audio, VFX, shaders, data files
-design/                             # GDDs, narrative docs, level designs
-docs/                               # Technical documentation and ADRs
-tests/                              # Test suites (unit, integration, performance, playtest)
-tools/                              # Build and pipeline tools
-prototypes/                         # Throwaway prototypes (isolated from src/)
-production/                         # Sprint plans, milestones, release tracking
+# PlayMode tests
+Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform PlayMode -testResults results.xml
 ```
 
-## How It Works
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Agent Coordination
+<!-- GAMEPLAY -->
+## Gameplay
 
-Agents follow a structured delegation model:
+The core loop is tight and repeatable:
 
-1. **Vertical delegation** — directors delegate to leads, leads delegate to specialists
-2. **Horizontal consultation** — same-tier agents can consult each other but can't make binding cross-domain decisions
-3. **Conflict resolution** — disagreements escalate up to the shared parent (`creative-director` for design, `technical-director` for technical)
-4. **Change propagation** — cross-department changes are coordinated by `producer`
-5. **Domain boundaries** — agents don't modify files outside their domain without explicit delegation
+1. **Day Phase (Serve)** – Talk to Linh, Van, and Minh. Give them tea, incense, or offerings. Choose which two to save.
+2. **Choice Lock** – The one left behind is locked in. The game computes how they'll mess with you at night.
+3. **Night Phase (Survive)** – Run to the shrine. Avoid solar residue hazards, manage your Ward Timer, and deal with the curse of the soul you abandoned.
+4. **Resolve** – Made it to the shrine? You win that loop. Die? Face the consequence.
 
-### Collaborative, Not Autonomous
+### The Map (Act 1)
 
-This is **not** an auto-pilot system. Every agent follows a strict collaboration protocol:
+The journey is split into 3 nodes, each with its own vibe:
 
-1. **Ask** — agents ask questions before proposing solutions
-2. **Present options** — agents show 2-4 options with pros/cons
-3. **You decide** — the user always makes the call
-4. **Draft** — agents show work before finalizing
-5. **Approve** — nothing gets written without your sign-off
+| Node | Name | Vibe | Gameplay |
+|------|------|------|----------|
+| 1 | Am Đầu Sóng | Calmest area, plenty of shade | Tutorial: serving villagers, short runs |
+| 2 | Am Rừng Dừa | Dead coconut trees, mobile shade | Introduces mobile shadow mechanics |
+| 3 | Lăng Ông Nam Hải | Ruined shrine, cracked ground, hottest | Boss fight: Cá Ông Bộ Xương |
 
-You stay in control. The agents provide structure and expertise, not autonomy.
+At each shrine, you can open your old map and plan your next night route—short/fast vs. long/safe with more loot.
 
-### Automated Safety
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Hooks** run automatically on every session:
+<!-- ROADMAP -->
+## Roadmap
 
-| Hook | Trigger | What It Does |
-|------|---------|--------------|
-| `validate-commit.sh` | PreToolUse (Bash) | Checks for hardcoded values, TODO format, JSON validity, design doc sections — exits early if the command is not `git commit` |
-| `validate-push.sh` | PreToolUse (Bash) | Warns on pushes to protected branches — exits early if the command is not `git push` |
-| `validate-assets.sh` | PostToolUse (Write/Edit) | Validates naming conventions and JSON structure — exits early if the file is not in `assets/` |
-| `session-start.sh` | Session open | Shows current branch and recent commits for orientation |
-| `detect-gaps.sh` | Session open | Detects fresh projects (suggests `/start`) and missing design docs when code or prototypes exist |
-| `pre-compact.sh` | Before compaction | Preserves session progress notes |
-| `post-compact.sh` | After compaction | Reminds Claude to restore session state from `active.md` |
-| `notify.sh` | Notification event | Shows Windows toast notification via PowerShell |
-| `session-stop.sh` | Session close | Archives `active.md` to session log and records git activity |
-| `log-agent.sh` | Agent spawned | Audit trail start — logs subagent invocation |
-| `log-agent-stop.sh` | Agent stops | Audit trail stop — completes subagent record |
-| `validate-skill-change.sh` | PostToolUse (Write/Edit) | Advises running `/skill-test` after any `.claude/skills/` change |
+- [x] Game concept and core loop design
+- [x] NPC/Soul data model (Linh, Van, Minh)
+- [x] Day/Night phase state machine design
+- [ ] Implement day/night state machine
+- [ ] Build consequence resolver (how abandoned souls become night hazards)
+- [ ] Create boss chase AI for Cá Ông Bộ Xương
+- [ ] Implement solar residue hazard system
+- [ ] Write custom shadow/sun zone shader
+- [ ] Build the 3-node map
+- [ ] Add audio state director (day/night mix transitions)
+- [ ] Polish HUD and diegetic feedback
 
-> **Note**: `validate-commit.sh`, `validate-assets.sh`, and `validate-skill-change.sh` fire on every Bash/Write tool call and exit immediately (exit 0) when the command or file path is not relevant. This is normal hook behavior — not a performance concern.
+See the [open issues](https://github.com/truong204/Solar-Phobia/issues) for a full list of proposed features and known issues.
 
-**Permission rules** in `settings.json` auto-allow safe operations (git status, test runs) and block dangerous ones (force push, `rm -rf`, reading `.env` files).
+### Cut Plan (if needed)
+- Remove 1 NPC
+- Simplify boss mechanics
+- Reduce number of endings
 
-### Path-Scoped Rules
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Coding standards are automatically enforced based on file location:
-
-| Path | Enforces |
-|------|----------|
-| `src/gameplay/**` | Data-driven values, delta time usage, no UI references |
-| `src/core/**` | Zero allocations in hot paths, thread safety, API stability |
-| `src/ai/**` | Performance budgets, debuggability, data-driven parameters |
-| `src/networking/**` | Server-authoritative, versioned messages, security |
-| `src/ui/**` | No game state ownership, localization-ready, accessibility |
-| `design/gdd/**` | Required 8 sections, formula format, edge cases |
-| `tests/**` | Test naming, coverage requirements, fixture patterns |
-| `prototypes/**` | Relaxed standards, README required, hypothesis documented |
-
-## Design Philosophy
-
-This template is grounded in professional game development practices:
-
-- **MDA Framework** — Mechanics, Dynamics, Aesthetics analysis for game design
-- **Self-Determination Theory** — Autonomy, Competence, Relatedness for player motivation
-- **Flow State Design** — Challenge-skill balance for player engagement
-- **Bartle Player Types** — Audience targeting and validation
-- **Verification-Driven Development** — Tests first, then implementation
-
-## Customization
-
-This is a **template**, not a locked framework. Everything is meant to be customized:
-
-- **Add/remove agents** — delete agent files you don't need, add new ones for your domains
-- **Edit agent prompts** — tune agent behavior, add project-specific knowledge
-- **Modify skills** — adjust workflows to match your team's process
-- **Add rules** — create new path-scoped rules for your project's directory structure
-- **Tune hooks** — adjust validation strictness, add new checks
-- **Pick your engine** — use the Godot, Unity, or Unreal agent set (or none)
-- **Set review intensity** — `full` (all director gates), `lean` (phase gates only), or `solo` (none). Set during `/start` or edit `production/review-mode.txt`. Override per-run with `--review solo` on any skill.
-
-## Platform Support
-
-Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns (`grep -E`, not `grep -P`) and include fallbacks for missing tools. Works on macOS and Linux without modification.
-
-## Community
-
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Claude-Code-Game-Studios/issues)
-
----
-
-## Supporting This Project
-
-Claude Code Game Studios is free and open source. If it saves you time or helps you ship your game, consider supporting continued development:
-
-<p>
-  <a href="https://www.buymeacoffee.com/donchitos3"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee"></a>
-  &nbsp;
-  <a href="https://github.com/sponsors/Donchitos"><img src="https://img.shields.io/badge/GitHub%20Sponsors-ea4aaa?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="GitHub Sponsors"></a>
-</p>
-
-- **[Buy Me a Coffee](https://www.buymeacoffee.com/donchitos3)** — one-time support
-- **[GitHub Sponsors](https://github.com/sponsors/Donchitos)** — recurring support through GitHub
-
-Sponsorships help fund time spent maintaining skills, adding new agents, keeping up with Claude Code and engine API changes, and responding to community issues.
-
----
-
-*Built for Claude Code. Maintained and extended — contributions welcome via [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions).*
-
+<!-- LICENSE -->
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+This project is proprietary. All rights reserved.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/truong204/Solar-Phobia](https://github.com/truong204/Solar-Phobia)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Unity Technologies](https://unity.com) for the engine
+* [VContainer](https://github.com/vcontainer/vcontainer) for dependency injection
+* [UniTask](https://github.com/Cysharp/UniTask) for async/await support
+* [DOTween](http://dotween.demigiant.com/) for tween animations
+* [Odin Inspector](https://odininspector.com/) for editor enhancements
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: images/screenshot.png

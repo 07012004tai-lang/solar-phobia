@@ -49,6 +49,7 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 - **NPC/Soul Data Model -> Map Director**: abandoned soul + consequence intensity to bias Mo Oan and disruption placement.
 - **Boss Chase AI <-> Map Director**: sweep pattern ownership split (Map owns lane geometry; Boss AI owns timing profile).
 - **Solar Residue Hazard <-> Map Director**: hazard zones bound to lane segments and visibility constraints.
+- **Health/Stamina & Damage Rules <-> Map Director**: map emits strike/relic/time-drain events; survivability rules return viability constraints and penalty caps.
 - **Resource Effects <- Map Director**: Bone Relic pickup events trigger Time Drain modifier.
 - **Player Controller <- Map Director**: receives cover zone and strike warning overlap events.
 - **Consequence Resolver -> Map Director**: can flag FalseSafeMound spawns (e.g., Linh-abandoned route profile).
@@ -148,6 +149,7 @@ cover_density = mo_thuong_count / lane_length
 | NPC/Soul Data Model | This depends on it | **Hard**: consequence-informed spawn bias |
 | Boss Chase AI | Bidirectional | **Hard**: synchronized sweep/strike behavior |
 | Solar Residue Hazard | Bidirectional | **Hard**: hazard placement contracts |
+| Health/Stamina & Damage Rules | Bidirectional | **Hard**: strike/relic penalties consume ward timer; map generation respects viability/fairness constraints |
 | Resource Effects | This system feeds it | **Soft**: emits Bone Relic pickup + Time Drain events |
 | Player Controller | This system feeds it | **Hard**: cover/strike overlap signals |
 

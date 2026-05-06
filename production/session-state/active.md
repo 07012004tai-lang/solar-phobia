@@ -1,7 +1,7 @@
 # Active Session State
 
-- **Task**: Designing npc-soul-data-model GDD
-- **Status**: In Review
-- **Current section**: Review findings applied
-- **File**: design/gdd/npc-soul-data-model.md
-- **Next**: Re-run /design-review for approval verdict
+- **Task**: Aligning cross-system design consistency after review
+- **Status**: Complete (review fixes applied)
+- **Current section**: Post-review synchronization
+- **File**: design/gdd/health-stamina-damage-rules.md
+- **Next**: Continue MVP system design in dependency order (Player Controller or Shrine Objective)
