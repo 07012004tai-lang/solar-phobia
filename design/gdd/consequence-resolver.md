@@ -1,6 +1,6 @@
 # Consequence Resolver$
 
-> **Status**: In Design$
+> **Status**: Approved$
 > **Author**: User + opencode$
 > **Last Updated**: 2026-05-06$
 > **Implements Pillar**: Consequence-driven survival loop with day/night emotional contrast$
@@ -65,32 +65,107 @@ The emotional promise: **"The person you left behind is now your nightmare."** T
 
 ## Formulas$
 
-[To be designed]
+Consequence Resolver uses deterministic lookup (no mathematical formulas). The core mapping is:
+
+| Abandoned Soul | NightOutcomeState | Curse Type | Intensity | Downstream Effects |
+|-------------|-------------------|------------|-----------|-------------------|
+| `Linh` | `Drag` | Water Trap (Nước Dâng) | 1.0 (constant) | Map: Mo Oan (CursedMound) placement, Water Trap zones; Curse: blue tint, drowning VFX |
+| `Van` | `Block` | Blood Net (Lưới Máu) | 1.0 (constant) | Map: Lưới Máu (Blood Net) hazards, reduced visibility; Curse: red tint, restraint sounds |
+| `Minh` | `FakeShrine` | Illusion (Ảo Ảnh) | 1.0 (constant) | Map: FalseSafeMound (Ảo Ảnh) hazards, illusory platforms; Curse: ground collapse, deceptive VFX |
+
+### Payload Structure
+Sent to downstream systems (`Map & Spawn Director`, `Curse Effect Modules`):
+```json
+{
+  "curse_type": "Drag" | "Block" | "FakeShrine",
+  "intensity": 1.0,
+  "spawn_bias": { "abandoned_soul_id": "Linh" | "Van" | "Minh" }
+```
+
+**Expected output**: Curse type string + intensity float + spawn bias object.  
+**Edge case**: If abandoned soul ID not in {Linh, Van, Minh}, emit `InvalidSoulId` error and default to `Drag`.
+
+*Provisional: Downstream GDDs (Curse Effect Modules, Night Survival Run) are undesigned; payload structure may evolve.*
 
 ## Edge Cases$
 
-[To be designed]
+| Scenario | Expected Behavior | Rationale |
+|----------|-------------------|-----------|
+| Invalid `abandoned_soul_id` (not in {Linh, Van, Minh}) | Reject write, emit `InvalidSoulId` error, set NightOutcomeState = `Drag` (default) | Prevents undefined curse mapping |
+| Duplicate write attempt (same run) | Reject write, emit `DuplicateWrite` error, keep initial valid state | Enforces one-write rule |
+| Day Service sends malformed payload (missing soul_id) | Reject, emit `InvalidPayload` error, enter `FatalError` in Game State | Preserves contract integrity |
+| Downstream system (Map/Curse) not ready | Send payload anyway; downstream ignores if not in NightSurvival phase | Decouples timing, but may need retry later |
+| Consequence Resolver fails to compute (bug) | Return default `Drag`, emit `ResolverFailed` warning | Graceful degradation, ensures night can start |
+| All souls saved (0 abandoned) — impossible per Day Service rule | If occurs (bug), default to `Drag` | Fallback for invalid state |
 
 ## Dependencies$
 
-[To be designed]
+### Upstream (This depends on):
+| System | Direction | Nature of Dependency |
+|--------|-----------|---------------------|
+| Day Service & Selection | This depends on it | **Hard**: receives `SelectionConfirmed(payload)` with `abandoned_soul_id`. Cannot map without this. |
+| NPC/Soul Data Model | This depends on it | **Hard**: reads `SoulId`, `DaySelectionState` for abandoned soul. Writes `NightOutcomeState`. |
+| Game State / Phase State Machine | This depends on it | **Hard**: invoked on `ChoiceLock`; must return curse payload before Night. |
+
+### Downstream (Depends on this):
+| System | Direction | Nature of Dependency |
+|--------|-----------|---------------------|
+| Curse Effect Modules | Depends on this | **Soft**: receives curse type from payload for visual/audio effects. |
+| Map & Spawn Director | Depends on this | **Soft**: receives curse type + bias for night hazard placement. |
+| Boss Cá Ông Searchlight | Depends on this | **Soft**: reads curse type for AI behavior (e.g., Lưới Máu affects searchlight). |
+| Night Survival Run | Depends on this | **Hard**: curse type defines core hazards the player must survive. |
+| Ngọc Cốt / Relic System | Depends on this | **Soft**: curse type may affect relic spawn bias. |
+
+### Interface ownership:
+- **Consequence Resolver owns** curse mapping logic, payload structure, one-write rule.
+- **Day Service owns** `abandoned_soul_id` assignment.
+- **NPC Model owns** `NightOutcomeState` write.
 
 ## Tuning Knobs$
 
-[To be designed]
+No tunable parameters for vertical slice — curse mapping is fully deterministic. Future expansion may add:
+
+| Parameter | Current Value | Safe Range | Effect of Increase | Effect of Decrease |
+|-----------|---------------|------------|-------------------|-------------------|
+| `curse_intensity_multiplier` | 1.0 | 0.5-3.0 | Stronger curse effects (harder night) | Weaker curses (easier night) |
+| `default_cursetype` | `Drag` | {Drag, Block, FakeShrine} | Changes fallback for invalid soul ID | N/A |
+
+**Interacting Knobs:**
+- `curse_intensity_multiplier` multiplies base intensity sent to Curse Effect Modules/Map Director.
+- These knobs are provisional — downstream GDDs (Curse Effect Modules) are not designed yet.
 
 ## Visual/Audio Requirements$
 
-[To be designed]
+| Event | Visual Feedback | Audio Feedback | Priority |
+|-------|-----------------|----------------|----------|
+| Curse Assigned (Linh → Drag) | Blue tint, water ripple VFX, drowning overlay | Water sound layers, bubbling, distant drowning | High |
+| Curse Assigned (Van → Block) | Red tint, blood net overlay, restraint VFX | Blood net tension sounds, rattling chains | High |
+| Curse Assigned (Minh → FakeShrine) | Illusion shimmer, ground crack VFX, deceptive platforms | Ground collapse rumble, deceptive whisper | High |
+| Payload Sent to Map/Curse | Confirmation ping, curse icon appears | Short tension stinger | Medium |
 
 ## UI Requirements$
 
-[To be designed]
+| Information | Display Location | Update Frequency | Condition |
+|-------------|------------------|------------------|-----------|
+| Curse type preview (optional) | Decision panel footer | On lock commit | ChoiceLock |
+| Curse icon (Linh/Van/Minh) | HUD top-right | On curse assignment | NightSurvival |
+| No direct UI — system runs in background | N/A | N/A | Always |
 
 ## Acceptance Criteria$
 
-[To be designed]
+- [ ] **Curse Mapping**: Deterministic lookup Linh→Drag, Van→Block, Minh→FakeShrine. No randomness.
+- [ ] **One-Write Rule**: Writes `NightOutcomeState` exactly once per run. Contradictory writes rejected.
+- [ ] **Invalid Soul ID**: Rejects writes for soul IDs not in {Linh, Van, Minh}, emits `InvalidSoulId` error.
+- [ ] **Duplicate Write**: Rejects second write attempt, emits `DuplicateWrite` error.
+- [ ] **Payload Delivery**: Sends curse type, intensity=1.0, spawn bias to Map Director + Curse Effect Modules.
+- [ ] **Performance**: curse mapping completes within 0.1ms average on target PC.
+- [ ] **Cross-System Events**: Verified that Map Director and Curse Effect Modules receive payload reliably.
 
 ## Open Questions$
 
-[To be designed]
+| Question | Owner | Deadline | Resolution |
+|----------|-------|----------|------------|
+| Should curse intensity scale with game progress (chapter/act)? | Game Designer | Before post-vertical slice | Open |
+| Should default curse for invalid soul ID be configurable (currently Drag)? | Systems Designer | Before MVP lock | Open |
+| How should payload structure evolve when Curse Effect Modules GDD is written? | Systems Designer | Before Feature layer design | Open |
+| Should curse assignment be visible to player before night starts? | UX-Designer | Before first playtest | Open |

@@ -153,6 +153,14 @@ cover_density = mo_thuong_count / lane_length
 | Resource Effects | This system feeds it | **Soft**: emits Bone Relic pickup + Time Drain events |
 | Player Controller | This system feeds it | **Hard**: cover/strike overlap signals |
 
+## Interface Ownership
+
+- **Map & Spawn Director owns**: `base_drain_rate` (default protection decay, configurable 0.1-5.0), `hallucination_multiplier` (extra decay per bone relic, configurable 1.0-3.0), `StrikeTimePenaltySec` (timer penalty per strike, default 30s, range 5-60).
+- **Health/Stamina & Damage Rules** references these values but does not own them.
+- **Game State / Phase State Machine** references `StrikeTimePenaltySec` but does not own it.
+
+---
+
 ## Tuning Knobs
 
 | Parameter | Current Value | Safe Range | Effect of Increase | Effect of Decrease |

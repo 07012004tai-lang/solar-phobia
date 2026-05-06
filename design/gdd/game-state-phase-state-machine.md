@@ -1,6 +1,6 @@
 # Game State / Phase State Machine
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + Copilot
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Consequence-driven survival loop with day/night emotional contrast
@@ -70,7 +70,7 @@ phase_duration = base_phase_duration * pacing_multiplier
 ### Night Start Eligibility
 
 ```
-night_start_ready = has_valid_selection AND consequence_payload_ready AND spawn_bundle_ready
+night_start_ready = has_valid_selection AND consequence_payload_ready AND spawn_bundle_ready AND initial_ward_sec > 0
 ```
 
 | Variable | Type | Range | Source | Description |
@@ -78,6 +78,7 @@ night_start_ready = has_valid_selection AND consequence_payload_ready AND spawn_
 | has_valid_selection | bool | {0,1} | Day Service | Exactly required saves selected |
 | consequence_payload_ready | bool | {0,1} | Consequence Resolver | Curse data compiled |
 | spawn_bundle_ready | bool | {0,1} | Map/Spawn Director | Night spawn points validated |
+| initial_ward_sec | float sec | 0-600 | Health/Stamina & Damage Rules | Initial Ward Timer value from Day→Night translation |
 
 **Expected output range**: boolean
 **Edge case**: if false after timeout, enter FatalError.
@@ -103,6 +104,7 @@ outcome_score = shrine_reached*100 - death_penalty - night_time_seconds*0.2
 |----------|-------------------|-----------|
 | Player confirms with < required saved souls | Stay in DayService; show blocking reason `InvalidSelectionCount` | Prevents ambiguous consequence mapping |
 | Consequence payload generation fails in ChoiceLock | Retry once; if still invalid -> FatalError | Night cannot start without deterministic curse |
+| Spawn bundle validation fails in ChoiceLock | Retry x3; if still invalid -> FatalError | Night cannot start without valid spawn data |
 | Two transition triggers fire same frame (e.g., shrine + death) | Resolve by priority: Death > ShrineReached; single transition only | Avoids dual outcome corruption |
 | Timer expires during DayService without confirmation | Auto-commit current valid selection; if invalid, choose deterministic default policy | Keeps loop cadence and avoids deadlock |
 | Night systems report active during DayService | Force-disable and emit contract violation event | Preserves phase integrity |

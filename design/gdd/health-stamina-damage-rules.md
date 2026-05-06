@@ -47,9 +47,9 @@ The drain rate syncs with **Map & Spawn Director** when the player picks up **Wh
 ```csharp
 float effective_ward_drain = base_drain_rate * (1 + (bones_carried * hallucination_multiplier));
 ```
-- `base_drain_rate` = **1.0 unit/s**.
+- `base_drain_rate` = **1.0 unit/s** (configurable range 0.1–5.0 per Map & Spawn Director)
 - `bones_carried` = Number of collected bones (0‑3).
-- `hallucination_multiplier` = **1.0** (1 bone → 2× drain, 2 bones → 3× drain).
+- `hallucination_multiplier` = **1.0** (configurable range 1.0–3.0 per Map & Spawn Director; 1 bone → 2× drain, 2 bones → 3× drain).
 
 ### Direct Damage Penalties (Trap Effects)
 | Hazard | Ward Penalty (seconds) |
@@ -57,7 +57,7 @@ float effective_ward_drain = base_drain_rate * (1 + (bones_carried * hallucinati
 | **Nước Dâng (Linh)** – Water‑soaked trap | -3.0 per second of immersion |
 | **Lưới Máu (Văn)** – Blood net | -5.0 instantly + `Speed * 0.5` debuff for 3 s |
 | **Ảo Ảnh (Minh)** – Illusion | -15.0 (instant fall) |
-| **Searchlight Strike** – Whale’s beam | **-20.0** (`StrikeTimePenaltySec = 20.0`) per hit without cover |
+| **Searchlight Strike** – Whale’s beam | **-30.0** (`StrikeTimePenaltySec = 30.0`) per hit without cover (authoritative value from Map & Spawn Director) |
 
 ## 5. Readability Thresholds (Ward Percent Tiers)
 
@@ -71,6 +71,11 @@ float Ward_Percent = (Current_Ward / Max_Initial_Ward) * 100f;
 | ≤ 50% | **Tier 3 – Heavy Burden** | Heavy breathing, `Dash_Cooldown += 0.1s` |
 | ≤ 25% | **Tier 4 – Panic** | Chromatic aberration, whispering audio |
 | ≤ 10 s | **Tier 5 – Death Spiral** | Tinnitus SFX, tunnel vision |
+
+## Interface Ownership
+
+- **Map & Spawn Director owns**: `base_drain_rate` (default 1.0/sec, range 0.1-5.0), `hallucination_multiplier` (default 1.0, range 1.0-3.0), `StrikeTimePenaltySec` (default 30s, range 5-60).
+- **Health/Stamina & Damage Rules** references these values but does not own them.
 
 ---
 

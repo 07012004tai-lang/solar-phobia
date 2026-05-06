@@ -1,6 +1,6 @@
 # Day Service & Selection
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + opencode
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Consequence-driven survival loop with day/night emotional contrast
@@ -120,7 +120,7 @@ priority_score = base_priority + chapter_modifier
 |--------|-----------|---------------------|
 | Game State / Phase State Machine | This depends on it | **Hard**: receives `SelectionConfirmed(payload)` with saved/abandoned SoulIds and ritual assignments. Transitions to `ChoiceLock` on valid confirmation. |
 | NPC/Soul Data Model | This depends on it | **Hard**: reads soul data (SoulId, name, portrait, preferred ritual). Writes `DaySelectionState` (Saved/Abandoned) for each soul. |
-| Resource Effects | This depends on it | **Hard**: applies tea (light), incense (safe zone), offeing (skill) effects based on ritual assignments. **Note: Resource Effects has NO GDD yet** — assuming tea = +Ward Sec, incense = safe zone, offeing = skill. |
+| Resource Effects | This depends on it | **Soft**: applies tea (light), incense (safe zone), offeing (skill) effects based on ritual assignments. **Note: Resource Effects has NO GDD yet** — assuming tea = +Ward Sec, incense = safe zone, offeing = skill. |
 | Map & Spawn Director | This depends on it | **Soft**: sends saved/abandoned assignment for night spawn bias (abandoned soul affects map generation). |
 
 ### Downstream (Depends on this):
