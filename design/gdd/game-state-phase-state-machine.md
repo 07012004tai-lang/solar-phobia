@@ -115,6 +115,8 @@ outcome_score = shrine_reached*100 - death_penalty - night_time_seconds*0.2
 | Day Service & Selection | Depends on this | **Hard**: receives phase allowlist; emits `SelectionConfirmed(payload)` |
 | Consequence Resolver | Depends on this | **Hard**: invoked on `ChoiceLock`; must return `CursePayload` before Night |
 | Map & Spawn Director | This depends on it | **Hard**: provides validated spawn bundle for night start |
+| Health/Stamina & Damage Rules | Depends on this | **Hard**: consumes Ward values for phase gating and night penalties |
+| NPC/Soul Data Model | Depends on this | **Hard**: provides soul data needed for night spawn logic |
 | Player Controller | Depends on this | **Hard**: movement/input mode changes by phase |
 | Shrine Objective & Win/Lose Rules | Depends on this | **Hard**: transition triggers `Resolve` conditions |
 | Solar Residue Hazard | Depends on this | **Hard**: enabled only in NightSurvival |

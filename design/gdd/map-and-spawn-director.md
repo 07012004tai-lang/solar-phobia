@@ -73,14 +73,14 @@ is_exposed = in_sweep_cone AND (not in_valid_cover)
 ### Time Drain Under Bone Relic
 
 ```
-effective_ward_drain = base_drain_rate * (1 + relic_count * time_drain_multiplier)
+effective_ward_drain = base_drain_rate * (1 + (bones_carried * hallucination_multiplier))
 ```
 
 | Variable | Type | Range | Source | Description |
 |----------|------|-------|--------|-------------|
 | base_drain_rate | float/sec | 0.1-5.0 | config | Default protection decay |
-| relic_count | int | 0-3 | runtime inventory | Bone Relics carried in current run |
-| time_drain_multiplier | float | 0.1-1.0 | config | Extra decay per relic |
+| bones_carried | int | 0-3 | runtime inventory | Bone Relics carried in current run |
+| hallucination_multiplier | float | 1.0-3.0 | config | Extra decay per bone relic (1 bone = 2×, 2 bones = 3×) |
 
 **Expected output range**: 0.1-20.0/sec  
 **Edge case**: clamp to project max safe drain cap.

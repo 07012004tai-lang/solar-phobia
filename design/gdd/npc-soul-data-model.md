@@ -124,6 +124,7 @@ data_health_ratio = valid_record_count / total_record_count
 | Consequence Resolver | Depends on this | **Hard**: reads abandoned identity and writes night outcome mapping |
 | Resource Effects | Depends on this | **Soft**: uses saved set for resource grant logic |
 | Save Seed / Run Reset | Depends on this | **Hard**: needs full model snapshot and reset operation |
+| Map & Spawn Director | This depends on it | **Hard**: provides validated spawn bundle for night start |
 
 Interface ownership:
 - **Model owns** schema, validation, lock enforcement.

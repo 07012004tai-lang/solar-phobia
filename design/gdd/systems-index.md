@@ -21,8 +21,8 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | 2 | NPC/Soul Data Model | Narrative | MVP | In Review | design/gdd/npc-soul-data-model.md | — |
 | 3 | Map & Spawn Director | Core | MVP | In Design | design/gdd/map-and-spawn-director.md | — |
 | 4 | Health/Stamina & Damage Rules | Core | MVP | In Review | design/gdd/health-stamina-damage-rules.md | — |
-| 5 | Player Controller | Core | MVP | Not Started | — | Game State / Phase State Machine, Map & Spawn Director |
-| 6 | Shrine Objective & Win/Lose Rules | Core | MVP | Not Started | — | Game State / Phase State Machine, Player Controller, Health/Stamina & Damage Rules |
+| 5 | Player Controller | Core | MVP | Approved | design/gdd/player-controller.md | Game State / Phase State Machine, Map & Spawn Director |
+| 6 | Shrine Objective & Win/Lose Rules | Core | MVP | Approved | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller, Health/Stamina & Damage Rules |
 | 7 | Resource Effects | Economy | Vertical Slice | Not Started | — | NPC/Soul Data Model, Game State / Phase State Machine |
 | 8 | Solar Residue Hazard | Gameplay | Vertical Slice | Not Started | — | Map & Spawn Director, Health/Stamina & Damage Rules, Game State / Phase State Machine |
 | 9 | Day Service & Selection | Gameplay | MVP | Not Started | — | NPC/Soul Data Model, Resource Effects, Game State / Phase State Machine |
@@ -143,7 +143,7 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | Design docs started | 4 |
 | Design docs reviewed | 3 |
 | Design docs approved | 1 |
-| MVP systems designed | 1/10 |
+| MVP systems designed | 4/10 |
 | Vertical Slice systems designed | 0/5 |
 
 ---
