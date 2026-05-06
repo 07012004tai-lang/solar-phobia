@@ -25,7 +25,7 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | 6 | Shrine Objective & Win/Lose Rules | Core | MVP | Approved | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller, Health/Stamina & Damage Rules |
 | 7 | Resource Effects | Economy | Vertical Slice | Not Started | — | NPC/Soul Data Model, Game State / Phase State Machine |
 | 8 | Solar Residue Hazard | Gameplay | Vertical Slice | Not Started | — | Map & Spawn Director, Health/Stamina & Damage Rules, Game State / Phase State Machine |
-| 9 | Day Service & Selection | Gameplay | MVP | Not Started | — | NPC/Soul Data Model, Resource Effects, Game State / Phase State Machine |
+| 9 | Day Service & Selection | Gameplay | MVP | Approved | design/gdd/day-service-and-selection.md | NPC/Soul Data Model, Resource Effects, Game State / Phase State Machine |
 | 10 | Consequence Resolver | Gameplay | MVP | Not Started | — | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
 | 11 | Curse Effect Modules (inferred) | Gameplay | MVP | Not Started | — | Consequence Resolver, Player Controller, Map & Spawn Director, Health/Stamina & Damage Rules |
 | 12 | Boss Chase AI | Gameplay | Vertical Slice | Not Started | — | Player Controller, Map & Spawn Director, Game State / Phase State Machine, Health/Stamina & Damage Rules |
