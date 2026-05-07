@@ -22,17 +22,17 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | 3 | Map & Spawn Director | Core | MVP | Approved | design/gdd/map-and-spawn-director.md | — |
 | 4 | Ward Timer / Nước Mắm Cốt | Core | MVP | Approved | design/gdd/health-stamina-damage-rules.md | — |
 | 5 | Shadow Spatial Management | Gameplay | MVP | Approved | design/gdd/shadow-spatial-management.md | Game State / Phase State Machine |
-| 6 | Day/Night Camera Transition | Core | MVP | In Design | design/gdd/day-night-camera-transition.md | Game State / Phase State Machine |
+| 6 | Day/Night Camera Transition | Core | MVP | Approved | design/gdd/day-night-camera-transition.md | Game State / Phase State Machine |
 | 7 | Player Controller & Skills | Core | MVP | Approved | design/gdd/player-controller.md | Game State / Phase State Machine, Map & Spawn Director, Day/Night Camera Transition |
-| 8 | Physical Crowding & Push | Gameplay | MVP | Not Started | — | NPC/Soul Data Model, Map & Spawn Director, Game State / Phase State Machine |
-| 9 | Tactile Rituals | Gameplay | MVP | Not Started | — | Game State / Phase State Machine, NPC/Soul Data Model, Ward Timer / Nước Mắm Cốt |
+| 8 | Physical Crowding & Push | Gameplay | MVP | Approved | design/gdd/physical-crowding-and-push.md | NPC/Soul Data Model, Map & Spawn Director, Game State / Phase State Machine |
+| 9 | Tactile Rituals | Gameplay | MVP | Approved | design/gdd/tactile-rituals.md | Game State / Phase State Machine, NPC/Soul Data Model, Ward Timer / Nước Mắm Cốt |
 | 10 | Day Service & Selection | Gameplay | MVP | Approved | design/gdd/day-service-and-selection.md | NPC/Soul Data Model, Game State / Phase State Machine, Tactile Rituals |
 | 11 | Shrine Objective & Win/Lose Rules | Core | MVP | Approved | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller & Skills, Ward Timer / Nước Mắm Cốt |
-| 12 | Sensory Feedback System | UI | MVP | Not Started | — | Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
+| 12 | Sensory Feedback System | UI | MVP | Approved | design/gdd/sensory-feedback-system.md | Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
 | 13 | Consequence Resolver | Gameplay | MVP | Approved | design/gdd/consequence-resolver.md | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
-| 14 | Curse Effect Modules | Gameplay | MVP | Not Started | — | Consequence Resolver, Player Controller & Skills, Map & Spawn Director, Ward Timer / Nước Mắm Cốt |
-| 15 | Boss Cá Ông Searchlight | Gameplay | MVP | Not Started | — | Player Controller & Skills, Map & Spawn Director, Game State / Phase State Machine, Ward Timer / Nước Mắm Cốt |
-| 16 | Night Survival Run | Gameplay | MVP | Not Started | — | Shrine Objective & Win/Lose Rules, Curse Effect Modules, Boss Cá Ông Searchlight, Ngọc Cốt / Relic System, Resource Effects & Hương Hỏa |
+| 14 | Curse Effect Modules | Gameplay | MVP | Approved | design/gdd/curse-effect-modules.md | Consequence Resolver, Player Controller & Skills, Map & Spawn Director, Ward Timer / Nước Mắm Cốt |
+| 15 | Boss Cá Ông Searchlight | Gameplay | MVP | Approved | design/gdd/boss-ca-ong-searchlight.md | Player Controller & Skills, Map & Spawn Director, Game State / Phase State Machine, Ward Timer / Nước Mắm Cốt |
+| 16 | Night Survival Run | Gameplay | MVP | Approved | design/gdd/night-survival-run.md | Shrine Objective & Win/Lose Rules, Curse Effect Modules, Boss Cá Ông Searchlight, Ngọc Cốt / Relic System, Resource Effects & Hương Hỏa |
 | 17 | Resource Effects & Hương Hỏa | Economy | Vertical Slice | Not Started | — | NPC/Soul Data Model, Game State / Phase State Machine, Day Service & Selection |
 | 18 | Ngọc Cốt / Relic System | Gameplay | Vertical Slice | Not Started | — | Player Controller & Skills, Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
 | 19 | HUD-less Design & Sensory Feedback | UI | Vertical Slice | Not Started | — | Ward Timer / Nước Mắm Cốt, Sensory Feedback System, Night Survival Run |
@@ -154,10 +154,10 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | Metric | Count |
 |--------|-------|
 | Total systems identified | 21 |
-| Design docs started | 9 |
+| Design docs started | 10 |
 | Design docs reviewed | 5 |
-| Design docs approved | 3 |
-| MVP systems designed | 5/16 |
+| Design docs approved | 15 |
+| MVP systems designed | 6/16 |
 | Vertical Slice systems designed | 0/4 |
 
 ---

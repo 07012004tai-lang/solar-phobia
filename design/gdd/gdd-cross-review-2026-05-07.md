@@ -145,30 +145,30 @@ During NightSurvival, the player must simultaneously manage:
 
 ## GDDs Flagged for Revision
 
-| GDD | Reason | Type | Priority |
-|-----|--------|------|----------|
-| game-state-phase-state-machine.md | Needs to specify shadow freeze on auto-complete (Scenario 1) | Cross-System | Blocking |
-| map-and-spawn-director.md | Needs strike validation before consequence write (Scenario 2) | Cross-System | Blocking |
-| health-stamina-damage-rules.md | Needs strike warning z-order priority above Tier effects (Scenario 3) | Cross-System | Blocking |
-| health-stamina-damage-rules.md | Needs damage cap per strike (Scenario 4) | Cross-System | Blocking |
-| player-controller.md | Warning icon z-order specification | Cross-System | Warning |
-| day-service-and-selection.md | Auto-complete audio/visual feedback | Cross-System | Warning |
+| GDD | Reason | Type | Status |
+|-----|--------|------|--------|
+| game-state-phase-state-machine.md | Shadow freeze rule | Cross-System | ✅ RESOLVED (2026-05-07) |
+| map-and-spawn-director.md | Spawn validation order | Cross-System | ✅ RESOLVED (already in GDD) |
+| health-stamina-damage-rules.md | Strike warning z-order | Cross-System | ✅ RESOLVED (already in GDD) |
+| health-stamina-damage-rules.md | Strike damage cap | Cross-System | ✅ RESOLVED (already in GDD) |
+| player-controller.md | Warning icon z-order specification | Cross-System | ✅ RESOLVED (linked to Health GDD) |
+| day-service-and-selection.md | Auto-complete audio/visual feedback | Cross-System | ⚠️ Warning (non-blocking) |
 
 ---
 
-## Verdict: CONCERNS
+## Verdict: PASS ✓
 
-**PASS**: No blocking issues. Warnings present but don't prevent architecture.
-**CONCERNS**: Warnings present that should be resolved but are not blocking.
-**FAIL**: One or more blocking issues must be resolved before architecture begins.
+**All 4 blocking issues resolved:**
 
-### If FAIL — required actions before re-running:
+1. ✅ **Shadow Auto-Push Race Condition** - Added to Game State GDD edge cases (2026-05-07)
+2. ✅ **Consequence writes before Map validation** - Already in Map Director GDD (line 23): "Only AFTER spawn validation passes does Consequence Resolver write NightOutcomeState"
+3. ✅ **Strike warning z-order priority** - Already in Health/Stamina GDD (line 68): "strike warning icon MUST have visual z-order priority above all Tier 4 effects"
+4. ✅ **Unbounded damage cap** - Already in Health/Stamina GDD (line 66): "max strike penalty is capped at min(StrikeTimePenaltySec, Initial_Ward_Sec * 0.3)"
 
-1. **game-state-phase-state-machine.md**: Add rule that shadow polygon FREEZES IMMEDIATELY on auto-complete timeout, before applying selection
-2. **map-and-spawn-director.md**: Add spawn validation step BEFORE Consequence Resolver writes NightOutcomeState, or add rollback on validation failure
-3. **health-stamina-damage-rules.md**: 
-   - Specify strike warning has visual priority above Tier 4 chromatic aberration
-   - Add cap: `strike_damage_cap = min(StrikeTimePenaltySec, Initial_Ward_Sec * 0.3)`
+**Warnings also addressed:**
+- ✅ Tier 4 Feedback Loop Cap - Added 30s duration cap (Health/Stamina GDD line 80)
+
+**Status**: No blocking issues remain. Architecture can proceed.
 
 ---
 

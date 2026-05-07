@@ -1,12 +1,12 @@
 # Solar Phobia — Master Architecture
 
 ## Document Status
-- Version: 1.1
+- Version: 1.2
 - Last Updated: 2026-05-07
 - Engine: Unity 6000.3.11f1 (Unity 6)
-- GDDs Covered: 11 system GDDs (game-state, player-controller, day-service, shrine-objective, consequence-resolver, shadow-spatial, health-stamina, map-spawn, npc-soul, day-night-camera, game-concept)
+- GDDs Covered: 10 approved system GDDs (game-state, npc-soul, map-spawn, health-stamina, shadow, day-night-camera, player-controller, day-service, shrine-objective, night-survival-run)
 - Cross-System Issues: RESOLVED (4 blockers fixed 2026-05-07)
-- ADRs Referenced: 3 (ADR-0001, ADR-0002, ADR-0003)
+- ADRs Referenced: 4 (ADR-0001, ADR-0002, ADR-0003, ADR-0004)
 
 ---
 
@@ -202,44 +202,58 @@ public interface IPlayerController {
 
 ## ADR Audit
 
-**No ADRs exist yet.**
+### Existing ADRs
 
-All technical requirements from GDDs currently have **no architectural decision** supporting them.
+| ADR | Title | Layer | GDD Linkage | Status |
+|-----|-------|-------|-------------|--------|
+| ADR-0001 | Phase State Machine Architecture | Foundation | game-state-phase-state-machine.md | ✅ Valid |
+| ADR-0002 | Soul Data Repository Pattern | Foundation | npc-soul-data-model.md | ✅ Valid |
+| ADR-0003 | Player Controller Pattern | Core | player-controller.md | ✅ Valid |
+| ADR-0004 | Coding Standards & Scene Folder Structure | Foundation | AGENTS.md, Naming Conventions | ✅ Valid |
 
 ### Traceability Coverage
 
 | Requirement ID | GDD | Requirement | ADR Coverage | Status |
 |---------------|-----|-------------|--------------|--------|
-| TR-state-001 | game-state-phase-state-machine.md | Phase state machine | — | ❌ GAP |
-| TR-state-002 | game-state-phase-state-machine.md | Day/Night transitions | — | ❌ GAP |
-| TR-player-001 | player-controller.md | WASD movement | — | ❌ GAP |
+| TR-state-001 | game-state-phase-state-machine.md | Phase state machine | ADR-0001 | ✅ |
+| TR-state-002 | game-state-phase-state-machine.md | Day/Night transitions | ADR-0001 | ✅ |
+| TR-player-001 | player-controller.md | WASD movement | ADR-0003 | ✅ |
 | TR-ward-001 | health-stamina-damage-rules.md | Ward initialization | — | ❌ GAP |
-| TR-npc-001 | npc-soul-data-model.md | Soul entity storage | — | ❌ GAP |
+| TR-npc-001 | npc-soul-data-model.md | Soul entity storage | ADR-0002 | ✅ |
 | TR-map-001 | map-and-spawn-director.md | Procedural generation | — | ❌ GAP |
+| TR-consequence-001 | consequence-resolver.md | Curse mapping | — | ❌ GAP |
+| TR-shrine-001 | shrine-objective-win-lose-rules.md | Win/Lose detection | — | ❌ GAP |
+| TR-night-001 | night-survival-run.md | Night loop | — | ❌ GAP |
+| TR-shadow-001 | shadow-spatial-management.md | Shadow polygon | — | ❌ GAP |
+| TR-camera-001 | day-night-camera-transition.md | Camera transition | — | ❌ GAP |
+
+**Coverage**: 4/11 requirements covered. **7 gaps** requiring new ADRs.
 
 ---
 
 ## Required ADRs (Priority Order)
 
-### Foundation Layer (Must create first)
-1. **Phase State Machine Architecture** — VContainer + R3 reactive pattern
-   - Covers: TR-state-001, TR-state-002, TR-state-003
-2. **Event Bus Architecture** — MessagePipe pub/sub vs direct coupling
-3. **Soul Data Repository Pattern** — Dictionary-based storage with R3 observables
+### Already Created ✅
+1. **ADR-0001** — Phase State Machine Architecture
+2. **ADR-0002** — Soul Data Repository Pattern
+3. **ADR-0003** — Player Controller Pattern
+4. **ADR-0004** — Coding Standards & Scene Folder Structure
 
-### Core Layer (Before implementation)
-4. **Player Controller Pattern** — CharacterController + New Input System
+### Still Needed (7 gaps)
 5. **Ward Timer Implementation** — ReactiveProperty with sensory tiers
+   - Covers: TR-ward-001
 6. **Map Generation Strategy** — Deterministic seed + chunk spawning
+   - Covers: TR-map-001
 7. **Shrine Objective Logic** — Win/lose detection with phase gating
-
-### Feature Layer
+   - Covers: TR-shrine-001
 8. **Consequence Resolver Pattern** — Curse payload generation from sacrifice
-9. **Boss Searchlight AI** — Sweep pattern + cover detection
-10. **Curse Effect Modules** — Karma-based hazard spawning
-
-### Presentation Layer
-11. **Sensory Feedback System** — HUD-less tier-based visual/audio feedback
+   - Covers: TR-consequence-001
+9. **Night Survival Run Architecture** — Night loop integration
+   - Covers: TR-night-001
+10. **Shadow Spatial Management** — Shadow polygon + shrink mechanics
+    - Covers: TR-shadow-001
+11. **Day/Night Camera Transition** — Camera behavior + transition effects
+    - Covers: TR-camera-001
 
 ---
 
@@ -269,7 +283,12 @@ All technical requirements from GDDs currently have **no architectural decision*
 
 ## Next Steps
 
-1. Run `/architecture-decision "Phase State Machine Architecture"` — Foundation ADR #1
-2. Run `/architecture-decision "Soul Data Repository Pattern"` — Foundation ADR #2  
-3. Run `/architecture-decision "Player Controller Pattern"` — Core ADR #1
-4. Run `/gate-check pre-production` when all Foundation + Core ADRs are written
+1. **ADRs already created**: ADR-0001 (Phase State Machine), ADR-0002 (Soul Repository), ADR-0003 (Player Controller), ADR-0004 (Coding Standards)
+2. **Create remaining ADRs** for the 7 coverage gaps (Ward Timer, Map, Shrine, Consequence, Night Run, Shadow, Camera)
+3. Run `/create-control-manifest` to produce the layer rules manifest
+4. Run `/gate-check pre-production` when all required ADRs are written
+
+**Priority order for remaining ADRs**:
+- Ward Timer Implementation (survival core)
+- Map Generation Strategy (procedural foundation)
+- Consequence Resolver Pattern (game identity)

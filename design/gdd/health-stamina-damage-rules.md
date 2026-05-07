@@ -37,6 +37,7 @@ The player should feel **time pressure and vulnerability**—their Ward timer is
 
 | Action | Ward Cost | Notes |
 |--------|-----------|-------|
+| Sprint (Shift held) | -0.5s/sec | Continuous while held, in addition to base drain |
 | Jump / Double Jump | 0 | Free movement |
 | Swing (cloth throw) | -2.0s | One-time burst |
 | Spirit Dash | -5.0s | Burst movement |

@@ -36,7 +36,7 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 8. Spawn set must always include at least one valid route from start to end with optional risk detours.
 9. Map resets deterministically per seed on new run.
 10. **Unified Resource Rule**: Night Phase has no separate HP; all lethal pressure is represented through Ward Timer depletion.
-11. Strike hit applies timer loss and terrain disruption: default `StrikeTimePenaltySec = 30` and nearest active mound enters broken state.
+11. Strike hit applies timer loss and terrain disruption: default `StrikeTimePenaltySec = 30` and nearest active Mound is destroyed, creating debris that becomes a NEW cover volume for subsequent sweeps.
 12. FalseSafeMound must present a readable warning tell before failure (`TellDurationSec`), never instant-kill by surprise.
 
 ### States and Transitions
@@ -174,7 +174,7 @@ cover_density = mo_thuong_count / lane_length
 | FogDensity | 0.7 | 0.3-0.9 | More uncertainty/tension | More readability/less dread |
 | SweepIntervalSec | 6.0 | 3.0-10.0 | Less frequent pressure | More relentless pressure |
 | SweepWidth | 5.0 | 2.0-8.0 | Harder to avoid without cover | Easier traversal |
-| StrikeTelegraphSec | 1.2 | 0.6-2.0 | Fairer reaction window | More punishing checks |
+| StrikeTelegraphSec | 1.5 | 0.8-2.5 | Fairer reaction window | More punishing checks |
 | MoThuongCount | 14 | 8-24 | Safer route options | Higher route risk |
 | MoOanCount | 3 | 1-6 | More reward temptations | Fewer risk/reward moments |
 | TimeDrainMultiplier | 0.5 | 0.1-1.0 | Harsher Bone Relic burden | Softer penalty |

@@ -190,6 +190,7 @@ This creates "Hopeless Hope" — the player knows death is coming but fights any
 | Timer expires during DayService without confirmation | Auto-commit current valid selection; if invalid, choose deterministic default policy | Keeps loop cadence and avoids deadlock |
 | Night systems report active during DayService | Force-disable and emit contract violation event | Preserves phase integrity |
 | Reset interrupted by missing references | In dev: enter FatalError; in release: force failure Resolve snapshot then Reset | Avoids partial-reset ghost state while preserving recoverability |
+| Shadow auto-push fires simultaneously with auto-complete timeout | **Shadow polygon FREEZES IMMEDIATELY** on auto-complete timeout, THEN apply selection | Prevents race condition where auto-push (thermal death) and auto-complete fire simultaneously causing contradictory soul states (Saved/Abandoned + Burned) |
 
 ## Dependencies
 
