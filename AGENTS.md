@@ -108,7 +108,47 @@ namespace NhemBootstrap.Editor.Steps {
 - **DOTween**: Animation tweens (Demigiant)
 - **Odin Inspector**: Editor enhancements (Sirenix)
 
+## Scene Folder Structure
+
+**Use only** `Assets/_Project/_Scenes/` for project scenes:
+
+| Folder | Purpose |
+|--------|---------|
+| `_Scenes/Dev/` | Development, testing, and prototype scenes |
+| `_Scenes/Dev/Prototype/` | Prototype test scenes |
+| `_Scenes/Dev/Dialogue/` | Dialogue system development scenes |
+| `_Scenes/Gameplay/` | Main gameplay and level scenes |
+| `_Project/Settings/Scenes/` | URP scene templates only |
+
+**Never use**: `Assets/Scenes/` (deprecated - delete if empty)
+
+## Coding Standards Namespace
+
+Use `SolarPhobia.Rules` namespace for codifiable standards:
+
+```csharp
+using SolarPhobia.Rules;
+
+// Layer attribute for architectural enforcement
+[Layer(NamingConventions.Layers.Domain)]
+public class MyEntity { }
+
+// Scene path constants
+string devScenes = ScenePaths.Scenes.Dev;
+```
+
+See `Assets/_Project/Domain/Rules/` for:
+- `NamingConventions.cs` - Namespace and naming rules
+- `LayerAttributes.cs` - Architectural layer attributes
+- `ScenePaths.cs` - Scene folder path constants
+
 ## Git Workflow
 - **Ignore**: Library/, Temp/, Obj/, Build/, Logs/, UserSettings/, *.csproj, *.sln
 - **Track**: Assets/, Packages/, ProjectSettings/
 - See `.gitignore` for complete list
+
+---
+
+## Engine Version Reference
+
+@docs/engine-reference/unity/VERSION.md

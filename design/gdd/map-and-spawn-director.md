@@ -1,6 +1,6 @@
 # Map & Spawn Director
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + Copilot
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Psychological consequence through readable survival pressure
@@ -16,6 +16,12 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 ## Detailed Design
 
 ### Core Rules
+
+**Pre-Night Validation Order**: The following sequence MUST occur before transitioning to NightSurvival:
+   a. Map Director validates spawn bundle (route viability, cover placement, hazard zones)
+   b. If spawn validation FAILS, return error to Game State Machine → transition to FatalError
+   c. Only AFTER spawn validation passes does Consequence Resolver write NightOutcomeState
+   d. This prevents locked NPC Model state with invalid night setup
 
 1. Night map is a single horizontal lane between `StartShrine` and `EndShrine`.
 2. Global fog limits forward visibility; reveal radius is player-centered.

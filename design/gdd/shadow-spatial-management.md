@@ -1,6 +1,6 @@
 # Shadow Spatial Management
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + opencode
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Consequence-driven survival loop with day/night emotional contrast

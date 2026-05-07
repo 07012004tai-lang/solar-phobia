@@ -2,7 +2,7 @@
 
 > **Status**: Updated
 > **Created**: 2026-05-06
-> **Last Updated**: 2026-05-06
+> **Last Updated**: 2026-05-07
 > **Source Concept**: design/gdd/game-concept.md
 
 ---
@@ -17,19 +17,19 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 
 | # | System Name | Category | Priority | Status | Design Doc | Depends On |
 |---|-------------|----------|----------|--------|------------|------------|
-| 1 | Game State / Phase State Machine | Core | MVP | Needs Revision | design/gdd/game-state-phase-state-machine.md | — |
-| 2 | NPC/Soul Data Model | Narrative | MVP | In Review | design/gdd/npc-soul-data-model.md | — |
-| 3 | Map & Spawn Director | Core | MVP | Needs Revision | design/gdd/map-and-spawn-director.md | — |
-| 4 | Ward Timer / Nước Mắm Cốt | Core | MVP | Needs Revision | design/gdd/health-stamina-damage-rules.md | — |
+| 1 | Game State / Phase State Machine | Core | MVP | Approved | design/gdd/game-state-phase-state-machine.md | — |
+| 2 | NPC/Soul Data Model | Narrative | MVP | Approved | design/gdd/npc-soul-data-model.md | — |
+| 3 | Map & Spawn Director | Core | MVP | Approved | design/gdd/map-and-spawn-director.md | — |
+| 4 | Ward Timer / Nước Mắm Cốt | Core | MVP | Approved | design/gdd/health-stamina-damage-rules.md | — |
 | 5 | Shadow Spatial Management | Gameplay | MVP | Approved | design/gdd/shadow-spatial-management.md | Game State / Phase State Machine |
-| 6 | Day/Night Camera Transition | Core | MVP | Not Started | — | Game State / Phase State Machine |
-| 7 | Player Controller & Skills | Core | MVP | Needs Revision | design/gdd/player-controller.md | Game State / Phase State Machine, Map & Spawn Director, Day/Night Camera Transition |
+| 6 | Day/Night Camera Transition | Core | MVP | In Design | design/gdd/day-night-camera-transition.md | Game State / Phase State Machine |
+| 7 | Player Controller & Skills | Core | MVP | Approved | design/gdd/player-controller.md | Game State / Phase State Machine, Map & Spawn Director, Day/Night Camera Transition |
 | 8 | Physical Crowding & Push | Gameplay | MVP | Not Started | — | NPC/Soul Data Model, Map & Spawn Director, Game State / Phase State Machine |
 | 9 | Tactile Rituals | Gameplay | MVP | Not Started | — | Game State / Phase State Machine, NPC/Soul Data Model, Ward Timer / Nước Mắm Cốt |
-| 10 | Day Service & Selection | Gameplay | MVP | Needs Revision | design/gdd/day-service-and-selection.md | NPC/Soul Data Model, Game State / Phase State Machine, Tactile Rituals |
-| 11 | Shrine Objective & Win/Lose Rules | Core | MVP | Needs Revision | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller & Skills, Ward Timer / Nước Mắm Cốt |
+| 10 | Day Service & Selection | Gameplay | MVP | Approved | design/gdd/day-service-and-selection.md | NPC/Soul Data Model, Game State / Phase State Machine, Tactile Rituals |
+| 11 | Shrine Objective & Win/Lose Rules | Core | MVP | Approved | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller & Skills, Ward Timer / Nước Mắm Cốt |
 | 12 | Sensory Feedback System | UI | MVP | Not Started | — | Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
-| 13 | Consequence Resolver | Gameplay | MVP | Needs Revision | design/gdd/consequence-resolver.md | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
+| 13 | Consequence Resolver | Gameplay | MVP | Approved | design/gdd/consequence-resolver.md | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
 | 14 | Curse Effect Modules | Gameplay | MVP | Not Started | — | Consequence Resolver, Player Controller & Skills, Map & Spawn Director, Ward Timer / Nước Mắm Cốt |
 | 15 | Boss Cá Ông Searchlight | Gameplay | MVP | Not Started | — | Player Controller & Skills, Map & Spawn Director, Game State / Phase State Machine, Ward Timer / Nước Mắm Cốt |
 | 16 | Night Survival Run | Gameplay | MVP | Not Started | — | Shrine Objective & Win/Lose Rules, Curse Effect Modules, Boss Cá Ông Searchlight, Ngọc Cốt / Relic System, Resource Effects & Hương Hỏa |

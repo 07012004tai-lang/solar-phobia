@@ -73,6 +73,51 @@ Shadow Spatial Management GDD ✅ (8/8 sections written, APPROVED by design-revi
 - Recommended next: Run /gate-check pre-production to validate Systems Design phase gate
 - Report: design/gdd/gdd-cross-review-2026-05-06.md (original, still valid)
 
+## Gate Check: Systems Design → Technical Setup 2026-05-07
+- Verdict: PASS
+- Required artifacts: 2/2 present
+- Quality checks: 3/3 passing
+- 3 GDDs approved with all 8 sections
+- Stage updated: production/stage.txt = "Technical Setup"
+
+## Create Architecture 2026-05-07
+- Tech stack: VContainer, R3, MessagePipe, ZlinQ, ObserverCollections, DOTween, UIToolkit, New Input System
+- Architecture doc: docs/architecture/architecture.md (already exists, updated status)
+- 21 systems mapped across 5 layers (Platform → Foundation → Core → Feature → Presentation)
+- 16 Required ADRs identified for Foundation + Core + Feature + Presentation layers
+- Architecture principles: Phase-gated processing, deterministic consequences, single lethal resource (Ward Timer)
+
+## ADR Created 2026-05-07
+- ADR-0001: Phase State Machine Architecture (Accepted)
+- Covers: TR-state-001 through TR-state-010 (10 requirements)
+- Tech: VContainer + R3 ReactiveProperty + MessagePipe pub/sub
+
+- ADR-0002: NPC/Soul Data Model and Phase-Locked Writes (Accepted)
+- Covers: TR-npc-001 through TR-npc-009 (9 requirements)
+- Tech: VContainer + Dictionary-based repo + R3 observables
+
+- ADR-0003: Save Seed and Run Reset Strategy (Accepted)
+- Covers: Deterministic seed, serialization, reset, outcome snapshots
+- Tech: PlayerPrefs + JSON serialization
+
+- ADR-0004: Ward Timer System - Single Lethal Resource (Accepted)
+- Covers: TR-health-001 through TR-health-009 (9 requirements)
+- Tech: VContainer + R3 ReactiveProperty
+
+- ADR-0005: Map & Spawn Director - Lane Generation and Hazard Placement (Accepted)
+- Covers: TR-map-001 through TR-map-010 (10 requirements)
+- Tech: Procedural generation with deterministic seed
+
+- ADR-0006: Player Controller - Input System and Movement (Accepted)
+- Covers: Movement, sprint, cover, E-interact, phase gating
+- Tech: New Input System + CharacterController + VContainer
+- Core Layer ADRs complete!
+
+## GDD Update 2026-05-07
+- Updated: game-state-phase-state-machine.md
+- Added: Lore foundation (Tú, Cá Ông, Mặt Trời Rỗng), Day phase timeline (5-min), Swap/Shove mechanics, Night phase platformer details, Karma hazards (Lưới Máu, Vũng Nước, Bệ Đá), Ngọc Cốt system, Ward Timer formulas, Sensory tier system (HUD-less)
+- Next: Run /propagate-design-change to check ADR impact
+
 ## Completed Systems GDDs ✅`
 1. Game State / Phase State Machine (Approved)
 2. Player Controller & Skills (Approved)
@@ -91,3 +136,20 @@ design/gdd/shadow-spatial-management.md (approved)
 - Continue designing remaining MVP systems: Shadow Spatial Management, Day/Night Camera Transition, Physical Crowding & Push, Tactile Rituals, Resource Effects & Hương Hỏa, Curse Effect Modules, Boss Cá Ông Searchlight, Night Survival Run
 - Run `/gate-check pre-production` when MVP systems are designed
 - Run `/prototype [system]` for high-risk systems (Consequence Resolver, Night Survival Run)
+
+
+## Setup Engine 2026-05-07
+- Engine: Unity 6000.3.11f1 (Unity 6)
+- Knowledge Risk: HIGH (beyond LLM training data)
+- Reference Docs: Created full set (VERSION.md, breaking-changes.md, deprecated-apis.md, current-best-practices.md, modules/ui-toolkit.md)
+- AGENTS.md: Updated with engine reference import
+- Tech Prefs: Updated with Unity/C# naming conventions, performance budgets
+- Agent Roster: Added version awareness protocol for unity-specialist
+- Next: Can now run /create-architecture and write ADRs with engine-verified patterns
+
+
+## ADR Created 2026-05-07
+- ADR-0001: Phase State Machine Architecture (Accepted)
+- Covers: TR-state-001 through TR-state-010 (10 requirements)
+- Tech: VContainer + R3 ReactiveProperty + MessagePipe pub/sub
+- Next: Continue with more ADRs

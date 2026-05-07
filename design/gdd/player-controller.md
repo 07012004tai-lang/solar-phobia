@@ -1,6 +1,6 @@
 # Player Controller
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + opencode
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Consequence-driven survival loop with day/night emotional contrast
@@ -184,7 +184,7 @@ input_allowed = (current_phase in allowed_phases[input_type])
 - [ ] **Sprint Integration**: Releasing Shift or stamina = 0 sends `is_sprinting = false`. Speed returns to base.
 - [ ] **E-Interact (Bone Relic)**: Near CursedMound, E key picks up Bone Relic, triggers `OnResourcePickedUp(NgocCot)` event to Resource Effects system.
 - [ ] **E-Interact (Shrine)**: Near EndShrine, E key triggers shrine arrival event to Game State Machine.
-- [ ] **Strike Warning**: On receiving `OnStrikeWarning` from Map Director, display warning icon near reticle.
+- [ ] **Strike Warning**: On receiving `OnStrikeWarning` from Map Director, display warning icon near reticle. **Critical**: Warning icon must have z-order priority above Tier 4 panic effects (chromatic aberration) per Health/Stamina GDD. If 2D screen-space, use highest layer; if 3D world-space, ensure not obscured by post-processing.
 - [ ] **Phase Transition Clean**: On `NightSurvival` exit, sprint disabled, E-interact disabled, cursor shown. No orphaned states.
 - [ ] **Performance**: Input processing completes within 1ms average per frame on target PC.
 - [ ] **Cross-System Events**: Verify events sent to Map Director (position, cover state), Health/Stamina (sprint state), Resource Effects (relic pickup), HUD (state changes) are delivered reliably.

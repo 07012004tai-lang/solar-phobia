@@ -25,16 +25,17 @@ The emotional promise: **"The person you left behind is now your nightmare."** T
 ### Core Rules$
 
 1. **Trigger**: Consequence Resolver is invoked by Game State Machine during `ChoiceLock` phase when `SelectionConfirmed(payload)` is received.
-2. **Payload Read**: Extract `abandoned_soul_id` from the payload. This is the soul the player left behind.
-3. **Curse Mapping** (deterministic):
+2. **Prerequisite**: Consequence Resolver only executes AFTER Map & Spawn Director validates spawn bundle. If Map validation fails, Consequence Resolver is NOT invoked (state remains in ChoiceLock, transitions to FatalError).
+3. **Payload Read**: Extract `abandoned_soul_id` from the payload. This is the soul the player left behind.
+4. **Curse Mapping** (deterministic):
    - `Linh` (abandoned) → `NightOutcomeState = Drag` (Water Trap — Nước Dâng).
    - `Van` (abandoned) → `NightOutcomeState = Block` (Blood Net — Lưới Máu).
    - `Minh` (abandoned) → `NightOutcomeState = FakeShrine` (Illusion — Ảo Ảnh).
-4. **Model Write**: Write `NightOutcomeState` to NPC/Soul Data Model for the abandoned soul only.
-5. **Curse Payload**: Send curse type, intensity, and location bias to:
+5. **Model Write**: Write `NightOutcomeState` to NPC/Soul Data Model for the abandoned soul only.
+6. **Curse Payload**: Send curse type, intensity, and location bias to:
    - Map & Spawn Director (spawn bias for night hazards).
    - Curse Effect Modules (visual/audio effects for night).
-6. **One-Write Rule**: Consequence Resolver writes `NightOutcomeState` exactly once per run. Contradictory writes are rejected.
+7. **One-Write Rule**: Consequence Resolver writes `NightOutcomeState` exactly once per run. Contradictory writes are rejected.
 
 ### States and Transitions$
 

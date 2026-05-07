@@ -1,198 +1,308 @@
-<p align="center">
-  <a href="https://github.com/truong204/Solar-Phobia">
-    <img src="images/logo.png" alt="Solar Phobia Logo" width="80" height="80">
-  </a>
+<!--
+Hey, thanks for using the awesome-readme-template template.  
+If you have any enhancements, then fork this project and create a pull request 
+or just open an issue with the label "enhancement".
 
-  <h3 align="center">Solar Phobia: Nắng Gắt</h3>
+Don't forget to give this project a star for additional support ;)
+Maybe you can mention me or this repo in the acknowledgements too
+-->
+<div align="center">
 
-  <p align="center">
-    A consequence-driven survival game set in a sun-scorched Vietnamese fishing village.
-    <br />
-    By day, you choose who to save. By night, you run from what you left behind.
-    <br />
-    <br />
-    <a href="https://github.com/truong204/Solar-Phobia/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/truong204/Solar-Phobia/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
+  <h1>Awesome Readme Template</h1>
+
+  <p>
+    An awesome README template for your projects! 
   </p>
+
+
+<!-- Badges -->
+<p>
+  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
+  </a>
+  <a href="https://github.com/Louis3797/awesome-readme-template/network/members">
+    <img src="https://img.shields.io/github/forks/Louis3797/awesome-readme-template" alt="forks" />
+  </a>
+  <a href="https://github.com/Louis3797/awesome-readme-template/stargazers">
+    <img src="https://img.shields.io/github/stars/Louis3797/awesome-readme-template" alt="stars" />
+  </a>
+  <a href="https://github.com/Louis3797/awesome-readme-template/issues/">
+    <img src="https://img.shields.io/github/issues/Louis3797/awesome-readme-template" alt="open issues" />
+  </a>
+  <a href="https://github.com/Louis3797/awesome-readme-template/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
+  </a>
 </p>
 
-<!-- TABLE OF CONTENTS -->
+<h4>
+    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
+  <span> · </span>
+    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
+  <span> · </span>
+    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
+  </h4>
+</div>
+
+<br />
+
+<!-- Table of Contents -->
+# :notebook_with_decorative_cover: Table of Contents
+
+- [About the Project](#star2-about-the-project)
+   * [Screenshots](#camera-screenshots)
+   * [Tech Stack](#space_invader-tech-stack)
+   * [Features](#dart-features)
+   * [Color Reference](#art-color-reference)
+   * [Environment Variables](#key-environment-variables)
+- [Getting Started](#toolbox-getting-started)
+   * [Prerequisites](#bangbang-prerequisites)
+   * [Installation](#gear-installation)
+   * [Running Tests](#test_tube-running-tests)
+   * [Run Locally](#running-run-locally)
+   * [Deployment](#triangular_flag_on_post-deployment)
+- [Usage](#eyes-usage)
+- [Roadmap](#compass-roadmap)
+- [Contributing](#wave-contributing)
+   * [Code of Conduct](#scroll-code-of-conduct)
+- [FAQ](#grey_question-faq)
+- [License](#warning-license)
+- [Contact](#handshake-contact)
+- [Acknowledgements](#gem-acknowledgements)
+
+
+
+<!-- About the Project -->
+## :star2: About the Project
+
+
+<!-- Screenshots -->
+### :camera: Screenshots
+
+<div align="center"> 
+  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+</div>
+
+
+<!-- TechStack -->
+### :space_invader: Tech Stack
+
 <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#gameplay">Gameplay</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
+    <li><a href="https://nextjs.org/">Next.js</a></li>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+  </ul>
 </details>
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
+    <li><a href="https://expressjs.com/">Express.js</a></li>
+    <li><a href="https://go.dev/">Golang</a></li>
+    <li><a href="https://nestjs.com/">Nest.js</a></li>
+    <li><a href="https://socket.io/">SocketIO</a></li>
+    <li><a href="https://www.prisma.io/">Prisma</a></li>    
+    <li><a href="https://www.apollographql.com/">Apollo</a></li>
+    <li><a href="https://graphql.org/">GraphQL</a></li>
+  </ul>
+</details>
 
-[![Game Screenshot][product-screenshot]](https://example.com)
+<details>
+<summary>Database</summary>
+  <ul>
+    <li><a href="https://www.mysql.com/">MySQL</a></li>
+    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://redis.io/">Redis</a></li>
+    <li><a href="https://neo4j.com/">Neo4j</a></li>
+    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+  </ul>
+</details>
 
-I wanted to make a game where your choices actually matter—not in some vague "good ending/bad ending" way, but immediate, gut-punch consequences you feel the same night.
+<details>
+<summary>DevOps</summary>
+  <ul>
+    <li><a href="https://www.docker.com/">Docker</a></li>
+    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
+    <li><a href="https://circleci.com/">CircleCLI</a></li>
+  </ul>
+</details>
 
-Set in the fictional Làng Chài Hắc Hải, a fishing village cursed by "Nắng Gắt" (Scorching Sun), the game puts you in a tight day/night loop:
+<!-- Features -->
+### :dart: Features
 
-**By day**, you serve three villagers—Linh, Van, and Minh. You've got tea for light, incense for safe zones, offerings for skills. But you can only save two. One must be left behind.
+- Feature 1
+- Feature 2
+- Feature 3
 
-**By night**, you flee to the shrine while the abandoned soul hunts you down. Each one becomes a different obstacle:
-- Linh drags you down
-- Van blocks your path
-- Minh fakes shrines to waste your time
+<!-- Color Reference -->
+### :art: Color Reference
 
-You don't lose because the game is hard. You lose because of what you chose.
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
+| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
+| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
+| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
 
-Here's why I built it this way:
-* I wanted players to feel the weight of every decision, not just see a different cutscene
-* The day/night contrast lets me play with hot yellows vs. deep blues, calm ambience vs. escalating tension
-* Keeping it small (3 NPCs, 1 boss, 1 map) means I can polish the hell out of that one loop
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- Env Variables -->
+### :key: Environment Variables
 
-### Built With
+To run this project, you will need to add the following environment variables to your .env file
 
-This section lists the major technologies I'm using to build this.
+`API_KEY`
 
-* ![Unity](https://img.shields.io/badge/Unity%206000.3.11f1-100000?style=for-the-badge&logo=unity&logoColor=white)
-* ![C#](https://img.shields.io/badge/C%23%209.0-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-* ![VContainer](https://img.shields.io/badge/VContainer-DI-blue?style=for-the-badge)
-* ![UniTask](https://img.shields.io/badge/UniTask-Async-green?style=for-the-badge)
-* ![DOTween](https://img.shields.io/badge/DOTween-Animation-orange?style=for-the-badge)
+`ANOTHER_API_KEY`
 
-The code is split into clean layers (Domain → Application → Infrastructure → Presentation) with separate assembly definitions for each, so it stays organized as it grows.
+<!-- Getting Started -->
+## 	:toolbox: Getting Started
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- Prerequisites -->
+### :bangbang: Prerequisites
 
-<!-- GETTING STARTED -->
-## Getting Started
+This project uses Yarn as package manager
 
-This is how to get a local copy up and running on your machine.
-
-### Prerequisites
-
-* [Unity 6000.3.11f1 (Unity 6)](https://unity.com/download) – make sure you have this specific version via Unity Hub
-* [Git](https://git-scm.com/)
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/truong204/Solar-Phobia.git
-   ```
-2. Open Unity Hub and add the project folder
-3. Open the project with Unity 6000.3.11f1
-
-### Running Tests
-
-Inside Unity Editor:
-- Open **Test Runner**: `Window → General → Test Runner` (or Ctrl+Alt+T)
-- Run EditMode tests from `Assets/_Project/**/Editor/Tests/`
-- Run PlayMode tests from `Assets/_Project/**/Tests/`
-
-Or via command line:
-```sh
-# EditMode tests
-Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform EditMode -testResults results.xml
-
-# PlayMode tests
-Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform PlayMode -testResults results.xml
+```bash
+ npm install --global yarn
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- Installation -->
+### :gear: Installation
 
-<!-- GAMEPLAY -->
-## Gameplay
+Install my-project with npm
 
-The core loop is tight and repeatable:
+```bash
+  yarn install my-project
+  cd my-project
+```
 
-1. **Day Phase (Serve)** – Talk to Linh, Van, and Minh. Give them tea, incense, or offerings. Choose which two to save.
-2. **Choice Lock** – The one left behind is locked in. The game computes how they'll mess with you at night.
-3. **Night Phase (Survive)** – Run to the shrine. Avoid solar residue hazards, manage your Ward Timer, and deal with the curse of the soul you abandoned.
-4. **Resolve** – Made it to the shrine? You win that loop. Die? Face the consequence.
+<!-- Running Tests -->
+### :test_tube: Running Tests
 
-### The Map (Act 1)
+To run tests, run the following command
 
-The journey is split into 3 nodes, each with its own vibe:
+```bash
+  yarn test test
+```
 
-| Node | Name | Vibe | Gameplay |
-|------|------|------|----------|
-| 1 | Am Đầu Sóng | Calmest area, plenty of shade | Tutorial: serving villagers, short runs |
-| 2 | Am Rừng Dừa | Dead coconut trees, mobile shade | Introduces mobile shadow mechanics |
-| 3 | Lăng Ông Nam Hải | Ruined shrine, cracked ground, hottest | Boss fight: Cá Ông Bộ Xương |
+<!-- Run Locally -->
+### :running: Run Locally
 
-At each shrine, you can open your old map and plan your next night route—short/fast vs. long/safe with more loot.
+Clone the project
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+```bash
+  git clone https://github.com/Louis3797/awesome-readme-template.git
+```
 
-<!-- ROADMAP -->
-## Roadmap
+Go to the project directory
 
-- [x] Game concept and core loop design
-- [x] NPC/Soul data model (Linh, Van, Minh)
-- [x] Day/Night phase state machine design
-- [ ] Implement day/night state machine
-- [ ] Build consequence resolver (how abandoned souls become night hazards)
-- [ ] Create boss chase AI for Cá Ông Bộ Xương
-- [ ] Implement solar residue hazard system
-- [ ] Write custom shadow/sun zone shader
-- [ ] Build the 3-node map
-- [ ] Add audio state director (day/night mix transitions)
-- [ ] Polish HUD and diegetic feedback
+```bash
+  cd my-project
+```
 
-See the [open issues](https://github.com/truong204/Solar-Phobia/issues) for a full list of proposed features and known issues.
+Install dependencies
 
-### Cut Plan (if needed)
-- Remove 1 NPC
-- Simplify boss mechanics
-- Reduce number of endings
+```bash
+  yarn install
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Start the server
 
-<!-- LICENSE -->
-## License
+```bash
+  yarn start
+```
 
-This project is proprietary. All rights reserved.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- Deployment -->
+### :triangular_flag_on_post: Deployment
 
-<!-- CONTACT -->
-## Contact
+To deploy this project run
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+```bash
+  yarn deploy
+```
 
-Project Link: [https://github.com/truong204/Solar-Phobia](https://github.com/truong204/Solar-Phobia)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- Usage -->
+## :eyes: Usage
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
 
-* [Unity Technologies](https://unity.com) for the engine
-* [VContainer](https://github.com/vcontainer/vcontainer) for dependency injection
-* [UniTask](https://github.com/Cysharp/UniTask) for async/await support
-* [DOTween](http://dotween.demigiant.com/) for tween animations
-* [Odin Inspector](https://odininspector.com/) for editor enhancements
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+```javascript
+import Component from 'my-project'
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: images/screenshot.png
+function App() {
+  return <Component />
+}
+```
+
+<!-- Roadmap -->
+## :compass: Roadmap
+
+* [x] Todo 1
+* [ ] Todo 2
+
+
+<!-- Contributing -->
+## :wave: Contributing
+
+<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
+</a>
+
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+
+<!-- Code of Conduct -->
+### :scroll: Code of Conduct
+
+Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+
+<!-- FAQ -->
+## :grey_question: FAQ
+
+- Question 1
+
+   + Answer 1
+
+- Question 2
+
+   + Answer 2
+
+
+<!-- License -->
+## :warning: License
+
+Distributed under the no License. See LICENSE.txt for more information.
+
+
+<!-- Contact -->
+## :handshake: Contact
+
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+
+Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+
+
+<!-- Acknowledgments -->
+## :gem: Acknowledgements
+
+Use this section to mention useful resources and libraries that you have used in your projects.
+
+- [Shields.io](https://shields.io/)
+- [Awesome README](https://github.com/matiassingers/awesome-readme)
+- [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
+- [Readme Template](https://github.com/othneildrew/Best-README-Template)

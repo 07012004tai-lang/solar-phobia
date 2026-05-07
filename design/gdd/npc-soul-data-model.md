@@ -1,6 +1,6 @@
 # NPC/Soul Data Model
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + Copilot
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Consequence readability and emotional ownership

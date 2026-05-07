@@ -172,7 +172,7 @@ priority_score = base_priority + chapter_modifier
 - [ ] **Ritual Assignment**: Tea (diem) -> light bonus, Incense (rot) -> safe zone, Offering (vay) -> skill. Each soul can receive one ritual. 
 - [ ] **Confirm Flow**: Valid + confirmed sends `SelectionConfirmed(payload)` to Game State Machine with SoulIds and ritual assignments. 
 - [ ] **Phase Gating**: DayService phase only. WASD/mouse-look ignored (Player Controller). Cursor visible, UI active. 
-- [ ] **Auto-Complete**: On idle timeout (15s), auto-select using priority order `Linh -> Van -> Minh`; mark 2 Saved, 1 Abandoned. 
+- [ ] **Auto-Complete**: On idle timeout (15s), auto-select using priority order `Linh -> Van -> Minh`; mark 2 Saved, 1 Abandoned. **Must include audio/visual feedback**: play distinct "auto-select" sound and flash UI border when auto-complete triggers, so player knows why selection changed. 
 - [ ] **Invalid Pattern Block**: 3 Saved/0 Abandoned, 0 Saved/3 Abandoned = block confirm + show `InvalidSelectionCount`. 
 - [ ] **Consequence Payload**: Abandoned soul ID sent to Game State Machine for Consequence Resolver. Saved souls sent for Resource Effects. 
 - [ ] **Performance**: per-soul validation completes within 0.05ms average on target PC. 

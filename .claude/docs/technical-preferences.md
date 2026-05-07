@@ -5,44 +5,41 @@
 
 ## Engine & Language
 
-- **Engine**: [TO BE CONFIGURED — run /setup-engine]
-- **Language**: [TO BE CONFIGURED]
-- **Rendering**: [TO BE CONFIGURED]
-- **Physics**: [TO BE CONFIGURED]
+- **Engine**: Unity 6000.3.11f1 (Unity 6)
+- **Language**: C# 9.0
+- **Rendering**: [TO BE CONFIGURED — URP/HDRP/Built-in]
+- **Physics**: Unity Physics (3D)
 
 ## Input & Platform
 
-<!-- Written by /setup-engine. Read by /ux-design, /ux-review, /test-setup, /team-ui, and /dev-story -->
-<!-- to scope interaction specs, test helpers, and implementation to the correct input methods. -->
-
 - **Target Platforms**: [TO BE CONFIGURED — e.g., PC, Console, Mobile, Web]
-- **Input Methods**: [TO BE CONFIGURED — e.g., Keyboard/Mouse, Gamepad, Touch, Mixed]
-- **Primary Input**: [TO BE CONFIGURED — the dominant input for this game]
+- **Input Methods**: New Input System (Keyboard/Mouse + Gamepad)
+- **Primary Input**: Keyboard/Mouse
 - **Gamepad Support**: [TO BE CONFIGURED — Full / Partial / None]
-- **Touch Support**: [TO BE CONFIGURED — Full / Partial / None]
-- **Platform Notes**: [TO BE CONFIGURED — any platform-specific UX constraints]
+- **Touch Support**: None (PC-focused)
+- **Platform Notes**: Windows primary, consider WebGL later
 
-## Naming Conventions
+## Naming Conventions (Unity/C#)
 
-- **Classes**: [TO BE CONFIGURED]
-- **Variables**: [TO BE CONFIGURED]
-- **Signals/Events**: [TO BE CONFIGURED]
-- **Files**: [TO BE CONFIGURED]
-- **Scenes/Prefabs**: [TO BE CONFIGURED]
-- **Constants**: [TO BE CONFIGURED]
+- **Classes**: PascalCase (e.g., `PlayerController`)
+- **Public fields/properties**: PascalCase (e.g., `MoveSpeed`)
+- **Private fields**: _camelCase (e.g., `_moveSpeed`)
+- **Methods**: PascalCase (e.g., `TakeDamage()`)
+- **Files**: PascalCase matching class (e.g., `PlayerController.cs`)
+- **Constants**: PascalCase or UPPER_SNAKE_CASE
 
 ## Performance Budgets
 
-- **Target Framerate**: [TO BE CONFIGURED]
-- **Frame Budget**: [TO BE CONFIGURED]
+- **Target Framerate**: 60 FPS
+- **Frame Budget**: 16.6ms
 - **Draw Calls**: [TO BE CONFIGURED]
 - **Memory Ceiling**: [TO BE CONFIGURED]
 
 ## Testing
 
-- **Framework**: [TO BE CONFIGURED]
-- **Minimum Coverage**: [TO BE CONFIGURED]
-- **Required Tests**: Balance formulas, gameplay systems, networking (if applicable)
+- **Framework**: NUnit (Unity Test Framework 1.6.0)
+- **Minimum Coverage**: 80% for core systems
+- **Required Tests**: Balance formulas, gameplay systems, phase state machine
 
 ## Forbidden Patterns
 
@@ -61,27 +58,18 @@
 
 ## Engine Specialists
 
-<!-- Written by /setup-engine when engine is configured. -->
-<!-- Read by /code-review, /architecture-decision, /architecture-review, and team skills -->
-<!-- to know which specialist to spawn for engine-specific validation. -->
-
-- **Primary**: [TO BE CONFIGURED — run /setup-engine]
-- **Language/Code Specialist**: [TO BE CONFIGURED]
-- **Shader Specialist**: [TO BE CONFIGURED]
-- **UI Specialist**: [TO BE CONFIGURED]
-- **Additional Specialists**: [TO BE CONFIGURED]
-- **Routing Notes**: [TO BE CONFIGURED]
+- **Primary**: unity-specialist (C# + Unity engine)
+- **Language/Code Specialist**: unity-specialist
+- **Shader Specialist**: unity-specialist (with shader focus)
+- **UI Specialist**: unity-specialist (UI Toolkit)
+- **Routing Notes**: All C# code routes to unity-specialist
 
 ### File Extension Routing
 
-<!-- Skills use this table to select the right specialist per file type. -->
-<!-- If a row says [TO BE CONFIGURED], fall back to Primary for that file type. -->
-
 | File Extension / Type | Specialist to Spawn |
 |-----------------------|---------------------|
-| Game code (primary language) | [TO BE CONFIGURED] |
-| Shader / material files | [TO BE CONFIGURED] |
-| UI / screen files | [TO BE CONFIGURED] |
-| Scene / prefab / level files | [TO BE CONFIGURED] |
-| Native extension / plugin files | [TO BE CONFIGURED] |
-| General architecture review | Primary |
+| *.cs | unity-specialist |
+| *.uxml, *.uss | unity-specialist |
+| *.shader | unity-specialist |
+| *.asmdef | unity-specialist |
+| Scene / prefab files | Default (fallback) | |
