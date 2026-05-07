@@ -1,7 +1,7 @@
 # Story 001: Day Phase Timeline — 4 Pressure Phases
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Logic
 > **Manifest Version**: N/A (no control-manifest.md exists)

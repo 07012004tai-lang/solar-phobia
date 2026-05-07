@@ -1,7 +1,7 @@
 # Story 002: Day Phase Mechanics — Swap/Shove Souls
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Logic
 > **Manifest Version**: N/A
@@ -87,3 +87,24 @@
 
 - Depends on: Story 001 (Day Phase Timeline) — Collapse phase must exist before Shove
 - Unlocks: Story 006 (Karma Hazards) — needs sacrificed_ghost_id
+
+---
+
+## Completion Notes
+
+**Completed**: 2026-05-07
+**Criteria**: 3/3 passing (all acceptance criteria met)
+
+**Files Modified**:
+- `Assets/_Project/Application/Services/DayPhaseMechanicsService.cs` (implemented)
+- `Assets/_Project/Application/Editor/Tests/DayPhaseMechanicsTests.cs` (12 tests)
+
+**Test Evidence**: Logic: `Assets/_Project/Application/Editor/Tests/DayPhaseMechanicsTests.cs` (12 tests, passing)
+
+**Code Review**: APPROVED WITH SUGGESTIONS (from `/code-review` run)
+
+**Deviations**: None — Implementation matches ADR-0001 and story requirements.
+
+**Tech debt logged**: None
+
+**Next recommended**: `/story-readiness production/epics/phase-state-machine/story-003-night-phase-movement.md`

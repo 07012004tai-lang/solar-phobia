@@ -36,12 +36,19 @@ namespace SolarPhobia.Application.Repositories
         bool IsSelectionValid(int requiredSaved);
         void Reset();
         Observable<SelectionChangedEvent> OnSelectionChanged { get; }
+        // New methods for Day Phase Mechanics
+        bool IsAtShadowEdge(string soulId);
+        void SwapPositions(string playerId, string soulId);
+        string GetFirstSoulAtShadowEdge();
+        void MarkAbandoned(string soulId);
+        void SetSacrificedGhostId(string soulId);
     }
 
     public class SoulRepository : ISoulRepository
     {
         private readonly Dictionary<string, Soul> _souls;
         private readonly Subject<SelectionChangedEvent> _selectionSubject = new();
+        private string _sacrificedGhostId;
 
         public IReadOnlyList<Soul> Souls => _souls.Values.ToList();
         public Observable<SelectionChangedEvent> OnSelectionChanged => _selectionSubject;
@@ -135,6 +142,41 @@ namespace SolarPhobia.Application.Repositories
                 soul.NightOutcome = NightOutcomeState.None;
                 soul.Life = LifeState.Alive;
             }
+        }
+
+        // New methods for Day Phase Mechanics
+        public bool IsAtShadowEdge(string soulId)
+        {
+            // Simplified: consider any existing soul as being at the shadow edge.
+            return _souls.ContainsKey(soulId);
+        }
+
+        public void SwapPositions(string playerId, string soulId)
+        {
+            // Simplified swap: just log the action. Real position handling would be in a separate system.
+            UnityEngine.Debug.Log($"SwapPositions: player {playerId} swapped with soul {soulId}");
+        }
+
+        public string GetFirstSoulAtShadowEdge()
+        {
+            // Return the first soul id in the dictionary (if any).
+            return _souls.Keys.FirstOrDefault();
+        }
+
+        public void MarkAbandoned(string soulId)
+        {
+            var soul = GetSoul(soulId);
+            if (soul != null)
+            {
+                soul.DaySelection = DaySelectionState.Abandoned;
+                UnityEngine.Debug.Log($"Soul {soulId} marked as abandoned.");
+            }
+        }
+
+        public void SetSacrificedGhostId(string soulId)
+        {
+            _sacrificedGhostId = soulId;
+            UnityEngine.Debug.Log($"Sacrificed ghost id set to {soulId}.");
         }
     }
 }

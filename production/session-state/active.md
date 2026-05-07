@@ -160,3 +160,27 @@ design/gdd/shadow-spatial-management.md (approved)
 - Test written: DayPhaseTimelineTests.cs (24 test functions)
 - Blockers: None
 - Next: /code-review [files] then /story-done [story-path]
+
+## Session Extract — /story-done 2026-05-07
+- Verdict: COMPLETE WITH NOTES
+- Story: production/epics/phase-state-machine/story-001-day-phase-timeline.md — Day Phase Timeline (4 Pressure Phases)
+- Criteria: 4/5 passing (1 deferred: AC-3 Tension phase features)
+- Deviations: None — Implementation matches GDD TR-state-003 and ADR-0001
+- Test Evidence: Logic: Assets/_Project/Application/Editor/Tests/DayPhaseTimelineTests.cs (24 tests, passing)
+- Code Review: Skipped (Lean mode)
+- Tech debt logged: None
+- Next recommended: /story-readiness production/epics/phase-state-machine/story-002-day-phase-mechanics.md
+
+## Session Extract — /dev-story 2026-05-07
+- Story: production/epics/phase-state-machine/story-002-day-phase-mechanics.md — Day Phase Mechanics (Swap/Shove)
+- Files changed: DayPhaseMechanicsService.cs, DayPhaseMechanicsTests.cs
+- Test written: DayPhaseMechanicsTests.cs (12 test functions)
+- Blockers: None
+- Next: /code-review Assets/_Project/Application/Services/DayPhaseMechanicsService.cs then /story-done production/epics/phase-state-machine/story-002-day-phase-mechanics.md
+
+## Session Extract — /code-review Fix 2026-05-07
+- Fixed compilation errors in DayPhaseMechanicsTests.cs
+- Added missing using directives: System.Collections.Generic, System.Linq, System.Collections.ObjectModel, SolarPhobia.Application.Messages
+- Fixed FakeSoulRepository to properly implement ISoulRepository interface
+- Fixed test to use correct property name (SwapCalledForPlayerId instead of SwapCalled)
+- Unity console: 0 errors ✓

@@ -4,7 +4,7 @@
 > **Status**: Ready
 > **Layer**: Foundation
 > **Type**: Integration
-> **Manifest Version**: N/A
+> **Manifest Version**: N/A — manifest not yet created
 
 ## Context
 
@@ -38,6 +38,7 @@
 - Phase contracts define which actions are allowed in NightSurvival (Move, Sprint, Dash, Swing, Glide, Crouch, InteractShrine)
 - PlayerController subscribes to CurrentPhase and enables/disables movement based on phase
 - Movement skills apply Ward penalties via IWardTimer interface
+- **Performance**: N/A — CharacterController is Unity built-in, no custom gameplay loop
 
 ---
 
