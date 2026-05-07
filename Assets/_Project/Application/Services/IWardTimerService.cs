@@ -12,6 +12,9 @@ namespace SolarPhobia.Application.Services
         /// <summary>Get current Ward timer value in seconds</summary>
         float CurrentWard { get; set; }
 
+        /// <summary>Get current Ward timer value (method for consistency)</summary>
+        float GetCurrentWard();
+
         /// <summary>Try to apply a cost to the Ward timer.</summary>
         /// <returns>True if cost was applied successfully</returns>
         bool TryApplyCost(float cost);

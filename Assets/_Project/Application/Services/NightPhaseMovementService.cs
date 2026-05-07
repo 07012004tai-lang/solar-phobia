@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using R3;
-using SolarPhobia.Application.Repositories;
 using SolarPhobia.Domain.ValueObjects;
 
 namespace SolarPhobia.Application.Services
@@ -248,7 +247,7 @@ namespace SolarPhobia.Application.Services
         /// </summary>
         public float GetCurrentWard()
         {
-            return _wardTimer.CurrentWard;
+            return _wardTimer.GetCurrentWard();
         }
     }
 }

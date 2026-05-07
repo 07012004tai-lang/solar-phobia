@@ -5,14 +5,15 @@
 > **Layer**: Feature
 > **Type**: Logic + Integration
 > **Manifest Version**: N/A (no control-manifest.md exists)
+> **Estimate**: M (2-3 hours)
 
 ## Context
 
 **GDD**: `design/gdd/game-state-phase-state-machine.md`
 **Requirement**: `TR-state-004` (Night phase mechanics and karma hazard spawning)
 
-**ADR Governing Implementation**: ADR-0004: Night Phase Mechanics
-**ADR Decision Summary**: Karma hazards spawn based on sacrificed_ghost_id with distinct effects per ghost type.
+**ADR Governing Implementation**: ADR-0001: Phase State Machine Architecture
+**ADR Decision Summary**: Karma hazards spawn based on sacrificed_ghost_id with distinct effects per ghost type. (TR-state-004 covered by ADR-0001)
 
 **Engine**: Unity 6000.3.11f1 (Unity 6) | **Risk**: MEDIUM
 
@@ -38,6 +39,8 @@
 - Lưới Máu applies movement speed reduction (0.5×) while in zone
 - Vũng Nước applies damage-over-time (5 HP/s) while standing
 - Bệ Đá Ảo Ảnh has collision trigger that collapses for 0.2s when player enters
+
+**Performance**: Hazard spawn check expected <2ms/frame. KarmaHazardService runs only during NightSurvival phase — no impact on day phase performance.
 
 ---
 
