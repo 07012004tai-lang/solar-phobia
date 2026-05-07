@@ -153,3 +153,10 @@ design/gdd/shadow-spatial-management.md (approved)
 - Covers: TR-state-001 through TR-state-010 (10 requirements)
 - Tech: VContainer + R3 ReactiveProperty + MessagePipe pub/sub
 - Next: Continue with more ADRs
+
+## Session Extract — /dev-story 2026-05-07
+- Story: production/epics/phase-state-machine/story-001-day-phase-timeline.md — Day Phase Timeline (4 Pressure Phases)
+- Files changed: DayPhaseTimelineService.cs, TimelinePhase.cs, DayPhaseTimelineTests.cs
+- Test written: DayPhaseTimelineTests.cs (24 test functions)
+- Blockers: None
+- Next: /code-review [files] then /story-done [story-path]

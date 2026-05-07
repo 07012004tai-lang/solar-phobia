@@ -1,0 +1,74 @@
+# TR Registry - Solar Phobia Requirements Tracking
+# Generated: 2026-05-07
+# Purpose: Trace GDD requirements to ADRs for implementation tracking
+
+schema_version: "1.0"
+last_updated: "2026-05-07"
+
+systems:
+  - id: "phase-state-machine"
+    name: "Game State / Phase State Machine"
+    gdd: "design/gdd/game-state-phase-state-machine.md"
+    layer: "Foundation"
+    requirements:
+      - tr_id: "TR-state-001"
+        description: "Phase state machine with day/night cycle transitions"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Day Phase (5-minute timeline)"
+        
+      - tr_id: "TR-state-002"
+        description: "Day/Night phase transitions with phase-gated system activation"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Phase Transitions"
+        
+      - tr_id: "TR-state-003"
+        description: "4 pressure phases within Day (Stability, Tension, Crisis, Collapse)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Day Phase Timeline"
+        
+      - tr_id: "TR-state-004"
+        description: "Night phase mechanics (movement, hazards, karma)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Night Phase Mechanics"
+        
+      - tr_id: "TR-state-005"
+        description: "Survival System (Ward Timer, Sensory Tiers)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Survival System"
+
+  - id: "npc-soul-data-model"
+    name: "NPC/Soul Data Model"
+    gdd: "design/gdd/npc-soul-data-model.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "map-spawn-director"
+    name: "Map & Spawn Director"
+    gdd: "design/gdd/map-and-spawn-director.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "ward-timer"
+    name: "Ward Timer / Nước Mắm Cốt"
+    gdd: "design/gdd/health-stamina-damage-rules.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "shadow-spatial-management"
+    name: "Shadow Spatial Management"
+    gdd: "design/gdd/shadow-spatial-management.md"
+    layer: "Foundation"
+    requirements: []
+
+# Coverage Summary
+coverage:
+  total_systems: 5
+  systems_with_requirements: 1
+  total_requirements: 5
+  covered_by_adr: 5
+  uncovered: 0
