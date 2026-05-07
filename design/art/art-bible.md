@@ -1,8 +1,9 @@
 # Art Bible — Solar Phobia: Nắng Gắt
 
-> **Status**: In Progress
+> **Status**: Complete
 > **Created**: 2026-05-07
-> **Art Director Sign-Off**: Pending
+> **Art Director Sign-Off**: APPROVED 2026-05-07
+> **Style**: Hand-painted watercolour with fire damage
 
 ---
 
@@ -27,7 +28,7 @@ Every frame looks like a watercolour illustration that survived a fire — warm,
 
 ---
 
-## Section 3: Shape Language
+## Section 2: Mood & Atmosphere
 
 ### Core Philosophy: Permeable Boundaries
 Day shapes feel like liquid held briefly in form — rounded corners, soft intersections, shapes that seem to flow. Night shapes fracture into hard edges, exposed scaffolding, forms that can't hold warmth.
@@ -180,6 +181,69 @@ The UI lives in a different relationship to fire than the world does.
 - **Atmosphere**: Null, void, finished, still, gone
 - **Energy**: None. Flatline.
 - **Visual Element**: Watercolour entirely consumed. Bare paper remains — off-white with faint ember-glow at edges. No evidence you were ever there.
+
+---
+
+## Section 5: Character Design Direction
+
+### Core Philosophy: Painted Marks That Remain or Burn
+
+Characters exist as painted marks on the paper-scrying surface. In daylight they are controlled brushstrokes with visible texture; at night they burn at edges, losing definition.
+
+### Player Character — The Surviving Mark
+- **Silhouette**: Compact, legible, slightly abstracted humanoid. Readable against both bright day and dark night backgrounds.
+- **Proportions**: Slightly elongated (longer torso, shorter limbs) — fragile, not powerful
+- **Distinguishing traits**: 
+  - No facial features — just darker brushstroke "mask"
+  - Visible brushstroke texture on limbs
+  - Leaves faint watercolor smear where walking (prominent in day, barely in night)
+- **Color identity**: Ochre Gold (day) → Charcoal Black with Ember Orange edges (night)
+
+### NPC/Soul Archetypes — Linh, Van, Minh
+
+**Linh — The Watercolor Wash**
+- Shape: Soft, flowing, permeable edges — wash that spread beyond boundary
+- Silhouette: Rounded, indistinct, almost blob-like
+- Day: Pale, translucent (Bruised Indigo wash)
+- Night: Darkens to Charcoal Black but remains soft-edged
+- At a glance: Most vaporous/ethereal — mistakable for shadow
+
+**Van — The Ink Stroke**
+- Shape: Sharp, angular, confident — single confident pen stroke
+- Silhouette: Geometric, elongated, upright with squared shoulders
+- Day: Bold Burnt Sienna with visible brush direction
+- Night: Stroke splits into branching lines like struck match
+- At a glance: Most solid/defined — person first, watercolor second
+
+**Minh — The Stippled Impasto**
+- Shape: Dense, textured, built-up — heavy pigment stacked
+- Silhouette: Squat, compact, always slightly hunched
+- Day: Heavy Ochre Gold with visible granulation
+- Night: Impasto crusts and cracks, leaving gaps of bare paper
+- At a glance: Roughest/heaviest texturally — physically present
+
+### Enemy/Boss — Cá Ông Whale
+- **Philosophy**: Not a character, a stain that keeps growing
+- **Day**: Clearly readable whale silhouette in Bruised Indigo with soft feathered edges
+- **Night**: Silhouette evaporates — edges lift off, leaving gaps and transparency
+- Scale: Never fully visible — glimpses through water like wet-on-wet wash
+- Eyes: Two simple dark spots (Charcoal Black) — no whites, no pupils
+
+### Expression/Pose Style
+- **No faces**: Expression through body tilt, limb position, edge behavior, color intensity
+- **Day**: Subtle, restrained, slightly stiff like paint not fully dried
+- **Night**: Exaggerated, urgent, limbs extend further, silhouettes more extreme
+- **Burn communication**: Burning edges trail smoke-like pigment — how emotional state reads
+
+### LOD Philosophy
+
+| Tier | Distance | Treatment |
+|------|----------|-----------|
+| **Far** | 1-2cm screen height | Silhouette only — solid color blob |
+| **Mid** | Gameplay distance | Shape + edge — brushstroke texture visible, no facial detail |
+| **Close** | Cutscene | Full watercolor — paper texture, pigment granulation visible |
+
+No popping — detail fades in/out across distance. At max distance, characters feel like color notes on the page.
 
 ---
 
@@ -348,3 +412,94 @@ Every environment asset includes:
 | **Tile Palette** | Day/Night tile pairs, 2 variants each | Organic shapes (Day) + Geometric fragments (Night) |
 
 *This section is complete whenoutsourcing can begin without verbal briefing.*
+
+---
+
+## Section 7: UI/HUD Visual Direction
+
+### Hybrid Architecture: Diegetic + Screen-Space
+
+| Element | Approach | Rationale |
+|--------|---------|-----------|
+| Health/Stamina bars | Diegetic | Part of body — feels like looking at your hands |
+| Inventory/Item icons | Screen-space | Functional storage, needs clarity |
+| Compass/Location | Diegetic | Physical object on player's back |
+| Quest markers | Screen-space | External information |
+| Damage indicators | Diegetic | Blood spatter/vignette — reactive |
+| Dialogue text | Screen-space | Readability paramount |
+| Pause menu | Screen-space | Meta-information |
+
+### Diegetic Framing
+- Player's body as anchor — health displays as watercolor heart on chest
+- Ink-line veins radiate as damage accumulates
+- Night: veins glow ember-orange at fractures
+
+### Screen-Space Container
+- Edges feel like torn paper scraps or burned canvas remnants
+- Translucent — background bleeds through
+- Floating at screen periphery, not full overlay
+
+### Typography
+- **Font**: Hand-painted aesthetic, uneven baseline, organic variation
+- **Recommended**: Rosa Cleaner, Caveat, or custom with humanist hand-drawn qualities
+- Hierarchy: H1 (2x body), H2 (1.5x), H3 (1.15x), Body (16-18px baseline), Caption (0.75x)
+
+### Iconography: Outlined with Watercolour Fill
+- Linework: Ink-brush strokes with variable width
+- Fill: Watercolour wash inside lines — not solid
+- Day: Near-black ink, transparent wash
+- Night: Burnt umber, ember-orange internal glow
+
+### Animation Feel
+- **Core**: UI doesn't pop — it washes in like pigment diffusing
+- Day: Soft, fluid, slightly slow — like underwater
+- Night: Sharp, quick snaps, ember trails
+- Timing: Panel open 350ms ease-out, close 250ms ease-in, hover 200ms
+
+### UI Never-Use Colors
+| Condition | Never | Use Instead |
+|-----------|-------|------------|
+| Day text on light | Pure black | Near-black (#1a1a1a) |
+| Day background | Pure white | Parchment cream (#f5f0e6) |
+| Night text on dark | Pure white | Ember cream (#ffe4c4) |
+| Night background | Pure black | Charcoal (#1a1815) |
+
+---
+
+## Section 8: Asset Standards
+
+*See separate file: `design/art/asset-standards.md`*
+
+### Quick Reference
+
+| Category | Standard |
+|----------|----------|
+| Textures | PNG with paper grain, no JPEG |
+| Naming | PascalCase classes, _camelCase private |
+| Resolution Tiers | Tier 1: 512px (far), Tier 2: 1024px (mid), Tier 3: 2048px (close) |
+| Memory Budget | 256MB total texture |
+| Day/Night Suffix | *_day.png, *_night.png |
+
+---
+
+## Section 9: Reference Direction
+
+### Reference 1: Candle: The Power of the Flame (Game)
+- **Draw from**: Visible paper texture, hand-painted imperfections, wet-on-wet blending
+- **Avoid**: Flat cartoonish character design — we need muted, atmospheric
+
+### Reference 2: Fred Williams — Burnt Landscape series (Artist)
+- **Draw from**: Charred earth palette, contrast between blackened ground and warm remains
+- **Avoid**: Photographic realism — we want organic watercolour softness
+
+### Reference 3: Gris (Game)
+- **Draw from**: Watercolour bleeding technique, emotional color shifts (warm ochres → cool violets), soft edge treatment
+- **Avoid**: Flowing dress animations — we need weight and texture
+
+### Reference 4: Hollow Knight (Game)
+- **Draw from**: Biome-specific color palettes with dramatic contrast, lighting shifts between areas
+- **Avoid**: Default to darkness — we embrace both day warmth AND night desolation
+
+### Reference 5: John Sacret Young — "Forest Fire in Moonlight" (Watercolour, 1920)
+- **Draw from**: Warm/cool contrast within single composition — white-hot interior rimmed with moonlit cool. Fire creates its own light.
+- **Avoid**: Literal narrative content — use the color relationship, not the subject
