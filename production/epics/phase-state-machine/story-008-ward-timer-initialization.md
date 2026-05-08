@@ -94,3 +94,11 @@
 
 - Depends on: Story 003 (Night Phase Movement)
 - Unlocks: Story 009 (Sensory Tiers)
+
+## Completion Notes
+**Completed**: 2026-05-08
+**Criteria**: 5/5 passing (all acceptance criteria verified)
+**Deviations**: 
+- ADVISORY: Penalty constants (10s, 5s, 30s) are hardcoded in WardTimerService.cs. Consider moving to ScriptableObject for designer tuning in future iteration.
+**Test Evidence**: Logic: WardTimerInitializationTests.cs created with 5 AC test methods
+**Code Review**: Complete (via /code-review, verdict: APPROVED)

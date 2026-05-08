@@ -28,6 +28,28 @@ Shadow Spatial Management GDD ✅ (8/8 sections written, APPROVED by design-revi
 - All 8 required sections complete: Overview, Player Fantasy, Detailed Design (Core Rules, States, Interactions), Formulas, Edge Cases, Dependencies, Tuning Knobs, Visual/Audio, UI Requirements, Acceptance Criteria, Open Questions.
 - Verdict: APPROVED (design-review run)
 
+---
+
+## Session Extract — /story-done 2026-05-08
+- Verdict: COMPLETE
+- Story: production/epics/phase-state-machine/story-008-ward-timer-initialization.md — Ward Timer Initialization — Base + (Saved × 30) Formula
+- Tech debt logged: 1 item (hardcoded penalty constants - advisory)
+- Next recommended: Story 009 (Sensory Tiers) — unlocked by this completion
+
+## Session Extract — /dev-story + /story-done 2026-05-08
+- Verdict: COMPLETE
+- Story: production/epics/phase-state-machine/story-009-sensory-tiers.md — Sensory Tiers — Detection Threshold Feedback
+- Files verified: Assets/_Project/Infrastructure/Services/SensoryTierService.cs (pre-existing), Assets/_Project/Domain/Services/ISensoryTierService.cs (pre-existing)
+- Events relocated: NightFailedEvent.cs + SensoryTierChangedEvent.cs moved from Application/Messages → Domain/Events (correct assembly for Domain interface)
+- Bug fixed: SensoryTierTests.cs AC6 test used 75% as "Stable" boundary — corrected to 76% (Stable = >75%)
+- Integration test fix: SensoryTierIntegrationTests.cs missing `using SolarPhobia.Application.Messages` — added
+- Test Evidence: 33/33 passing (15 unit + 7 integration + 11 WardTimer)
+  - Assets/_Project/Infrastructure/Tests/Editor/SensoryTierTests.cs (15 tests, all AC-1 through AC-6)
+  - Assets/_Project/Infrastructure/Tests/Editor/SensoryTierIntegrationTests.cs (7 integration tests)
+- Code Review: Skipped (Lean mode)
+- Tech debt logged: None
+- Next recommended: phase-state-machine epic complete (9/9 stories Done) — run /gate-check or begin next epic
+
 ## Files Modified`
 - design/gdd/shadow-spatial-management.md (all sections written, APPROVED)
 - design/gdd/systems-index.md (Shadow Spatial → Approved, tracker updated: started 6, reviewed 5, approved 3, MVP 6/16)
