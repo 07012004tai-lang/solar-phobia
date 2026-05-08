@@ -1,8 +1,8 @@
 # Systems Index: Solar Phobia: Nắng Gắt
 
-> **Status**: Draft
+> **Status**: Updated
 > **Created**: 2026-05-06
-> **Last Updated**: 2026-05-06
+> **Last Updated**: 2026-05-07
 > **Source Concept**: design/gdd/game-concept.md
 
 ---
@@ -18,21 +18,26 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 | # | System Name | Category | Priority | Status | Design Doc | Depends On |
 |---|-------------|----------|----------|--------|------------|------------|
 | 1 | Game State / Phase State Machine | Core | MVP | Approved | design/gdd/game-state-phase-state-machine.md | — |
-| 2 | NPC/Soul Data Model | Narrative | MVP | In Review | design/gdd/npc-soul-data-model.md | — |
-| 3 | Map & Spawn Director | Core | MVP | Not Started | — | — |
-| 4 | Health/Stamina & Damage Rules | Core | MVP | Not Started | — | — |
-| 5 | Player Controller | Core | MVP | Not Started | — | Game State / Phase State Machine, Map & Spawn Director |
-| 6 | Shrine Objective & Win/Lose Rules | Core | MVP | Not Started | — | Game State / Phase State Machine, Player Controller, Health/Stamina & Damage Rules |
-| 7 | Resource Effects | Economy | Vertical Slice | Not Started | — | NPC/Soul Data Model, Game State / Phase State Machine |
-| 8 | Solar Residue Hazard | Gameplay | Vertical Slice | Not Started | — | Map & Spawn Director, Health/Stamina & Damage Rules, Game State / Phase State Machine |
-| 9 | Day Service & Selection | Gameplay | MVP | Not Started | — | NPC/Soul Data Model, Resource Effects, Game State / Phase State Machine |
-| 10 | Consequence Resolver | Gameplay | MVP | Not Started | — | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
-| 11 | Curse Effect Modules (inferred) | Gameplay | MVP | Not Started | — | Consequence Resolver, Player Controller, Map & Spawn Director, Health/Stamina & Damage Rules |
-| 12 | Boss Chase AI | Gameplay | Vertical Slice | Not Started | — | Player Controller, Map & Spawn Director, Game State / Phase State Machine, Health/Stamina & Damage Rules |
-| 13 | Night Survival Run | Gameplay | MVP | Not Started | — | Shrine Objective & Win/Lose Rules, Solar Residue Hazard, Boss Chase AI, Curse Effect Modules (inferred), Resource Effects |
-| 14 | HUD & Diegetic Feedback (inferred) | UI | Vertical Slice | Not Started | — | Day Service & Selection, Night Survival Run, Health/Stamina & Damage Rules, Resource Effects |
-| 15 | Audio State Director (inferred) | Audio | Vertical Slice | Not Started | — | Game State / Phase State Machine, Boss Chase AI, Night Survival Run |
-| 16 | Save Seed / Run Reset (inferred) | Persistence | Alpha | Not Started | — | Game State / Phase State Machine, NPC/Soul Data Model, Map & Spawn Director, Day Service & Selection, Consequence Resolver, Night Survival Run |
+| 2 | NPC/Soul Data Model | Narrative | MVP | Approved | design/gdd/npc-soul-data-model.md | — |
+| 3 | Map & Spawn Director | Core | MVP | Approved | design/gdd/map-and-spawn-director.md | — |
+| 4 | Ward Timer / Nước Mắm Cốt | Core | MVP | Approved | design/gdd/health-stamina-damage-rules.md | — |
+| 5 | Shadow Spatial Management | Gameplay | MVP | Approved | design/gdd/shadow-spatial-management.md | Game State / Phase State Machine |
+| 6 | Day/Night Camera Transition | Core | MVP | Approved | design/gdd/day-night-camera-transition.md | Game State / Phase State Machine |
+| 7 | Player Controller & Skills | Core | MVP | Approved | design/gdd/player-controller.md | Game State / Phase State Machine, Map & Spawn Director, Day/Night Camera Transition |
+| 8 | Physical Crowding & Push | Gameplay | MVP | Approved | design/gdd/physical-crowding-and-push.md | NPC/Soul Data Model, Map & Spawn Director, Game State / Phase State Machine |
+| 9 | Tactile Rituals | Gameplay | MVP | Approved | design/gdd/tactile-rituals.md | Game State / Phase State Machine, NPC/Soul Data Model, Ward Timer / Nước Mắm Cốt |
+| 10 | Day Service & Selection | Gameplay | MVP | Approved | design/gdd/day-service-and-selection.md | NPC/Soul Data Model, Game State / Phase State Machine, Tactile Rituals |
+| 11 | Shrine Objective & Win/Lose Rules | Core | MVP | Approved | design/gdd/shrine-objective-win-lose-rules.md | Game State / Phase State Machine, Player Controller & Skills, Ward Timer / Nước Mắm Cốt |
+| 12 | Sensory Feedback System | UI | MVP | Approved | design/gdd/sensory-feedback-system.md | Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
+| 13 | Consequence Resolver | Gameplay | MVP | Approved | design/gdd/consequence-resolver.md | Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine |
+| 14 | Curse Effect Modules | Gameplay | MVP | Approved | design/gdd/curse-effect-modules.md | Consequence Resolver, Player Controller & Skills, Map & Spawn Director, Ward Timer / Nước Mắm Cốt |
+| 15 | Boss Cá Ông Searchlight | Gameplay | MVP | Approved | design/gdd/boss-ca-ong-searchlight.md | Player Controller & Skills, Map & Spawn Director, Game State / Phase State Machine, Ward Timer / Nước Mắm Cốt |
+| 16 | Night Survival Run | Gameplay | MVP | Approved | design/gdd/night-survival-run.md | Shrine Objective & Win/Lose Rules, Curse Effect Modules, Boss Cá Ông Searchlight, Ngọc Cốt / Relic System, Resource Effects & Hương Hỏa |
+| 17 | Resource Effects & Hương Hỏa | Economy | Vertical Slice | Not Started | — | NPC/Soul Data Model, Game State / Phase State Machine, Day Service & Selection |
+| 18 | Ngọc Cốt / Relic System | Gameplay | Vertical Slice | Not Started | — | Player Controller & Skills, Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine |
+| 19 | HUD-less Design & Sensory Feedback | UI | Vertical Slice | Not Started | — | Ward Timer / Nước Mắm Cốt, Sensory Feedback System, Night Survival Run |
+| 20 | Audio State Director | Audio | Vertical Slice | Not Started | — | Game State / Phase State Machine, Boss Cá Ông Searchlight, Night Survival Run |
+| 21 | Save Seed / Run Reset | Persistence | Alpha | Not Started | — | Game State / Phase State Machine, NPC/Soul Data Model, Map & Spawn Director, Day Service & Selection, Consequence Resolver, Night Survival Run |
 
 ---
 
@@ -40,11 +45,11 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 
 | Category | Description | Typical Systems |
 |----------|-------------|-----------------|
-| **Core** | Foundation systems everything depends on | Loop state machine, player controller, objective/win-lose logic |
-| **Gameplay** | The systems that make the game fun | Day selection, consequences, curses, hazards, chase pressure |
-| **Economy** | Resource creation and consumption | Tea/incense/offering effects and conversion |
+| **Core** | Foundation systems everything depends on | Loop state machine, player controller, objective/win-lose logic, ward timer, camera transition |
+| **Gameplay** | The systems that make the game fun | Day selection, consequences, curses, hazards, chase pressure, shadow management, tactile rituals, physical crowding |
+| **Economy** | Resource creation and consumption | Tea/incense/offering effects and conversion, Hương Hỏa points |
 | **Persistence** | Save state and continuity | Run reset and deterministic restart |
-| **UI** | Player-facing information displays | Choice feedback, danger readability, objective cues |
+| **UI** | Player-facing information displays | Choice feedback, danger readability, objective cues, sensory feedback |
 | **Audio** | Sound and music systems | Day/night mix state, threat escalation cues |
 | **Narrative** | Story and identity state delivery | NPC/soul identity and abandonment state |
 
@@ -64,58 +69,65 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 ## Dependency Map
 
 ### Foundation Layer (no dependencies)
-
 1. Game State / Phase State Machine — orchestrates day -> choice -> night transitions for all systems.
 2. NPC/Soul Data Model — provides stable identity/state for selection and consequence transformation.
-3. Map & Spawn Director — anchors where hazards, boss, shrine, and player enter each phase.
-4. Health/Stamina & Damage Rules — provides shared survivability contract for hazards and chase.
 
-### Core Layer (depends on foundation)
+### Foundation Layer (depends on Foundation)
+3. Map & Spawn Director — depends on: Game State / Phase State Machine (day/night map selection).
+4. Ward Timer / Nước Mắm Cốt — depends on: Game State / Phase State Machine (countdown only at night), NPC/Soul Data Model (saved count → initial ward).
+5. Shadow Spatial Management — depends on: Game State / Phase State Machine (only active during day).
+6. Day/Night Camera Transition — depends on: Game State / Phase State Machine (trigger on phase change).
 
-1. Player Controller — depends on: Game State / Phase State Machine, Map & Spawn Director.
-2. Shrine Objective & Win/Lose Rules — depends on: Game State / Phase State Machine, Player Controller, Health/Stamina & Damage Rules.
-3. Resource Effects — depends on: NPC/Soul Data Model, Game State / Phase State Machine.
-4. Solar Residue Hazard — depends on: Map & Spawn Director, Health/Stamina & Damage Rules, Game State / Phase State Machine.
-5. Day Service & Selection — depends on: NPC/Soul Data Model, Resource Effects, Game State / Phase State Machine.
+### Core Layer (depends on Foundation)
+7. Player Controller & Skills — depends on: Game State / Phase State Machine, Map & Spawn Director, Day/Night Camera Transition.
+8. Physical Crowding & Push — depends on: NPC/Soul Data Model, Map & Spawn Director, Game State / Phase State Machine.
+9. Tactile Rituals — depends on: Game State / Phase State Machine, NPC/Soul Data Model, Ward Timer / Nước Mắm Cốt.
+10. Day Service & Selection — depends on: NPC/Soul Data Model, Game State / Phase State Machine, Tactile Rituals.
+11. Shrine Objective & Win/Lose Rules — depends on: Game State / Phase State Machine, Player Controller & Skills, Ward Timer / Nước Mắm Cốt.
+12. Sensory Feedback System — depends on: Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine.
+13. Resource Effects & Hương Hỏa — depends on: NPC/Soul Data Model, Game State / Phase State Machine, Day Service & Selection.
 
-### Feature Layer (depends on core)
+### Feature Layer (depends on Core)
+14. Consequence Resolver — depends on: Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine.
+15. Curse Effect Modules — depends on: Consequence Resolver, Player Controller & Skills, Map & Spawn Director, Ward Timer / Nước Mắm Cốt.
+16. Boss Cá Ông Searchlight — depends on: Player Controller & Skills, Map & Spawn Director, Game State / Phase State Machine, Ward Timer / Nước Mắm Cốt.
+17. Ngọc Cốt / Relic System — depends on: Player Controller & Skills, Ward Timer / Nước Mắm Cốt, Game State / Phase State Machine.
+18. Night Survival Run — depends on: Shrine Objective & Win/Lose Rules, Curse Effect Modules, Boss Cá Ông Searchlight, Ngọc Cốt / Relic System, Resource Effects & Hương Hỏa.
 
-1. Consequence Resolver — depends on: Day Service & Selection, NPC/Soul Data Model, Game State / Phase State Machine.
-2. Curse Effect Modules — depends on: Consequence Resolver, Player Controller, Map & Spawn Director, Health/Stamina & Damage Rules.
-3. Boss Chase AI — depends on: Player Controller, Map & Spawn Director, Game State / Phase State Machine, Health/Stamina & Damage Rules.
-4. Night Survival Run — depends on: Shrine Objective & Win/Lose Rules, Solar Residue Hazard, Boss Chase AI, Curse Effect Modules, Resource Effects.
-
-### Presentation Layer (depends on features)
-
-1. HUD & Diegetic Feedback — depends on: Day Service & Selection, Night Survival Run, Health/Stamina & Damage Rules, Resource Effects.
-2. Audio State Director — depends on: Game State / Phase State Machine, Boss Chase AI, Night Survival Run.
+### Presentation Layer (depends on Features)
+19. HUD-less Design & Sensory Feedback — depends on: Ward Timer / Nước Mắm Cốt, Sensory Feedback System, Night Survival Run.
+20. Audio State Director — depends on: Game State / Phase State Machine, Boss Cá Ông Searchlight, Night Survival Run.
 
 ### Polish Layer (depends on everything)
-
-1. Save Seed / Run Reset — depends on: core gameplay state contracts and loop outcomes.
+21. Save Seed / Run Reset — depends on: Game State / Phase State Machine, NPC/Soul Data Model, Map & Spawn Director, Day Service & Selection, Consequence Resolver, Night Survival Run.
 
 ---
 
 ## Recommended Design Order
 
 | Order | System | Priority | Layer | Agent(s) | Est. Effort |
-|-------|--------|----------|-------|----------|-------------|
+|-------|---------|----------|-------|----------|-------------|
 | 1 | Game State / Phase State Machine | MVP | Foundation | game-designer | M |
 | 2 | NPC/Soul Data Model | MVP | Foundation | game-designer | S |
 | 3 | Map & Spawn Director | MVP | Foundation | game-designer | S |
-| 4 | Health/Stamina & Damage Rules | MVP | Foundation | systems-designer | S |
-| 5 | Player Controller | MVP | Core | gameplay-programmer, game-designer | M |
-| 6 | Shrine Objective & Win/Lose Rules | MVP | Core | game-designer | S |
-| 7 | Day Service & Selection | MVP | Core | game-designer, ui-programmer | M |
-| 8 | Consequence Resolver | MVP | Feature | systems-designer, game-designer | M |
-| 9 | Curse Effect Modules | MVP | Feature | systems-designer, gameplay-programmer | M |
-| 10 | Night Survival Run | MVP | Feature | game-designer, gameplay-programmer | L |
-| 11 | Resource Effects | Vertical Slice | Core | systems-designer | S |
-| 12 | Solar Residue Hazard | Vertical Slice | Core | systems-designer, technical-artist | M |
-| 13 | Boss Chase AI | Vertical Slice | Feature | ai-programmer | M |
-| 14 | HUD & Diegetic Feedback | Vertical Slice | Presentation | ui-programmer, ux-designer | M |
-| 15 | Audio State Director | Vertical Slice | Presentation | sound-designer, audio-director | S |
-| 16 | Save Seed / Run Reset | Alpha | Polish | gameplay-programmer | S |
+| 4 | Ward Timer / Nước Mắm Cốt | MVP | Foundation | systems-designer | S |
+| 5 | Shadow Spatial Management | MVP | Foundation | systems-designer | M |
+| 6 | Day/Night Camera Transition | MVP | Foundation | gameplay-programmer | S |
+| 7 | Player Controller & Skills | MVP | Core | gameplay-programmer, game-designer | M |
+| 8 | Physical Crowding & Push | MVP | Core | gameplay-programmer | M |
+| 9 | Tactile Rituals | MVP | Core | game-designer, ui-programmer | M |
+| 10 | Day Service & Selection | MVP | Core | game-designer, ui-programmer | M |
+| 11 | Shrine Objective & Win/Lose Rules | MVP | Core | game-designer | S |
+| 12 | Sensory Feedback System | MVP | Core | systems-designer | S |
+| 13 | Consequence Resolver | MVP | Feature | systems-designer, game-designer | M |
+| 14 | Curse Effect Modules | MVP | Feature | systems-designer, gameplay-programmer | M |
+| 15 | Boss Cá Ông Searchlight | MVP | Feature | ai-programmer, technical-artist | M |
+| 16 | Night Survival Run | MVP | Feature | game-designer, gameplay-programmer | L |
+| 17 | Resource Effects & Hương Hỏa | Vertical Slice | Core | systems-designer | S |
+| 18 | Ngọc Cốt / Relic System | Vertical Slice | Feature | systems-designer | S |
+| 19 | HUD-less Design & Sensory Feedback | Vertical Slice | Presentation | ui-programmer, ux-designer | M |
+| 20 | Audio State Director | Vertical Slice | Presentation | sound-designer, audio-director | S |
+| 21 | Save Seed / Run Reset | Alpha | Polish | gameplay-programmer | S |
 
 ---
 
@@ -131,7 +143,9 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 |--------|-----------|------------------|------------|
 | Consequence Resolver | Design | If curse mapping is unclear, choices feel arbitrary instead of meaningful. | Prototype 3 fixed curse mappings early and run fast playtests for readability. |
 | Night Survival Run | Scope | Combines hazards, chase, curses, and objective timing; can over-expand quickly. | Hard-lock one map and one completion condition for slice; defer variants. |
-| Boss Chase AI | Technical | Poor pacing/tuning can make night either trivial or unfair. | Start with simple pursuit states and tune via fixed benchmark runs. |
+| Boss Cá Ông Searchlight | Technical | Poor pacing/tuning can make night either trivial or unfair. | Start with simple pursuit states and tune via fixed benchmark runs. |
+| Ward Timer / Nước Mắm Cốt | Design | HUD-less design requires clear sensory feedback; unclear feedback = unfair deaths. | Test sensory feedback thresholds early with playtests. |
+| Curse Effect Modules | Design | Multiple curses interacting can create impossible combinations. | Limit to 1-2 curses active simultaneously for MVP. |
 
 ---
 
@@ -139,18 +153,17 @@ Solar Phobia's mechanical scope centers on a consequence-driven day/night loop: 
 
 | Metric | Count |
 |--------|-------|
-| Total systems identified | 16 |
-| Design docs started | 2 |
-| Design docs reviewed | 2 |
-| Design docs approved | 1 |
-| MVP systems designed | 1/10 |
-| Vertical Slice systems designed | 0/5 |
+| Total systems identified | 21 |
+| Design docs started | 10 |
+| Design docs reviewed | 5 |
+| Design docs approved | 15 |
+| MVP systems designed | 6/16 |
+| Vertical Slice systems designed | 0/4 |
 
 ---
 
 ## Next Steps
 
-- [ ] Review and approve this systems enumeration
 - [ ] Design MVP-tier systems first (use `/design-system [system-name]`)
 - [ ] Run `/design-review` on each completed GDD
 - [ ] Run `/gate-check pre-production` when MVP systems are designed

@@ -25,8 +25,8 @@ namespace NhemBootStrap.Editor.Core {
         /// <summary>Appends <paramref name="message"/> to <see cref="Logs"/> and writes it to the Unity console.</summary>
         /// <param name="message">The message to log.</param>
         public void Log(string message) {
-            Debug.Log(message);
-            Logs.Add(message);
+//            Debug.Log(message);
+  //          Logs.Add(message);
         }
     }
 }

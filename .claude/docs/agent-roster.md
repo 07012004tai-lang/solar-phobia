@@ -58,7 +58,22 @@ domain lead) should delegate to specialists.
 | Agent | Engine | Model | When to Use |
 | ---- | ---- | ---- | ---- |
 | `unreal-specialist` | Unreal Engine 5 | Sonnet | Blueprint vs C++, GAS overview, UE subsystems, Unreal optimization |
-| `unity-specialist` | Unity | Sonnet | MonoBehaviour vs DOTS, Addressables, URP/HDRP, Unity optimization |
+| `unity-specialist` | Unity 6000.3.x | Sonnet | MonoBehaviour, VContainer, R3, UI Toolkit, URP optimization |
+
+### Version Awareness
+
+All engine specialists must follow this protocol:
+
+1. **Read engine reference** — Before making any code decision, read `docs/engine-reference/<engine>/VERSION.md`
+2. **Check deprecated APIs** — Verify no deprecated APIs in `deprecated-apis.md`
+3. **Check breaking changes** — Review `breaking-changes.md` for relevant changes
+4. **Verify uncertain APIs** — Use WebSearch to verify any API behavior that differs from training assumptions
+
+The unity-specialist should flag any code that uses:
+- `Object.FindObjectsOfType()` — obsolete
+- Legacy uGUI Canvas — prefer UI Toolkit
+- IMGUI/OnGUI — deprecated pattern
+- Any deprecated package APIs
 | `godot-specialist` | Godot 4 | Sonnet | GDScript patterns, node/scene architecture, signals, Godot optimization |
 
 ### Unreal Engine Sub-Specialists

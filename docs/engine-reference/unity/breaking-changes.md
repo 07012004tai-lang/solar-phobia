@@ -1,154 +1,108 @@
-# Unity 6.3 LTS — Breaking Changes
+# Unity 6 — Breaking Changes
 
-**Last verified:** 2026-02-13
+> Last verified: 2026-05-07
 
-This document tracks breaking API changes and behavioral differences between Unity 2022 LTS
-(likely in model training) and Unity 6.3 LTS (current version). Organized by risk level.
+This document lists breaking changes from Unity 2022 LTS through Unity 6000.3.x that may affect this project.
 
-## HIGH RISK — Will Break Existing Code
+---
 
-### Entities/DOTS API Complete Overhaul
-**Versions:** Entities 1.0+ (Unity 6.0+)
+## HIGH Risk Changes (must address)
 
+### Object.FindObjectsOfType / FindObjectOfType — OBSOLETE
+
+**Status**: Obsolete in Unity 6.0+
+
+**Old API**:
 ```csharp
-// ❌ OLD (pre-Unity 6, GameObjectEntity pattern)
-public class HealthComponent : ComponentData {
-    public float Value;
-}
-
-// ✅ NEW (Unity 6+, IComponentData)
-public struct HealthComponent : IComponentData {
-    public float Value;
-}
-
-// ❌ OLD: ComponentSystem
-public class DamageSystem : ComponentSystem { }
-
-// ✅ NEW: ISystem (unmanaged, Burst-compatible)
-public partial struct DamageSystem : ISystem {
-    public void OnCreate(ref SystemState state) { }
-    public void OnUpdate(ref SystemState state) { }
-}
+var objects = FindObjectsOfType<GameObject>();
+var obj = FindObjectOfType<PlayerController>();
 ```
 
-**Migration:** Follow Unity's ECS migration guide. Major architectural changes required.
-
----
-
-### Input System — Legacy Input Deprecated
-**Versions:** Unity 6.0+
-
+**Replacement**: Use `Object.FindObjectsByType` with `FindObjectsSortMode.None`:
 ```csharp
-// ❌ OLD: Input class (deprecated)
-if (Input.GetKeyDown(KeyCode.Space)) { }
-
-// ✅ NEW: Input System package
-using UnityEngine.InputSystem;
-if (Keyboard.current.spaceKey.wasPressedThisFrame) { }
+var objects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+var obj = Object.FindObjectOfType<PlayerController>();
 ```
 
-**Migration:** Install Input System package, replace all `Input.*` calls with new API.
+**Risk**: Legacy code using old APIs will break compilation.
 
 ---
 
-### URP/HDRP Renderer Feature API Changes
-**Versions:** Unity 6.0+
+### Enlighten Baked Global Illumination — REMOVED
 
-```csharp
-// ❌ OLD: ScriptableRenderPass.Execute signature
-public override void Execute(ScriptableRenderContext context, ref RenderingData data)
+**Status**: Removed in Unity 6.0
 
-// ✅ NEW: Uses RenderGraph API
-public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
-```
+**Impact**: If project uses Enlighten for GI, must switch to another solution (e.g., URP/HDRP Progressive GPU).
 
-**Migration:** Update custom render passes to use RenderGraph API.
+**Recommendation**: For this project, use URP with realtime GI or lightprobes.
 
 ---
 
-## MEDIUM RISK — Behavioral Changes
+### Auto-Generated Lighting — REMOVED
 
-### Addressables — Asset Loading Returns
-**Versions:** Unity 6.2+
+**Status**: Removed in Unity 6.0
 
-Asset loading failures now throw exceptions by default instead of returning null.
-Add proper exception handling or use `TryLoad` variants.
-
-```csharp
-// ❌ OLD: Silent null on failure
-var handle = Addressables.LoadAssetAsync<Sprite>("key");
-var sprite = handle.Result; // null if failed
-
-// ✅ NEW: Throws on failure, use try/catch or TryLoad
-try {
-    var handle = Addressables.LoadAssetAsync<Sprite>("key");
-    var sprite = await handle.Task;
-} catch (Exception e) {
-    Debug.LogError($"Failed to load: {e}");
-}
-```
+**Impact**: Projects relying on automatic lighting generation need explicit LightingSettings.
 
 ---
 
-### Physics — Default Solver Iterations Changed
-**Versions:** Unity 6.0+
+### Universal Compatibility Mode — REMOVED
 
-Default solver iterations increased for better stability.
-Check `Physics.defaultSolverIterations` if you rely on old behavior.
+**Status**: Removed in Unity 6.3 LTS
 
----
-
-## LOW RISK — Deprecations (Still Functional)
-
-### UGUI (Legacy UI)
-**Status:** Deprecated but supported
-**Replacement:** UI Toolkit
-
-UGUI still works but UI Toolkit is recommended for new projects.
+**Impact**: Projects using Universal Compatibility Mode must migrate to standard rendering.
 
 ---
 
-### Legacy Particle System
-**Status:** Deprecated
-**Replacement:** Visual Effect Graph (VFX Graph)
+## MEDIUM Risk Changes (be aware)
+
+### UI Toolkit Event Handling — REORGANIZED
+
+**Status**: Changed in Unity 6.0+
+
+**Impact**: Custom UXML controls may need event handler updates.
+
+**Reference**: `docs/engine-reference/unity/modules/ui-toolkit.md`
 
 ---
 
-### Old Animation System
-**Status:** Deprecated
-**Replacement:** Animator Controller (Mecanim)
+### [SerializeField] — Stricter Validation
+
+**Status**: Changed in Unity 6.3+
+
+**Impact**: `[SerializeField]` can now only be applied to fields. Applying to properties/methods is compile error.
 
 ---
 
-## Platform-Specific Breaking Changes
+### Android UnityPlayer Class — Renamed
 
-### WebGL
-- **Unity 6.0+**: WebGPU is now the default (WebGL 2.0 fallback available)
-- Update shaders for WebGPU compatibility
+**Status**: Changed in Unity 6.0+
 
-### Android
-- **Unity 6.0+**: Minimum API level raised to 24 (Android 7.0)
-
-### iOS
-- **Unity 6.0+**: Minimum deployment target raised to iOS 13
+**Old**: `UnityPlayer` extends `FrameLayout`  
+**New**: Use `UnityPlayerForActivityOrService` or `UnityPlayerForApplication`
 
 ---
 
-## Migration Checklist
+### LightingSettings Gaussian Filter — Floating Point
 
-When upgrading from 2022 LTS to Unity 6.3 LTS:
+**Status**: Changed in Unity 6.0+
 
-- [ ] Audit all DOTS/ECS code (complete rewrite likely needed)
-- [ ] Replace `Input` class with Input System package
-- [ ] Update custom render passes to RenderGraph API
-- [ ] Add exception handling to Addressables calls
-- [ ] Test physics behavior (solver iterations changed)
-- [ ] Consider migrating UGUI to UI Toolkit for new UI
-- [ ] Update WebGL shaders for WebGPU
-- [ ] Verify minimum platform versions (Android/iOS)
+**Old**: Integer radius values  
+**New**: Floating point radius values
 
 ---
 
-**Sources:**
-- https://docs.unity3d.com/6000.0/Documentation/Manual/upgrade-guides.html
-- https://docs.unity3d.com/Packages/com.unity.entities@1.3/manual/upgrade-guide.html
+## LOW Risk Changes (cosmetic/niche)
+
+- Graphics formats: `DepthAuto`, `ShadowAuto`, `VideoAuto` obsolete
+- Mipmap Limits no longer affect runtime Textures by default
+- Package Manager: `UPM_CACHE_PATH` env vars no longer supported
+- Light probes: ambient probe and skybox reflection probe no longer baked by default
+
+---
+
+## Cross-Reference
+
+- See `deprecated-apis.md` for APIs to avoid
+- See `current-best-practices.md` for recommended alternatives
+- See `modules/ui-toolkit.md` for UI Toolkit migration details

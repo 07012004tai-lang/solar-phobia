@@ -1,56 +1,74 @@
-# Technical Requirement ID Registry
-#
-# PURPOSE: Persistent, stable IDs for every GDD technical requirement.
-# Prevents TR-ID renumbering across /architecture-review runs, which would
-# break story references.
-#
-# RULES:
-#   - IDs are PERMANENT. Never renumber, never delete (use status: deprecated).
-#   - Add new entries only at the END of each system's list.
-#   - When a GDD requirement is reworded (same intent): update `requirement`
-#     text and add a `revised` date. The ID stays the same.
-#   - When a requirement is removed from the GDD: set status: deprecated.
-#   - When a requirement is split or replaced: set status: superseded-by with
-#     the new TR-ID(s).
-#
-# WRITTEN BY: /architecture-review (appends new entries, never overwrites)
-# READ BY:    /create-stories (embed IDs in stories)
-#             /story-done (look up current requirement text at review time)
-#             /story-readiness (validate TR-ID exists and is active)
-#
-# ID FORMAT: TR-[system-slug]-[NNN]
-#   system-slug = short slug matching the GDD system name
-#   NNN = three-digit zero-padded sequence per system, starting at 001
-#
-# STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
+# TR Registry - Solar Phobia Requirements Tracking
+# Generated: 2026-05-07
+# Purpose: Trace GDD requirements to ADRs for implementation tracking
 
-version: 1
-last_updated: ""
+schema_version: "1.0"
+last_updated: "2026-05-07"
 
-requirements: []
+systems:
+  - id: "phase-state-machine"
+    name: "Game State / Phase State Machine"
+    gdd: "design/gdd/game-state-phase-state-machine.md"
+    layer: "Foundation"
+    requirements:
+      - tr_id: "TR-state-001"
+        description: "Phase state machine with day/night cycle transitions"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Day Phase (5-minute timeline)"
+        
+      - tr_id: "TR-state-002"
+        description: "Day/Night phase transitions with phase-gated system activation"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Phase Transitions"
+        
+      - tr_id: "TR-state-003"
+        description: "4 pressure phases within Day (Stability, Tension, Crisis, Collapse)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Day Phase Timeline"
+        
+      - tr_id: "TR-state-004"
+        description: "Night phase mechanics (movement, hazards, karma)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Night Phase Mechanics"
+        
+      - tr_id: "TR-state-005"
+        description: "Survival System (Ward Timer, Sensory Tiers)"
+        status: "covered"
+        adr: "ADR-0001"
+        gdd_section: "Survival System"
 
-# --- EXAMPLE ENTRIES (remove when first real entries are added) ---
-#
-# - id: TR-combat-001
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Player takes damage from enemies based on attack power minus defence"
-#   created: 2026-03-10
-#   revised: ""
-#   status: active
-#
-# - id: TR-combat-002
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Combo window timing is 0.4 seconds between hits"
-#   created: 2026-03-10
-#   revised: "2026-04-01"
-#   status: active
-#
-# - id: TR-combat-003
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Old damage formula using raw stats"
-#   created: 2026-03-10
-#   revised: ""
-#   status: superseded-by: TR-combat-001
+  - id: "npc-soul-data-model"
+    name: "NPC/Soul Data Model"
+    gdd: "design/gdd/npc-soul-data-model.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "map-spawn-director"
+    name: "Map & Spawn Director"
+    gdd: "design/gdd/map-and-spawn-director.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "ward-timer"
+    name: "Ward Timer / Nước Mắm Cốt"
+    gdd: "design/gdd/health-stamina-damage-rules.md"
+    layer: "Foundation"
+    requirements: []
+
+  - id: "shadow-spatial-management"
+    name: "Shadow Spatial Management"
+    gdd: "design/gdd/shadow-spatial-management.md"
+    layer: "Foundation"
+    requirements: []
+
+# Coverage Summary
+coverage:
+  total_systems: 5
+  systems_with_requirements: 1
+  total_requirements: 5
+  covered_by_adr: 5
+  uncovered: 0

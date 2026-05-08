@@ -3,9 +3,12 @@
     "rootNamespace": "SolarPhobia.Application",
     "references": [
         "SolarPhobia.Domain",
+        "UnityEngine.TestRunner",
         "Unity.InputSystem.IntegrationTests",
         "Unity.InputSystem.ForUI",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "VContainer",
+        "R3.Unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

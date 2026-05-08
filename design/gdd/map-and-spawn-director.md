@@ -1,6 +1,6 @@
 # Map & Spawn Director
 
-> **Status**: In Design
+> **Status**: Approved
 > **Author**: User + Copilot
 > **Last Updated**: 2026-05-06
 > **Implements Pillar**: Psychological consequence through readable survival pressure
@@ -17,6 +17,12 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 
 ### Core Rules
 
+**Pre-Night Validation Order**: The following sequence MUST occur before transitioning to NightSurvival:
+   a. Map Director validates spawn bundle (route viability, cover placement, hazard zones)
+   b. If spawn validation FAILS, return error to Game State Machine → transition to FatalError
+   c. Only AFTER spawn validation passes does Consequence Resolver write NightOutcomeState
+   d. This prevents locked NPC Model state with invalid night setup
+
 1. Night map is a single horizontal lane between `StartShrine` and `EndShrine`.
 2. Global fog limits forward visibility; reveal radius is player-centered.
 3. Grave mounds are the primary tactical objects:
@@ -30,7 +36,7 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 8. Spawn set must always include at least one valid route from start to end with optional risk detours.
 9. Map resets deterministically per seed on new run.
 10. **Unified Resource Rule**: Night Phase has no separate HP; all lethal pressure is represented through Ward Timer depletion.
-11. Strike hit applies timer loss and terrain disruption: default `StrikeTimePenaltySec = 30` and nearest active mound enters broken state.
+11. Strike hit applies timer loss and terrain disruption: default `StrikeTimePenaltySec = 30` and nearest active Mound is destroyed, creating debris that becomes a NEW cover volume for subsequent sweeps.
 12. FalseSafeMound must present a readable warning tell before failure (`TellDurationSec`), never instant-kill by surprise.
 
 ### States and Transitions
@@ -49,6 +55,7 @@ The player should feel hunted, exposed, and morally cornered. The map is not an 
 - **NPC/Soul Data Model -> Map Director**: abandoned soul + consequence intensity to bias Mo Oan and disruption placement.
 - **Boss Chase AI <-> Map Director**: sweep pattern ownership split (Map owns lane geometry; Boss AI owns timing profile).
 - **Solar Residue Hazard <-> Map Director**: hazard zones bound to lane segments and visibility constraints.
+- **Health/Stamina & Damage Rules <-> Map Director**: map emits strike/relic/time-drain events; survivability rules return viability constraints and penalty caps.
 - **Resource Effects <- Map Director**: Bone Relic pickup events trigger Time Drain modifier.
 - **Player Controller <- Map Director**: receives cover zone and strike warning overlap events.
 - **Consequence Resolver -> Map Director**: can flag FalseSafeMound spawns (e.g., Linh-abandoned route profile).
@@ -72,14 +79,14 @@ is_exposed = in_sweep_cone AND (not in_valid_cover)
 ### Time Drain Under Bone Relic
 
 ```
-effective_ward_drain = base_drain_rate * (1 + relic_count * time_drain_multiplier)
+effective_ward_drain = base_drain_rate * (1 + (bones_carried * hallucination_multiplier))
 ```
 
 | Variable | Type | Range | Source | Description |
 |----------|------|-------|--------|-------------|
 | base_drain_rate | float/sec | 0.1-5.0 | config | Default protection decay |
-| relic_count | int | 0-3 | runtime inventory | Bone Relics carried in current run |
-| time_drain_multiplier | float | 0.1-1.0 | config | Extra decay per relic |
+| bones_carried | int | 0-3 | runtime inventory | Bone Relics carried in current run |
+| hallucination_multiplier | float | 1.0-3.0 | config | Extra decay per bone relic (1 bone = 2×, 2 bones = 3×) |
 
 **Expected output range**: 0.1-20.0/sec  
 **Edge case**: clamp to project max safe drain cap.
@@ -148,8 +155,17 @@ cover_density = mo_thuong_count / lane_length
 | NPC/Soul Data Model | This depends on it | **Hard**: consequence-informed spawn bias |
 | Boss Chase AI | Bidirectional | **Hard**: synchronized sweep/strike behavior |
 | Solar Residue Hazard | Bidirectional | **Hard**: hazard placement contracts |
+| Health/Stamina & Damage Rules | Bidirectional | **Hard**: strike/relic penalties consume ward timer; map generation respects viability/fairness constraints |
 | Resource Effects | This system feeds it | **Soft**: emits Bone Relic pickup + Time Drain events |
 | Player Controller | This system feeds it | **Hard**: cover/strike overlap signals |
+
+## Interface Ownership
+
+- **Map & Spawn Director owns**: `base_drain_rate` (default protection decay, configurable 0.1-5.0), `hallucination_multiplier` (extra decay per bone relic, configurable 1.0-3.0), `StrikeTimePenaltySec` (timer penalty per strike, default 30s, range 5-60).
+- **Health/Stamina & Damage Rules** references these values but does not own them.
+- **Game State / Phase State Machine** references `StrikeTimePenaltySec` but does not own it.
+
+---
 
 ## Tuning Knobs
 
@@ -158,7 +174,7 @@ cover_density = mo_thuong_count / lane_length
 | FogDensity | 0.7 | 0.3-0.9 | More uncertainty/tension | More readability/less dread |
 | SweepIntervalSec | 6.0 | 3.0-10.0 | Less frequent pressure | More relentless pressure |
 | SweepWidth | 5.0 | 2.0-8.0 | Harder to avoid without cover | Easier traversal |
-| StrikeTelegraphSec | 1.2 | 0.6-2.0 | Fairer reaction window | More punishing checks |
+| StrikeTelegraphSec | 1.5 | 0.8-2.5 | Fairer reaction window | More punishing checks |
 | MoThuongCount | 14 | 8-24 | Safer route options | Higher route risk |
 | MoOanCount | 3 | 1-6 | More reward temptations | Fewer risk/reward moments |
 | TimeDrainMultiplier | 0.5 | 0.1-1.0 | Harsher Bone Relic burden | Softer penalty |
