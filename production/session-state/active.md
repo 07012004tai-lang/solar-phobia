@@ -286,3 +286,28 @@ design/gdd/shadow-spatial-management.md (approved)
 - Code Review: Skipped (Lean mode)
 - Tech debt: Application-layer test discovery gap — no test asmdef; Unity Test Runner only runs Editor assembly tests
 - Next recommended: Continue with next story in epic or begin close-out sequence
+
+## Session Extract — MainMenu UI Redesign 2026-05-08
+- **Skill**: /team-ui (orchestrate UI team: ux-designer → art-director → ui-programmer)
+- **UX Spec**: `design/ux/mainmenu-ux-spec.md` — wireframes, interaction patterns, localization keys, accessibility rules
+- **Visual Spec**: `design/visual/mainmenu-visual-spec.md` — color palette, typography, spacing, animations, USS class naming
+- **Files created**:
+  - `Assets/_Project/Presentation/MainMenu/Toolkit/MainMenuView.uxml` — UXML layout with localization-ready labels
+  - `Assets/_Project/Presentation/MainMenu/Toolkit/MainMenuView.uss` — all styles from visual spec (colors, shadows, animations)
+  - `Assets/_Project/Presentation/MainMenu/Scripts/LocalizationKeys.cs` — all text keys + fallback values
+  - `Assets/_Project/Presentation/MainMenu/Scripts/SettingsKeys.cs` — PlayerPrefs keys + defaults + SettingsDefaults
+  - `Assets/_Project/Presentation/MainMenu/Scripts/MainMenuController.cs` — controller with settings binding
+  - `Assets/_Project/Assets/Textures/PaperGrain.png` — background texture
+- **Tests**: 92/93 passing (1 pre-existing unrelated failure)
+- **Remaining**: Input System polling commented out (Unity.InputSystem reference issue); create MainMenu.scene + wire GameObject
+- **Next**: Create scene, fix Input System reference, or proceed to sprint retrospective
+
+## Session Extract — Sprint Close-out 2026-05-08
+- Sprint 1 complete: phase-state-machine epic (7/7 stories Done)
+- ADR-0004 "1 File - 1 Type" refactor completed across 3 services (DayPhaseMechanicsService, DayPhaseTimelineService, KarmaHazardService)
+- 12 interface files moved to Application/Services/Interfaces/
+- Smoke check PASSED: 82 tests, 81 passing (1 pre-existing unrelated failure)
+- Manual QA: Game launches cleanly, all PSM services work, no regressions, no performance issues
+- MainMenu UI redesign with UI Toolkit identified as next priority
+- Smoke report: production/qa/smoke-2026-05-08.md
+- Next: MainMenu UI redesign, Stories 008+009 implementation, sprint review

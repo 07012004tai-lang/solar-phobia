@@ -1,19 +1,23 @@
-﻿using R3;
+﻿// Assets/_Project/Infrastructure/Services/WardTimerService.cs
+using R3;
 using SolarPhobia.Application.Services;
 using SolarPhobia.Domain.ValueObjects;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace SolarPhobia.Infrastructure.Services
 {
     /// <summary>
     /// Implementation of Ward Timer service.
-    /// Manages the Ward timer value and applies costs for player actions.
+    /// Implements TR-state-005: Ward Timer Initialization — Base + (Saved × 30) Formula
     /// </summary>
-    public class WardTimerService : IWardTimerService
+    public class WardTimerService : Domain.IWardTimerService, IInitializable, ITickable
     {
         // ── R3 Reactive State ──────────────────────────────────────
-        private readonly ReactiveProperty<float> _currentWard = new();
-        private readonly Subject<float> _wardChangedSubject = new();
+        private readonly ReactiveProperty<float> _currentWard = new(0f);
+        private readonly ReactiveProperty<SensoryTier> _currentTier = new(SensoryTier.Stable);
+        private readonly Subject<Unit> _onDepleted = new();
 
         // ── Dependencies ────────────────────────────────────────
         private readonly IPhaseStateMachine _phaseStateMachine;
@@ -21,85 +25,47 @@ namespace SolarPhobia.Infrastructure.Services
         // ── State ────────────────────────────────────────────────
         private float _maxWard;
         private float _drainRate;
+        private bool _isDepleted;
 
         // ── Constants ────────────────────────────────────────────
         private const float BaseWardSec = 10.0f;
         private const float WardPerGhostSec = 30.0f;
-        private const float DefaultDrainRate = 1.0f;
+        private const float FailedLightInterruptPenalty = 10.0f;
+        private const float SoulPanicPenalty = 5.0f;
+        private const float MaxDayPenalties = 30.0f;
+        private const float DefaultBaseDrain = 1.0f;
 
-        public float CurrentWard
-        {
-            get => _currentWard.Value;
-            set
-            {
-                var clampedValue = Mathf.Clamp(value, 0f, _maxWard);
-                if (Mathf.Approximately(_currentWard.Value, clampedValue)) return;
-                
-                _currentWard.Value = clampedValue;
-                _wardChangedSubject.OnNext(clampedValue);
-            }
-        }
+        // ── Public Properties ─────────────────────────────────────
+        public float CurrentWard => _currentWard.Value;
 
-        public Observable<float> OnWardChanged => _wardChangedSubject;
+        public ReadOnlyReactiveProperty<float> CurrentWardObservable => _currentWard;
 
-        /// <summary>
-        /// Initializes the Ward Timer service.
-        /// </summary>
+        public ReadOnlyReactiveProperty<SensoryTier> CurrentTier => _currentTier;
+
+        public Observable<Unit> OnDepleted => _onDepleted;
+
+        public float MaxWard => _maxWard;
+
+        // ── Constructor ───────────────────────────────────────────
         public WardTimerService(IPhaseStateMachine phaseStateMachine)
         {
             _phaseStateMachine = phaseStateMachine;
-            _maxWard = BaseWardSec;
-            _drainRate = DefaultDrainRate;
+            _maxWard = 0f;
+            _drainRate = DefaultBaseDrain;
+            _isDepleted = false;
+
+            // Subscribe to ward changes to update sensory tier
+            _currentWard.Subscribe(OnWardChanged);
         }
 
-        /// <summary>
-        /// Initialize Ward with saved souls count and day penalties.
-        /// </summary>
-        public void Initialize(int ghostsSaved, float dayPenaltiesSec)
+        // ── IInitializable ────────────────────────────────────────
+        public void Initialize()
         {
-            _maxWard = BaseWardSec + (ghostsSaved * WardPerGhostSec) - dayPenaltiesSec;
-            _maxWard = Mathf.Clamp(_maxWard, BaseWardSec, BaseWardSec + (2 * WardPerGhostSec));
-            CurrentWard = _maxWard;
+            // Initialization happens via Initialize(int, int, int) at day→night transition
         }
 
-        /// <inheritdoc/>
-        public void ApplyPenalty(float amount)
-        {
-            CurrentWard -= amount;
-        }
-
-        /// <summary>
-        /// Get current Ward timer value.
-        /// </summary>
-        public float GetCurrentWard()
-        {
-            return CurrentWard;
-        }
-
-        /// <summary>
-        /// Try to apply a cost to the Ward timer.
-        /// </summary>
-        public bool TryApplyCost(float cost)
-        {
-            // Only allow Ward costs during NightSurvival phase
-            if (_phaseStateMachine.CurrentState != PhaseState.NightSurvival)
-            {
-                return false;
-            }
-
-            if (CurrentWard < cost)
-            {
-                return false;
-            }
-
-            CurrentWard -= cost;
-            return true;
-        }
-
-        /// <summary>
-        /// Update Ward timer with time-based drain.
-        /// </summary>
-        public void Update(float deltaTime)
+        // ── ITickable ─────────────────────────────────────────────
+        public void Tick()
         {
             if (_phaseStateMachine.CurrentState != PhaseState.NightSurvival)
             {
@@ -107,21 +73,102 @@ namespace SolarPhobia.Infrastructure.Services
             }
 
             // Apply time-based drain
-            if (_drainRate > 0 && CurrentWard > 0)
+            if (_drainRate > 0 && _currentWard.Value > 0)
             {
-                CurrentWard -= _drainRate * deltaTime;
+                float newValue = _currentWard.Value - (_drainRate * Time.deltaTime);
+                _currentWard.Value = Mathf.Max(0f, newValue);
             }
         }
 
+        // ── Public Methods ─────────────────────────────────────────
         /// <summary>
-        /// Set the drain rate using the Ngọc Cốt multiplicative formula.
-        /// Formula: baseDrainRate × (1 + boneCount × 0.25) × (1 + hallucinationMultiplier)
+        /// Initialize Ward timer for night phase.
+        /// Formula: InitialWard = 10 + (GhostsSaved × 30) - DayPenalties
+        /// DayPenalties = (FailedLightInterrupts × 10) + (SoulPanicEvents × 5), capped at 30s
         /// </summary>
-        public void SetDrainRate(float baseDrainRate, int boneCount, float hallucinationMultiplier)
+        public void Initialize(int ghostsSaved, int failedLightInterrupts, int soulPanicEvents)
         {
-            float boneMultiplier = 1f + (boneCount * 0.25f);
-            float hallMultiplier = 1f + hallucinationMultiplier;
-            _drainRate = baseDrainRate * boneMultiplier * hallMultiplier;
+            // Calculate day penalties (capped at 30s)
+            float dayPenalties = (failedLightInterrupts * FailedLightInterruptPenalty)
+                               + (soulPanicEvents * SoulPanicPenalty);
+            dayPenalties = Mathf.Min(dayPenalties, MaxDayPenalties);
+
+            // Calculate initial ward (can go negative, clamped to 0 for gameplay)
+            float initialWard = BaseWardSec + (ghostsSaved * WardPerGhostSec) - dayPenalties;
+
+            _maxWard = Mathf.Max(0f, initialWard);
+            _currentWard.Value = _maxWard;
+            _isDepleted = false;
+
+            // Update tier based on initial value
+            UpdateSensoryTier();
+        }
+
+        /// <inheritdoc/>
+        public void ApplyPenalty(float amount)
+        {
+            if (_currentWard.Value <= 0) return;
+
+            _currentWard.Value = Mathf.Max(0f, _currentWard.Value - amount);
+        }
+
+        /// <summary>
+        /// Set the passive drain rate.
+        /// Formula: baseDrain + (boneCount × hallucinationMultiplier)
+        /// </summary>
+        public void SetDrainRate(float baseDrain, int boneCount, float hallucinationMultiplier)
+        {
+            // Additive formula as per Story-008: base + (bones × multiplier)
+            _drainRate = baseDrain + (boneCount * hallucinationMultiplier);
+        }
+
+        // ── Private Methods ───────────────────────────────────────
+        private void OnWardChanged(float newValue)
+        {
+            UpdateSensoryTier();
+
+            // Check for depletion
+            if (newValue <= 0 && !_isDepleted)
+            {
+                _isDepleted = true;
+                _onDepleted.OnNext(Unit.Default);
+            }
+        }
+
+        private void UpdateSensoryTier()
+        {
+            if (_maxWard <= 0)
+            {
+                _currentTier.Value = SensoryTier.DeathSpiral;
+                return;
+            }
+
+            float percentage = _currentWard.Value / _maxWard;
+            float secondsRemaining = _currentWard.Value;
+
+            SensoryTier newTier;
+            if (secondsRemaining <= 10f)
+            {
+                newTier = SensoryTier.DeathSpiral;
+            }
+            else if (percentage <= 0.25f)
+            {
+                newTier = SensoryTier.Panic;
+            }
+            else if (percentage <= 0.50f)
+            {
+                newTier = SensoryTier.HeavyBurden;
+            }
+            else if (percentage <= 0.75f)
+            {
+                newTier = SensoryTier.CreepingDread;
+            }
+            else
+            {
+                newTier = SensoryTier.Stable;
+            }
+
+            _currentTier.Value = newTier;
         }
     }
 }
