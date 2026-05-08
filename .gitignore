@@ -110,6 +110,7 @@ node_modules/
 .env.*.local
 *.pem
 *.key
+.venv/
 credentials.json
 secrets.json
 

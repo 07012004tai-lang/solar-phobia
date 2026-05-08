@@ -1,13 +1,9 @@
-// Assets/_Project/Application/Tests/KarmaHazardsTests.cs
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using R3;
 using SolarPhobia.Application.Services;
-using VContainer;
 using SolarPhobia.Domain.ValueObjects;
-
 
 namespace SolarPhobia.Application.Tests
 {
@@ -104,7 +100,7 @@ namespace SolarPhobia.Application.Tests
             _service.SpawnHazardForGhost("Linh", new Vector3(1f, 0f, 1f));
             _service.ClearHazards();
 
-            Assert.That(true); // ClearHazards executes without error
+            Assert.That(true);
         }
 
         private ReactiveProperty<PhaseState> CreateMockPhaseProperty(PhaseState phase)

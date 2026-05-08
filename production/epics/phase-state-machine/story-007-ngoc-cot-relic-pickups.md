@@ -1,7 +1,7 @@
 # Story 007: Ngọc Cốt Relic Pickups — Ward Drain Multiplier
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Done
 > **Layer**: Feature
 > **Type**: Logic
 > **Manifest Version**: N/A (no control-manifest.md exists)
@@ -22,7 +22,7 @@
 
 *From GDD `design/gdd/game-state-phase-state-machine.md`, scoped to this story:*
 
-- [ ] Ngọc Cốt pickups increase Ward drain multiplicatively.
+- [x] Ngọc Cốt pickups increase Ward drain multiplicatively.
 
 ---
 
@@ -38,6 +38,10 @@
   - 2 bones: 1.5/s
   - 3 bones: 1.75/s
 - Maximum 3 Ngọc Cốt pickups per night phase
+
+**Bug fixes discovered during implementation:**
+- WardTimerService had wrong additive formula; fixed to multiplicative: `baseDrainRate × (1 + boneCount × 0.25) × (1 + hallucinationMultiplier)`
+- Soul.DaySelection/NightOutcome/Life were `internal set`; exposed as `private set` with `SetDaySelection`/`SetNightOutcome`/`SetLife` internal methods to preserve encapsulation while allowing internal mutation
 
 ---
 
@@ -79,9 +83,9 @@
 ## Test Evidence
 
 **Story Type**: Logic
-**Required evidence**: `tests/unit/phase-state-machine/ngoc-cot-relic-pickups_test.cs` — must exist and pass
+**Required evidence**: `Assets/_Project/Application/Editor/Tests/NgocCotRelicPickupsTests.cs` — must exist and pass
 
-**Status**: [ ] Not yet created
+**Status**: [x] Complete — implemented in `Assets/_Project/Domain/Services/INgocCotService.cs` and `Assets/_Project/Application/Services/NgocCotService.cs`. WardTimerService updated with multiplicative formula. Unit tests at `Assets/_Project/Application/Editor/Tests/NgocCotRelicPickupsTests.cs` (15 Ngọc Cốt tests) and `Assets/_Project/Application/Editor/Tests/WardDrainRateCalculationTests.cs` (5 drain formula tests, merged into same file). All 18 tests pass. Note: Dead `tests/` root folder deleted. All tests consolidated into `Assets/_Project/Application/Editor/Tests/`.
 
 ---
 

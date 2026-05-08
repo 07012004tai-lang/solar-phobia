@@ -86,6 +86,13 @@
 
 ---
 
+## Completion Notes
+**Completed**: 2026-05-08
+**Criteria**: 3/3 passing
+**Deviations**: PhaseStateMachineNew.cs, PhaseStateMachineTests.cs, BossSearchlightService.cs modified outside scope to align enum values with Domain definitions
+**Test Evidence**: Logic: Assets/_Project/Application/Tests/KarmaHazardsTests.cs (8 tests) | Integration: tests/integration/phase-state-machine/karma-hazards_test.cs (16 tests)
+**Code Review**: Complete (APPROVED)
+
 ## Dependencies
 
 - Depends on: Story 002 (Day Phase Mechanics), Story 003 (Night Phase Movement)

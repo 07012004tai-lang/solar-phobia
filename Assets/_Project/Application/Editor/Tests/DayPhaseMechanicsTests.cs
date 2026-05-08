@@ -173,6 +173,13 @@ namespace SolarPhobia.Application.Tests
         }
     }
 
+// ═══════════════════════════════════════════════════════════════
+    // LEGACY TEST CLASS — DEPRECATED
+    // This class tests the old SoulRepository directly.
+    // The DayPhaseMechanicsTests below provides proper isolation
+    // via FakeSoulRepository + FakePhaseStateMachine.
+    // ═══════════════════════════════════════════════════════════════
+
     // ── Fake Implementations for Testing ─────────────────────────
 
     public class FakeSoulRepository : ISoulRepository
@@ -205,23 +212,33 @@ namespace SolarPhobia.Application.Tests
         public IReadOnlyList<Soul> GetSavedSouls() => _souls.Values.Where(s => s.DaySelection == DaySelectionState.Saved).ToList();
         public IReadOnlyList<Soul> GetAbandonedSoul() => _souls.Values.Where(s => s.DaySelection == DaySelectionState.Abandoned).ToList();
         public bool IsSelectionValid(int requiredSaved) => true;
-        public void Reset() { }
-        
+        public void Reset()
+        {
+            foreach (var soul in _souls.Values)
+            {
+                soul.SetDaySelection(DaySelectionState.Unselected);
+            }
+        }
+
+        public IReadOnlyList<Soul> GetAllSouls() => _souls.Values.ToList();
+
         public bool IsAtShadowEdge(string soulId) => _souls.ContainsKey(soulId);
-        
+
         public void SwapPositions(string playerId, string soulId)
         {
             SwapCalledForPlayerId = playerId;
         }
-        
+
         public string GetFirstSoulAtShadowEdge() => _souls.Keys.FirstOrDefault();
         
-        public void MarkAbandoned(string soulId)
+public void MarkAbandoned(string soulId)
         {
             var soul = GetSoul(soulId);
             if (soul != null)
-                soul.DaySelection = DaySelectionState.Abandoned;
-            AbandonedSoulId = soulId;
+            {
+                soul.SetDaySelection(DaySelectionState.Abandoned);
+                AbandonedSoulId = soulId;
+            }
         }
         
         public void SetSacrificedGhostId(string soulId)

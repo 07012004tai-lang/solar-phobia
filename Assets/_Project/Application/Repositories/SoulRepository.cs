@@ -11,9 +11,13 @@ namespace SolarPhobia.Application.Repositories
         public string Id { get; }
         public string LocalizedName { get; }
 
-        public DaySelectionState DaySelection { get; internal set; }
-        public NightOutcomeState NightOutcome { get; internal set; }
-        public LifeState Life { get; internal set; }
+        public DaySelectionState DaySelection { get; private set; }
+        public NightOutcomeState NightOutcome { get; private set; }
+        public LifeState Life { get; private set; }
+
+        public void SetDaySelection(DaySelectionState state) => DaySelection = state;
+        public void SetNightOutcome(NightOutcomeState state) => NightOutcome = state;
+        public void SetLife(LifeState state) => Life = state;
 
         public Soul(string id, string localizedName)
         {
@@ -89,7 +93,7 @@ namespace SolarPhobia.Application.Repositories
             }
 
             var oldState = soul.DaySelection;
-            soul.DaySelection = state;
+            soul.SetDaySelection(state);
 
             _selectionSubject.OnNext(new SelectionChangedEvent(soulId, oldState, state));
 
@@ -111,7 +115,7 @@ namespace SolarPhobia.Application.Repositories
                 return false;
             }
 
-            soul.NightOutcome = outcome;
+            soul.SetNightOutcome(outcome);
             return true;
         }
 
@@ -138,9 +142,9 @@ namespace SolarPhobia.Application.Repositories
         {
             foreach (var soul in _souls.Values)
             {
-                soul.DaySelection = DaySelectionState.Unselected;
-                soul.NightOutcome = NightOutcomeState.None;
-                soul.Life = LifeState.Alive;
+                soul.SetDaySelection(DaySelectionState.Unselected);
+                soul.SetNightOutcome(NightOutcomeState.None);
+                soul.SetLife(LifeState.Alive);
             }
         }
 
@@ -168,7 +172,7 @@ namespace SolarPhobia.Application.Repositories
             var soul = GetSoul(soulId);
             if (soul != null)
             {
-                soul.DaySelection = DaySelectionState.Abandoned;
+                soul.SetDaySelection(DaySelectionState.Abandoned);
                 UnityEngine.Debug.Log($"Soul {soulId} marked as abandoned.");
             }
         }

@@ -62,6 +62,12 @@ namespace SolarPhobia.Infrastructure.Services
             CurrentWard = _maxWard;
         }
 
+        /// <inheritdoc/>
+        public void ApplyPenalty(float amount)
+        {
+            CurrentWard -= amount;
+        }
+
         /// <summary>
         /// Get current Ward timer value.
         /// </summary>
@@ -108,11 +114,14 @@ namespace SolarPhobia.Infrastructure.Services
         }
 
         /// <summary>
-        /// Set the drain rate multiplier (based on bones carried).
+        /// Set the drain rate using the Ngọc Cốt multiplicative formula.
+        /// Formula: baseDrainRate × (1 + boneCount × 0.25) × (1 + hallucinationMultiplier)
         /// </summary>
-        public void SetDrainRate(float baseDrainRate, int bonesCarried, float hallucinationMultiplier)
+        public void SetDrainRate(float baseDrainRate, int boneCount, float hallucinationMultiplier)
         {
-            _drainRate = baseDrainRate * (1 + (bonesCarried * hallucinationMultiplier));
+            float boneMultiplier = 1f + (boneCount * 0.25f);
+            float hallMultiplier = 1f + hallucinationMultiplier;
+            _drainRate = baseDrainRate * boneMultiplier * hallMultiplier;
         }
     }
 }

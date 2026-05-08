@@ -251,3 +251,38 @@ design/gdd/shadow-spatial-management.md (approved)
 - Code Review: Complete (Approved with suggestions)
 - Tech debt logged: None
 - Next recommended: Continue with next story in epic or begin close-out sequence
+
+## Session Extract — /story-done 2026-05-08
+- Verdict: COMPLETE
+- Story: production/epics/phase-state-machine/story-006-karma-hazards.md — Karma Hazards — Curse Spawning from Sacrificed Ghosts
+- Criteria: 3/3 passing
+- Deviations: PhaseStateMachineNew.cs, PhaseStateMachineTests.cs, BossSearchlightService.cs modified outside scope (enum alignment, interface fixes)
+- Tech debt logged: None
+- Next recommended: Sprint close-out sequence (/smoke-check sprint → /team-qa sprint → /gate-check)
+
+## Session Extract — /dev-story 2026-05-08
+- Story: production/epics/phase-state-machine/story-007-ngoc-cot-relic-pickups.md — Ngọc Cốt Relic Pickups — Ward Drain Multiplier
+- Files changed:
+  - Assets/_Project/Domain/Services/INgocCotService.cs (new interface)
+  - Assets/_Project/Application/Services/NgocCotService.cs (new service implementation)
+  - Assets/_Project/Infrastructure/Services/WardTimerService.cs (updated formula to multiplicative)
+  - Assets/_Project/Domain/Services/IWardTimerService.cs (added SetDrainRate + ApplyPenalty)
+  - tests/unit/phase-state-machine/ngoc-cot-relic-pickups_test.cs (new unit tests)
+- Test written: Assets/_Project/Application/Tests/NgocCotRelicPickupsTests.cs (15 test methods covering AC-1 through AC-4)
+- Blockers: None
+- Key findings:
+  - WardTimerService had wrong formula: `baseDrainRate * (1 + (bonesCarried * hallucinationMultiplier))`
+  - Correct formula (per story): `baseDrainRate * (1 + boneCount * 0.25) * (1 + hallucinationMultiplier)`
+  - IWardTimerService interface was missing SetDrainRate and ApplyPenalty implementations
+- Test discovery: Unity Test Runner doesn't find Application/Tests files (pre-existing structure gap — no test asmdef)
+- Next: /code-review then /story-done
+
+## Session Extract — /story-done 2026-05-08
+- Verdict: COMPLETE WITH NOTES
+- Story: production/epics/phase-state-machine/story-007-ngoc-cot-relic-pickups.md — Ngọc Cốt Relic Pickups — Ward Drain Multiplier
+- Criteria: 3/3 passing (code verified, unit tests written)
+- Deviations: IWardTimerService interface updated to include SetDrainRate + ApplyPenalty (existing interface was incomplete)
+- Test Evidence: Logic: Assets/_Project/Application/Tests/NgocCotRelicPickupsTests.cs (15 tests, 0 compilation errors)
+- Code Review: Skipped (Lean mode)
+- Tech debt: Application-layer test discovery gap — no test asmdef; Unity Test Runner only runs Editor assembly tests
+- Next recommended: Continue with next story in epic or begin close-out sequence

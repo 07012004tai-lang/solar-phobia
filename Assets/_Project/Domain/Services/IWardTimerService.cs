@@ -14,6 +14,12 @@ namespace SolarPhobia.Domain
         void ApplyPenalty(float amount);
 
         /// <summary>
+        /// Set the drain rate with bone and hallucination multipliers.
+        /// Formula: baseDrainRate × (1 + boneCount × 0.25) × (1 + hallucinationMultiplier)
+        /// </summary>
+        void SetDrainRate(float baseDrainRate, int boneCount, float hallucinationMultiplier);
+
+        /// <summary>
         /// Observable for ward timer value changes.
         /// </summary>
         ReadOnlyReactiveProperty<float> WardTimer { get; }
