@@ -1,308 +1,153 @@
-<!--
-Hey, thanks for using the awesome-readme-template template.  
-If you have any enhancements, then fork this project and create a pull request 
-or just open an issue with the label "enhancement".
+# Solar Phobia
 
-Don't forget to give this project a star for additional support ;)
-Maybe you can mention me or this repo in the acknowledgements too
--->
-<div align="center">
+Solar Phobia is a Unity 6 survival game prototype built around a day/night loop: make morally costly decisions during the day, then survive the consequences at night.
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
-  <h1>Awesome Readme Template</h1>
+The project is currently focused on the first vertical slice: a playable foundation with phase transitions, soul selection, movement, cover, ward timer pressure, and consequence-driven hazards.
 
-  <p>
-    An awesome README template for your projects! 
-  </p>
+## Project Status
 
+- **Engine**: Unity 6000.3.11f1
+- **Milestone**: Vertical Slice 01 - Foundation Core
+- **Target**: Complete playable day/night loop
+- **Architecture**: Clean layered C# assemblies
+- **Primary docs**: `design/`, `docs/architecture/`, `production/`
 
-<!-- Badges -->
-<p>
-  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/network/members">
-    <img src="https://img.shields.io/github/forks/Louis3797/awesome-readme-template" alt="forks" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/stargazers">
-    <img src="https://img.shields.io/github/stars/Louis3797/awesome-readme-template" alt="stars" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/issues/">
-    <img src="https://img.shields.io/github/issues/Louis3797/awesome-readme-template" alt="open issues" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
-  </a>
-</p>
+## Requirements
 
-<h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
-  </h4>
-</div>
+- Unity 6000.3.11f1
+- JetBrains Rider or Visual Studio with Unity support
+- Git
 
-<br />
+Unity-generated files such as `Library/`, `Temp/`, `Obj/`, `Logs/`, `.csproj`, and `.sln` files are ignored or treated as local/generated artifacts.
 
-<!-- Table of Contents -->
-# :notebook_with_decorative_cover: Table of Contents
+## Getting Started
 
-- [About the Project](#star2-about-the-project)
-   * [Screenshots](#camera-screenshots)
-   * [Tech Stack](#space_invader-tech-stack)
-   * [Features](#dart-features)
-   * [Color Reference](#art-color-reference)
-   * [Environment Variables](#key-environment-variables)
-- [Getting Started](#toolbox-getting-started)
-   * [Prerequisites](#bangbang-prerequisites)
-   * [Installation](#gear-installation)
-   * [Running Tests](#test_tube-running-tests)
-   * [Run Locally](#running-run-locally)
-   * [Deployment](#triangular_flag_on_post-deployment)
-- [Usage](#eyes-usage)
-- [Roadmap](#compass-roadmap)
-- [Contributing](#wave-contributing)
-   * [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
-- [License](#warning-license)
-- [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
+1. Clone the repository.
+2. Open the repository root in Unity Hub.
+3. Use Unity 6000.3.11f1.
+4. Let Unity restore packages from `Packages/manifest.json`.
+5. Open a scene from `Assets/_Project/_Scenes/`.
 
+Current prototype scenes live in:
 
-
-<!-- About the Project -->
-## :star2: About the Project
-
-
-<!-- Screenshots -->
-### :camera: Screenshots
-
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
-</div>
-
-
-<!-- TechStack -->
-### :space_invader: Tech Stack
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
-  </ul>
-</details>
-
-<!-- Features -->
-### :dart: Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
-<!-- Color Reference -->
-### :art: Color Reference
-
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
-
-
-<!-- Env Variables -->
-### :key: Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
-
-<!-- Getting Started -->
-## 	:toolbox: Getting Started
-
-<!-- Prerequisites -->
-### :bangbang: Prerequisites
-
-This project uses Yarn as package manager
-
-```bash
- npm install --global yarn
+```text
+Assets/_Project/_Scenes/Dev/Prototype/
 ```
 
-<!-- Installation -->
-### :gear: Installation
+Do not create project scenes under `Assets/Scenes/`; that folder is deprecated for this project.
 
-Install my-project with npm
+## Project Layout
 
-```bash
-  yarn install my-project
-  cd my-project
+```text
+Assets/_Project/
+  _Scenes/          Unity scenes for dev and gameplay
+  Application/      Use cases, orchestration, application services
+  Assets/           Project-owned art, textures, and media
+  Composition/      Dependency injection and bootstrap wiring
+  Domain/           Pure rules, entities, value objects, interfaces
+  Infrastructure/   Unity/external integrations and persistence
+  Prefabs/          Project prefabs
+  Presentation/     UI, view controllers, feedback, and scene-facing code
+  Settings/         Project settings assets and templates
+  Shared/           Shared cross-layer utilities
+
+design/             GDDs, UX specs, visual specs, system design
+docs/architecture/  Architecture docs and ADRs
+production/         Epics, stories, milestones, QA, sprint state
+prototypes/         Throwaway or exploratory prototypes
 ```
 
-<!-- Running Tests -->
-### :test_tube: Running Tests
+## Architecture
 
-To run tests, run the following command
+Code follows clean layering through assembly definitions:
 
-```bash
-  yarn test test
+```text
+Domain -> Application -> Infrastructure / Presentation -> Composition
 ```
 
-<!-- Run Locally -->
-### :running: Run Locally
+Core principles:
 
-Clone the project
+- Domain code stays independent of Unity scene concerns.
+- Application services orchestrate use cases and gameplay rules.
+- Infrastructure owns persistence and external/engine integration.
+- Presentation owns UI, visual feedback, and scene-facing controllers.
+- Composition wires systems together with VContainer.
+- Shared gameplay state uses reactive/event-driven flow where appropriate.
 
-```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+See `docs/architecture/architecture.md` and the ADRs in `docs/architecture/` for the current technical decisions.
+
+## Key Packages
+
+- VContainer for dependency injection
+- R3 and MessagePipe for reactive/event-driven flows
+- UniTask for async Unity workflows
+- ZLinq for allocation-conscious query helpers
+- Unity Input System
+- UI Toolkit
+- URP
+- DOTween
+- Odin Inspector
+
+Package versions are pinned in `Packages/manifest.json`.
+
+## Build and Test
+
+### Unity Editor
+
+- Open project in Unity 6000.3.11f1.
+- Build from **File -> Build Profiles**.
+- Run tests from **Window -> General -> Test Runner**.
+
+### Command Line
+
+```powershell
+Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform EditMode -testResults results.xml
+Unity.exe -runTests -projectPath "I:\unityVers\Solar phobia" -testPlatform PlayMode -testResults results.xml
 ```
 
-Go to the project directory
+Windows standalone build example:
 
-```bash
-  cd my-project
+```powershell
+Unity.exe -quit -batchmode -projectPath "I:\unityVers\Solar phobia" -buildTarget Win64 -executeMethod BuildPipeline.BuildPlayer
 ```
 
-Install dependencies
+## Coding Standards
 
-```bash
-  yarn install
-```
+- C# 9.0 targeting .NET 4.7.1.
+- Allman braces.
+- 4-space indentation.
+- Public types and members should have XML docs.
+- Private fields use `_camelCase`.
+- Test names use `MethodName_Scenario_ExpectedResult`.
+- Prefer NUnit `Assert.That()` style in tests.
+- Use `SolarPhobia.Rules` for codifiable standards such as layer and scene path rules.
 
-Start the server
+Project rules and agent-facing workflow details are captured in `AGENTS.md`.
 
-```bash
-  yarn start
-```
+## Current Vertical Slice Scope
 
+Must-have systems for the first slice:
 
-<!-- Deployment -->
-### :triangular_flag_on_post: Deployment
+- Phase State Machine with day/night state flow
+- Soul repository with initial souls
+- Basic day selection flow
+- Night movement
+- Day-to-night transition
+- Ward Timer pressure
+- Cover detection
+- Consequence-driven hazards
 
-To deploy this project run
+Milestone details are in `production/milestones/vertical-slice-01.md`.
 
-```bash
-  yarn deploy
-```
+## Useful Docs
 
+- `AGENTS.md` - project conventions and automation instructions
+- `docs/engine-reference/unity/VERSION.md` - pinned Unity version and risk notes
+- `docs/architecture/architecture.md` - master architecture
+- `production/epics/index.md` - epic map and implementation status
+- `production/session-state/active.md` - latest production/session notes
+- `production/qa/smoke-2026-05-08.md` - latest smoke test report
 
-<!-- Usage -->
-## :eyes: Usage
+## License
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
-
-<!-- Roadmap -->
-## :compass: Roadmap
-
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- Code of Conduct -->
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Question 1
-
-   + Answer 1
-
-- Question 2
-
-   + Answer 2
-
-
-<!-- License -->
-## :warning: License
-
-Distributed under the no License. See LICENSE.txt for more information.
-
-
-<!-- Contact -->
-## :handshake: Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
-
-
-<!-- Acknowledgments -->
-## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
-
-- [Shields.io](https://shields.io/)
-- [Awesome README](https://github.com/matiassingers/awesome-readme)
-- [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
-- [Readme Template](https://github.com/othneildrew/Best-README-Template)
+See `LICENSE`.
