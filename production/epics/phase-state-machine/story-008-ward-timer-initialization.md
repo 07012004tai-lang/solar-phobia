@@ -1,7 +1,7 @@
 # Story 008: Ward Timer Initialization — Base + (Saved × 30) Formula
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Logic
 > **Manifest Version**: N/A (no control-manifest.md exists)
@@ -22,8 +22,8 @@
 
 *From GDD `design/gdd/game-state-phase-state-machine.md`, scoped to this story:*
 
-- [ ] Ward Timer initializes: Base (10s) + (GhostsSaved × 30s) - DayPenalties.
-- [ ] Passive drain: 1.0/s base + (bones × hallucination_multiplier).
+- [x] Ward Timer initializes: Base (10s) + (GhostsSaved × 30s) - DayPenalties.
+- [x] Passive drain: 1.0/s base + (bones × hallucination_multiplier).
 
 ---
 
@@ -84,9 +84,9 @@
 ## Test Evidence
 
 **Story Type**: Logic
-**Required evidence**: `tests/unit/phase-state-machine/ward-timer-initialization_test.cs` — must exist and pass
+**Required evidence**: `Assets/_Project/Infrastructure/Tests/Editor/WardTimerInitializationTests.cs` — created
 
-**Status**: [ ] Not yet created
+**Status**: [x] Created and ready for testing (requires Unity domain reload to discover)
 
 ---
 
