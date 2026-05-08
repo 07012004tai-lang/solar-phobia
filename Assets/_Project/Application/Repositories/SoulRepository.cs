@@ -6,48 +6,9 @@ using SolarPhobia.Domain.ValueObjects;
 
 namespace SolarPhobia.Application.Repositories
 {
-    public class Soul
-    {
-        public string Id { get; }
-        public string LocalizedName { get; }
-
-        public DaySelectionState DaySelection { get; private set; }
-        public NightOutcomeState NightOutcome { get; private set; }
-        public LifeState Life { get; private set; }
-
-        public void SetDaySelection(DaySelectionState state) => DaySelection = state;
-        public void SetNightOutcome(NightOutcomeState state) => NightOutcome = state;
-        public void SetLife(LifeState state) => Life = state;
-
-        public Soul(string id, string localizedName)
-        {
-            Id = id;
-            LocalizedName = localizedName;
-            DaySelection = DaySelectionState.Unselected;
-            NightOutcome = NightOutcomeState.None;
-            Life = LifeState.Alive;
-        }
-    }
-
-    public interface ISoulRepository
-    {
-        IReadOnlyList<Soul> Souls { get; }
-        Soul GetSoul(string id);
-        bool TrySetSelection(string soulId, DaySelectionState state, PhaseState currentPhase);
-        bool TrySetNightOutcome(string soulId, NightOutcomeState outcome, PhaseState currentPhase);
-        IReadOnlyList<Soul> GetSavedSouls();
-        IReadOnlyList<Soul> GetAbandonedSoul();
-        bool IsSelectionValid(int requiredSaved);
-        void Reset();
-        Observable<SelectionChangedEvent> OnSelectionChanged { get; }
-        // New methods for Day Phase Mechanics
-        bool IsAtShadowEdge(string soulId);
-        void SwapPositions(string playerId, string soulId);
-        string GetFirstSoulAtShadowEdge();
-        void MarkAbandoned(string soulId);
-        void SetSacrificedGhostId(string soulId);
-    }
-
+    /// <summary>
+    /// Repository for managing soul entities.
+    /// </summary>
     public class SoulRepository : ISoulRepository
     {
         private readonly Dictionary<string, Soul> _souls;
@@ -148,22 +109,18 @@ namespace SolarPhobia.Application.Repositories
             }
         }
 
-        // New methods for Day Phase Mechanics
         public bool IsAtShadowEdge(string soulId)
         {
-            // Simplified: consider any existing soul as being at the shadow edge.
             return _souls.ContainsKey(soulId);
         }
 
         public void SwapPositions(string playerId, string soulId)
         {
-            // Simplified swap: just log the action. Real position handling would be in a separate system.
             UnityEngine.Debug.Log($"SwapPositions: player {playerId} swapped with soul {soulId}");
         }
 
         public string GetFirstSoulAtShadowEdge()
         {
-            // Return the first soul id in the dictionary (if any).
             return _souls.Keys.FirstOrDefault();
         }
 

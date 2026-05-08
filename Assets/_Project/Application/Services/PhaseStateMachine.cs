@@ -6,19 +6,9 @@ using SolarPhobia.Domain.ValueObjects;
 
 namespace SolarPhobia.Application.Services
 {
-    public interface IPhaseStateMachine
-    {
-        PhaseState CurrentState { get; }
-        ReadOnlyReactiveProperty<PhaseState> CurrentPhase { get; }
-        Observable<PhaseChangedEvent> OnPhaseChanged { get; }
-        Observable<DayStartEvent> OnDayStart { get; }
-        Observable<NightStartEvent> OnNightStart { get; }
-        Observable<ResolveEvent> OnResolve { get; }
-        bool TryTransition(PhaseState newPhase);
-        bool IsActionAllowed(GameAction action);
-        void Initialize();
-    }
-
+    /// <summary>
+    /// Implementation of the game phase state machine.
+    /// </summary>
     public class PhaseStateMachine : IPhaseStateMachine
     {
         private readonly ReactiveProperty<PhaseState> _currentPhase = new(PhaseState.Boot);

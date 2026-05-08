@@ -1,5 +1,4 @@
-﻿// ...existing code...
-namespace SolarPhobia.Application.Services
+﻿namespace SolarPhobia.Application.Services
 {
     /// <summary>
     /// Service responsible for playing animation effects.
@@ -10,4 +9,3 @@ namespace SolarPhobia.Application.Services
         void PlayShoveAnimation(string playerId, string soulId);
     }
 }
-// ...existing code...

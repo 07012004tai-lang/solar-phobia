@@ -30,7 +30,7 @@ namespace SolarPhobia.Application.Tests
             _service?.Dispose();
             foreach (var hazard in _testHazards)
             {
-                if (hazard != null) GameObject.DestroyImmediate(hazard);
+                if (hazard != null) UnityEngine.Object.DestroyImmediate(hazard, true);
             }
             _testHazards.Clear();
         }

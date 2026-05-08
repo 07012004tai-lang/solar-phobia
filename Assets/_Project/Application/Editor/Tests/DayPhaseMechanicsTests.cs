@@ -222,7 +222,10 @@ namespace SolarPhobia.Application.Tests
 
         public IReadOnlyList<Soul> GetAllSouls() => _souls.Values.ToList();
 
-        public bool IsAtShadowEdge(string soulId) => _souls.ContainsKey(soulId);
+        public bool IsAtShadowEdge(string soulId)
+        {
+            return soulId == "linh" || soulId == "van";
+        }
 
         public void SwapPositions(string playerId, string soulId)
         {

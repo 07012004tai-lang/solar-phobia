@@ -87,6 +87,9 @@ Assets/
 │   │       └── [gameplay scenes]
 │   ├── Domain/
 │   ├── Application/
+│   │   ├── Services/
+│   │   │   ├── Interfaces/    ← I*Service.cs interfaces
+│   │   │   └── *.cs           ← implementations, hazards, data
 │   ├── Infrastructure/
 │   ├── Presentation/
 │   ├── Settings/
@@ -163,6 +166,102 @@ namespace SolarPhobia.Rules {
 - **Risk**: Subscenes (Addressables) reference old folder
   - **Mitigation**: Update Addressable groups after migration
 
+## File Organization Standards
+
+### Services Folder Organization
+
+**Rule**: The `Application/Services/` folder is split into two subfolders to keep interfaces and implementations separate at a glance.
+
+| Subfolder | Contents |
+|-----------|----------|
+| `Services/Interfaces/` | All `I*.cs` interface files |
+| `Services/` | All implementation files (services, hazards, events, data classes) |
+
+**Example structure**:
+```
+Application/
+├── Services/
+│   ├── Interfaces/
+│   │   ├── IAnimationService.cs
+│   │   ├── IAudioService.cs
+│   │   ├── IBossSearchlightService.cs
+│   │   ├── ICoverDetectionService.cs
+│   │   ├── IDayPhaseMechanicsService.cs
+│   │   ├── IDayPhaseTimelineService.cs
+│   │   ├── IKarmaHazardService.cs
+│   │   ├── INightPhaseMovementService.cs
+│   │   ├── IPhaseStateMachine.cs
+│   │   ├── IWardTimerService.cs
+│   │   └── ICharacterController.cs
+│   ├── DayPhaseMechanicsService.cs
+│   ├── DayPhaseTimelineService.cs
+│   ├── KarmaHazardService.cs
+│   ├── LuoiMauHazard.cs
+│   ├── VungNuocHazard.cs
+│   ├── BeDaDaoAnhHazard.cs
+│   └── ...
+```
+
+**Requirements**:
+- All `I*Service.cs` files → `Services/Interfaces/`
+- All concrete implementations, MonoBehaviour hazard components, and data classes → `Services/`
+- Events (`*Event.cs`) belong in `Application/Messages/`
+- Value objects belong in `Domain/ValueObjects/`
+
+### 1 File - 1 Type
+
+**Rule**: Each type definition (Class, Interface, Enum, Struct, Delegate) must live in its own dedicated `.cs` file named exactly after the type.
+
+**Examples**:
+```
+// Assets/_Project/Application/Services/Interfaces/
+├── INgocCotService.cs      // Interface for Ngọc Cốt tracking
+// Assets/_Project/Application/Services/
+├── NgocCotService.cs       // Concrete implementation
+// Assets/_Project/Domain/Services/
+├── IWardTimerService.cs    // Interface for ward timer (Domain layer)
+// Assets/_Project/Application/Services/
+├── WardTimerService.cs     // Concrete implementation
+```
+
+**Requirements**:
+- **Interface files (`I*Service.cs`) → `Application/Services/Interfaces/`**
+- **Implementation files → `Application/Services/`** (grouped with their interface)
+- **No multi-type files** — Never combine `interface IBar {}` and `class Bar {}` in one file. Never combine an `enum` with a class.
+- **Naming** — File name must match the type name exactly (case-sensitive).
+- **Enforced by**: Code review, future Roslyn analyzer (`SolarPhobia.OneTypePerFileAnalyzer`).
+
+**Rationale**:
+- **Layer discipline** — Domain is pure C# (no Unity, no FishNet). Interface in Domain = guaranteed no external dependencies in contracts.
+- **Faster file lookup** (name = file path)
+- **Easier refactoring** (rename type = rename file)
+- **Cleaner diffs** (one logical change per file)
+- **Prevents "god files"** accumulating multiple types over time
+- **Dependency enforcement** — Domain has no upstream dependencies, so keeping interfaces there forces clean architecture. Implementations live in layers that are allowed to depend on Unity/FishNet.
+
+**Anti-patterns**:
+```csharp
+// ✅ CORRECT — interface in Domain, implementation in Application/Infrastructure
+// Domain/Services/INgocCotService.cs     ← Domain layer: pure contract, no Unity/FishNet
+// Application/Services/NgocCotService.cs ← Application layer: behaviour
+// Infrastructure/Services/WardTimerService.cs ← Infrastructure layer: Unity-dependent
+
+// ❌ WRONG — multiple types in one file
+namespace Foo {
+    public interface IService { void M(); }
+    public class Service : IService { public void M() { } }
+    public enum ServiceState { Active, Inactive }
+}
+
+// ❌ WRONG — interface and implementation in same layer
+// Application/Services/INgocCotService.cs  ← mixes layer concerns
+// Application/Services/NgocCotService.cs
+```
+
+**Exceptions**:
+- Test files may contain multiple fake/test helper classes in one file when they are tightly coupled to a single test class.
+- Nested classes within a test file are exempt from this rule (e.g., `TestWardDrainRate` inside `NgocCotRelicPickupsTests.cs`).
+
 ## Performance Implications
 - **CPU**: No impact (coding standards are compile-time only)
 - **Memory**: Minimal (small rule classes)
@@ -189,6 +288,8 @@ namespace SolarPhobia.Rules {
 - [ ] `Assets/Scenes/` folder removed (or empty)
 - [ ] AGENTS.md updated with new folder references
 - [ ] Build Settings updated with new scene paths
+- [ ] All `I*Service.cs` interfaces live in `Application/Services/Interfaces/`
+- [ ] All service implementations live in `Application/Services/`
 
 ## Related Decisions
 
