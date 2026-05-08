@@ -77,6 +77,17 @@ namespace SolarPhobia.Presentation.MainMenu
 
         private void Awake()
         {
+            if (_document == null)
+            {
+                _document = FindObjectOfType<UIDocument>();
+            }
+            
+            if (_document == null)
+            {
+                Debug.LogError("MainMenuController: No UIDocument found in scene!");
+                return;
+            }
+            
             _root = _document.rootVisualElement;
             CacheElements();
             BindEvents();
