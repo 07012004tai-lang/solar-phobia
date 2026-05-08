@@ -350,11 +350,17 @@ namespace SolarPhobia.Presentation.MainMenu
             if (_dialogOverlay != null) _dialogOverlay.style.display = state == ScreenState.QuitConfirm ? DisplayStyle.Flex : DisplayStyle.None;
 
             if (state == ScreenState.MainMenu)
+            {
                 FocusButton(0);
+            }
             else if (state == ScreenState.Credits)
-                FocusButton(-1);
+            {
+                if (_btnBackCredits != null) _btnBackCredits.Focus();
+            }
             else if (state == ScreenState.QuitConfirm)
-                FocusButton(3);
+            {
+                if (_btnCancelQuit != null) _btnCancelQuit.Focus();
+            }
         }
 
         private void NavigateMenu(int direction)

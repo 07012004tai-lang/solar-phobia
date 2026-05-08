@@ -16,7 +16,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Label text="v1.0.0" name="version" class="mainmenu-version menu-animate--6"/>
-        <ui:VisualElement class="settings-panel" style="display: none;">
+        <ui:VisualElement class="settings-panel" style="display: none;" name="settings-panel">
             <ui:VisualElement class="settings-header">
                 <ui:Label text="Settings" name="settings-title" class="settings-title"/>
                 <ui:Button text="X" name="settings-close" class="settings-close"/>
