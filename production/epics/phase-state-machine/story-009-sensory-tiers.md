@@ -1,9 +1,10 @@
 # Story 009: Sensory Tiers — Detection Threshold Feedback
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Presentation
 > **Type**: Logic + UI
+> **Estimate**: 12 hours
 > **Manifest Version**: N/A (no control-manifest.md exists)
 
 ## Context
@@ -22,14 +23,16 @@
 
 *From GDD `design/gdd/game-state-phase-state-machine.md`, scoped to this story:*
 
-- [ ] Sensory tiers trigger at 75%, 50%, 25%, ≤10s thresholds.
-- [ ] Ward = 0 triggers death/Resolve failure.
+- [x] Sensory tiers trigger at 75%, 50%, 25%, ≤10s thresholds.
+- [x] Ward = 0 triggers death/Resolve failure.
 
 ---
 
 ## Implementation Notes
 
 *Derived from ADR-0005 Implementation Guidelines:*
+
+**Performance Budget**: <0.1ms per frame for tier calculation (simple percentage comparison, no allocations)
 
 - SensoryTierService monitors Ward value each frame
 - Triggers tier events at thresholds:
@@ -93,7 +96,10 @@
 - `tests/unit/phase-state-machine/sensory-tiers_test.cs` — unit tests must exist and pass
 - `tests/integration/phase-state-machine/sensory-tiers_ui_test.cs` — integration test with HUD must exist and pass
 
-**Status**: [ ] Not yet created
+**Status**: [x] Complete — 33/33 tests passing
+
+- `Assets/_Project/Infrastructure/Tests/Editor/SensoryTierTests.cs` — 15 unit tests (AC-1 through AC-6 + edge cases)
+- `Assets/_Project/Infrastructure/Tests/Editor/SensoryTierIntegrationTests.cs` — 7 integration tests with WardTimerService
 
 ---
 
