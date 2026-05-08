@@ -1,9 +1,9 @@
 // Assets/_Project/Domain/Services/ICoverDetectionService.cs
-namespace SolarPhobia.Domain.Services
-{
-    using UnityEngine;
-    using System.Collections.Generic;
+using UnityEngine;
+using System.Collections.Generic;
 
+namespace SolarPhobia.Domain
+{
     /// <summary>
     /// Interface for cover detection service.
     /// </summary>

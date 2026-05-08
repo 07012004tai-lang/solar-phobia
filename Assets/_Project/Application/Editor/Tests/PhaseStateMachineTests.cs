@@ -35,11 +35,11 @@ namespace SolarPhobia.Application.Tests
         }
 
         [Test]
-        public void TryTransition_FromDayServiceToChoiceLock_ReturnsTrue()
+        public void TryTransition_FromDayServiceToDialogue_ReturnsTrue()
         {
-            var result = _machine.TryTransition(PhaseState.ChoiceLock);
+            var result = _machine.TryTransition(PhaseState.Dialogue);
             Assert.That(result, Is.True);
-            Assert.That(_machine.CurrentState, Is.EqualTo(PhaseState.ChoiceLock));
+            Assert.That(_machine.CurrentState, Is.EqualTo(PhaseState.Dialogue));
         }
 
         [Test]
@@ -56,11 +56,11 @@ namespace SolarPhobia.Application.Tests
             PhaseChangedEvent? received = null;
             var sub = _machine.OnPhaseChanged.Subscribe(e => received = e);
             
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            _machine.TryTransition(PhaseState.Dialogue);
             
             Assert.That(received, Is.Not.Null);
             Assert.That(received.Value.PreviousPhase, Is.EqualTo(PhaseState.DayService));
-            Assert.That(received.Value.NewPhase, Is.EqualTo(PhaseState.ChoiceLock));
+            Assert.That(received.Value.NewPhase, Is.EqualTo(PhaseState.Dialogue));
             sub.Dispose();
         }
 
@@ -70,7 +70,12 @@ namespace SolarPhobia.Application.Tests
             NightStartEvent? received = null;
             var sub = _machine.OnNightStart.Subscribe(e => received = e);
             
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Full path: DayService -> Dialogue -> Order -> SunsetWarning -> NightTravel -> ShrineArrival -> NightSurvival
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
             
             Assert.That(received, Is.Not.Null);
@@ -78,14 +83,19 @@ namespace SolarPhobia.Application.Tests
         }
 
         [Test]
-        public void TryTransition_ToResolve_EmitsResolveEvent()
+        public void TryTransition_ToEndingEvaluation_EmitsResolveEvent()
         {
             ResolveEvent? received = null;
             var sub = _machine.OnResolve.Subscribe(e => received = e);
             
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Full path to NightSurvival then to EndingEvaluation
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
-            _machine.TryTransition(PhaseState.Resolve);
+            _machine.TryTransition(PhaseState.EndingEvaluation);
             
             Assert.That(received, Is.Not.Null);
             sub.Dispose();
@@ -94,93 +104,109 @@ namespace SolarPhobia.Application.Tests
         [Test]
         public void IsActionAllowed_DayService_ReturnsTrueForDayActions()
         {
-            Assert.That(_machine.IsActionAllowed(GameAction.InspectSoul), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.AssignRitual), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.ConfirmSelection), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.StartGame), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.CompleteDayPrep), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.FinishDialogue), Is.True);
         }
 
         [Test]
-        public void IsActionAllowed_DayService_ReturnsFalseForNightActions()
+        public void IsActionAllowed_DayService_ReturnsFalseForTravelActions()
         {
-            Assert.That(_machine.IsActionAllowed(GameAction.Move), Is.False);
-            Assert.That(_machine.IsActionAllowed(GameAction.Sprint), Is.False);
-            Assert.That(_machine.IsActionAllowed(GameAction.Dash), Is.False);
+            Assert.That(_machine.IsActionAllowed(GameAction.ArriveAtShrine), Is.False);
+            Assert.That(_machine.IsActionAllowed(GameAction.SurviveNight), Is.False);
         }
 
         [Test]
-        public void IsActionAllowed_ChoiceLock_OnlyAllowsLockIn()
+        public void IsActionAllowed_ShrineArrival_OnlyAllowsMakeChoice()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Go to ShrineArrival
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             
-            Assert.That(_machine.IsActionAllowed(GameAction.LockIn), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.ConfirmSelection), Is.False);
+            Assert.That(_machine.IsActionAllowed(GameAction.MakeChoice), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.CompleteDayPrep), Is.False);
         }
 
         [Test]
-        public void IsActionAllowed_NightSurvival_ReturnsTrueForMovementActions()
+        public void IsActionAllowed_NightSurvival_ReturnsTrueForSurvivalActions()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Go to NightSurvival
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
             
-            Assert.That(_machine.IsActionAllowed(GameAction.Move), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.Sprint), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.Dash), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.Swing), Is.True);
-            Assert.That(_machine.IsActionAllowed(GameAction.Glide), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.ResetGame), Is.True);
+            Assert.That(_machine.IsActionAllowed(GameAction.StartGame), Is.False);
         }
 
         [Test]
-        public void IsActionAllowed_Resolve_ReturnsFalseForAll()
+        public void IsActionAllowed_EndingEvaluation_ReturnsFalseForAll()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Go to EndingEvaluation
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
-            _machine.TryTransition(PhaseState.Resolve);
+            _machine.TryTransition(PhaseState.EndingEvaluation);
             
-            Assert.That(_machine.IsActionAllowed(GameAction.Move), Is.False);
-            Assert.That(_machine.IsActionAllowed(GameAction.InspectSoul), Is.False);
+            Assert.That(_machine.IsActionAllowed(GameAction.ResetGame), Is.False);
+            Assert.That(_machine.IsActionAllowed(GameAction.StartGame), Is.False);
         }
 
         [Test]
-        public void TryTransition_InvalidFromResolve_Blocked()
+        public void TryTransition_InvalidFromEndingEvaluation_Blocked()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Go to EndingEvaluation
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
-            _machine.TryTransition(PhaseState.Resolve);
+            _machine.TryTransition(PhaseState.EndingEvaluation);
             
             var result = _machine.TryTransition(PhaseState.DayService);
             Assert.That(result, Is.False);
         }
 
         [Test]
-        public void TryTransition_FatalError_FromChoiceLock()
+        public void TryTransition_ChoiceLock_FromEndingEvaluation()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
-            var result = _machine.TryTransition(PhaseState.FatalError);
+            // Go to EndingEvaluation
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
+            _machine.TryTransition(PhaseState.NightSurvival);
+            _machine.TryTransition(PhaseState.EndingEvaluation);
+            
+            var result = _machine.TryTransition(PhaseState.ChoiceLock);
             
             Assert.That(result, Is.True);
-            Assert.That(_machine.CurrentState, Is.EqualTo(PhaseState.FatalError));
+            Assert.That(_machine.CurrentState, Is.EqualTo(PhaseState.ChoiceLock));
         }
 
         [Test]
-        public void TryTransition_Reset_FromResolve()
+        public void TryTransition_CanGoBackToDayService_FromChoiceLock()
         {
-            _machine.TryTransition(PhaseState.ChoiceLock);
+            // Go to EndingEvaluation then ChoiceLock
+            _machine.TryTransition(PhaseState.Dialogue);
+            _machine.TryTransition(PhaseState.Order);
+            _machine.TryTransition(PhaseState.SunsetWarning);
+            _machine.TryTransition(PhaseState.NightTravel);
+            _machine.TryTransition(PhaseState.ShrineArrival);
             _machine.TryTransition(PhaseState.NightSurvival);
-            _machine.TryTransition(PhaseState.Resolve);
-            
-            var result = _machine.TryTransition(PhaseState.Reset);
-            
-            Assert.That(result, Is.True);
-            Assert.That(_machine.CurrentState, Is.EqualTo(PhaseState.Reset));
-        }
-
-        [Test]
-        public void TryTransition_CanGoBackToDayService_FromReset()
-        {
+            _machine.TryTransition(PhaseState.EndingEvaluation);
             _machine.TryTransition(PhaseState.ChoiceLock);
-            _machine.TryTransition(PhaseState.NightSurvival);
-            _machine.TryTransition(PhaseState.Resolve);
-            _machine.TryTransition(PhaseState.Reset);
             
             var result = _machine.TryTransition(PhaseState.DayService);
             

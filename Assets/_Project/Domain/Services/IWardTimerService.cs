@@ -1,5 +1,7 @@
 // Assets/_Project/Domain/Services/IWardTimerService.cs
-namespace SolarPhobia.Domain.Services
+using R3;
+
+namespace SolarPhobia.Domain
 {
     /// <summary>
     /// Interface for ward timer service.
@@ -14,6 +16,6 @@ namespace SolarPhobia.Domain.Services
         /// <summary>
         /// Observable for ward timer value changes.
         /// </summary>
-        R3.ReadOnlyReactiveProperty<float> WardTimer { get; }
+        ReadOnlyReactiveProperty<float> WardTimer { get; }
     }
 }

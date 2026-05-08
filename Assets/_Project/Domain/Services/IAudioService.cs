@@ -1,5 +1,5 @@
 // Assets/_Project/Domain/Services/IAudioService.cs
-namespace SolarPhobia.Domain.Services
+namespace SolarPhobia.Domain
 {
     /// <summary>
     /// Interface for audio service.

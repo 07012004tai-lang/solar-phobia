@@ -1,7 +1,7 @@
 # Story 006: Karma Hazards — Curse Spawning from Sacrificed Ghosts
 
 > **Epic**: phase-state-machine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Logic + Integration
 > **Manifest Version**: N/A (no control-manifest.md exists)
@@ -23,10 +23,10 @@
 
 *From GDD `design/gdd/game-state-phase-state-machine.md`, scoped to this story:*
 
-- [ ] Karma hazards spawn based on `sacrificed_ghost_id`:
-  - Van → Lưới Máu (slow penalty)
-  - Linh → Vũng Nước (DoT)
-  - Minh → Bệ Đá Ảo Ảnh (0.2s collapse)
+- [x] Karma hazards spawn based on `sacrificed_ghost_id`:
+  - [x] Van → Lưới Máu (slow penalty)
+  - [x] Linh → Vũng Nước (DoT)
+  - [x] Minh → Bệ Đá Ảo Ảnh (0.2s collapse)
 
 ---
 
@@ -82,7 +82,7 @@
 **Story Type**: Logic + Integration
 **Required evidence**: `tests/integration/phase-state-machine/karma-hazards_test.cs` — must exist and pass
 
-**Status**: [ ] Not yet created
+**Status**: [x] Created and passing
 
 ---
 

@@ -1,5 +1,5 @@
 // Assets/_Project/Domain/Services/IVisualEffectsService.cs
-namespace SolarPhobia.Domain.Services
+namespace SolarPhobia.Domain
 {
     /// <summary>
     /// Interface for visual effects service.

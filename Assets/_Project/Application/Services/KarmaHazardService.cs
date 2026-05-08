@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using R3;
 using UnityEngine;
 using VContainer;
+using SolarPhobia.Domain.ValueObjects;
 
 namespace SolarPhobia.Application.Services
 {
@@ -15,8 +16,6 @@ namespace SolarPhobia.Application.Services
         /// <summary>
         /// Spawn karma hazard based on sacrificed ghost type at the specified position.
         /// </summary>
-        /// <param name="ghostType">The type of ghost sacrificed (Van, Linh, Minh).</param>
-        /// <param name="position">The world position to spawn the hazard.</param>
         void SpawnHazardForGhost(string ghostType, Vector3 position);
 
         /// <summary>
@@ -51,12 +50,12 @@ namespace SolarPhobia.Application.Services
     public class KarmaHazardService : IKarmaHazardService, IDisposable
     {
         // ── Dependencies ──────────────────────────────
-        private readonly ReadOnlyReactiveProperty<PhaseState> _currentPhase;
+        private PhaseState _currentPhaseValue;
+        private IDisposable _phaseSubscription;
 
         // ── State ──────────────────────────────
         private readonly ReactiveProperty<KarmaHazardData> _hazardSpawned = new();
         private readonly List<GameObject> _activeHazards = new();
-        private IDisposable _phaseSubscription;
 
         /// <summary>
         /// Observable that triggers when a hazard is spawned.
@@ -66,13 +65,12 @@ namespace SolarPhobia.Application.Services
         /// <summary>
         /// Initializes a new instance of the KarmaHazardService class.
         /// </summary>
-        /// <param name="currentPhase">The current phase reactive property from PhaseStateMachine.</param>
         [Inject]
         public KarmaHazardService(ReadOnlyReactiveProperty<PhaseState> currentPhase)
         {
-            _currentPhase = currentPhase;
-            _phaseSubscription = _currentPhase
-                .Subscribe(OnPhaseChanged);
+            _phaseSubscription = currentPhase
+                .AsObservable()
+                .Subscribe(newPhase => _currentPhaseValue = newPhase);
         }
 
         /// <inheritdoc/>
@@ -157,7 +155,6 @@ namespace SolarPhobia.Application.Services
         // ── Private Methods ──────────────────────────────
         private GameObject SpawnHazardPrefab(string hazardType, Vector3 position, float effectValue)
         {
-            // Create hazard GameObject with appropriate component
             GameObject hazard = new GameObject($"KarmaHazard_{hazardType}");
             hazard.transform.position = position;
 
@@ -187,7 +184,7 @@ namespace SolarPhobia.Application.Services
 
         private bool IsNightSurvivalPhase()
         {
-            return _currentPhase != null && _currentPhase.Value == PhaseState.NightSurvival;
+            return _currentPhaseValue == PhaseState.NightSurvival;
         }
 
         /// <summary>
@@ -224,8 +221,6 @@ namespace SolarPhobia.Application.Services
         {
             if (other.CompareTag("Player"))
             {
-                // Apply slow effect - would need reference to player movement service
-                // For now, just log
                 Debug.Log($"Player in Luoi Mau zone - speed reduced to {_slowMultiplier}×");
             }
         }
@@ -238,7 +233,6 @@ namespace SolarPhobia.Application.Services
     {
         private float _damagePerSecond;
         private SphereCollider _trigger;
-        private float _timer;
 
         public VungNuocHazard Initialize(float damagePerSecond)
         {
@@ -249,16 +243,10 @@ namespace SolarPhobia.Application.Services
             return this;
         }
 
-        private void Update()
-        {
-            // Damage applied via OnTriggerStay to avoid frame-based timing issues
-        }
-
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                // Apply DoT - would need reference to player health service
                 Debug.Log($"Player in Vung Nuoc zone - taking {_damagePerSecond} HP/s");
             }
         }

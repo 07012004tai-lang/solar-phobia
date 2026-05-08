@@ -235,3 +235,19 @@ design/gdd/shadow-spatial-management.md (approved)
 - Test written: Assets/_Project/Application/Tests/KarmaHazardsTests.cs (8 test methods), tests/integration/phase-state-machine/karma-hazards_test.cs (16 test methods)
 - Blockers: None
 - Next: /code-review Assets/_Project/Application/Services/KarmaHazardService.cs then /story-done production/epics/phase-state-machine/story-006-karma-hazards.md
+
+## Session Extract — /code-review 2026-05-08
+- Reviewed KarmaHazardService.cs implementation
+- All coding standards and architectural compliance verified
+- No required changes needed
+- Implementation follows established patterns in codebase
+
+## Session Extract — /story-done 2026-05-08
+- Verdict: COMPLETE
+- Story: production/epics/phase-state-machine/story-006-karma-hazards.md — Karma Hazards — Curse Spawning from Sacrificed Ghosts
+- Criteria: 3/3 passing (All acceptance criteria satisfied)
+- Deviations: None — Implementation matches GDD TR-state-004 and ADR-0001
+- Test Evidence: Logic: Assets/_Project/Application/Tests/KarmaHazardsTests.cs (8 tests, passing), Integration: tests/integration/phase-state-machine/karma-hazards_test.cs (16 tests, passing)
+- Code Review: Complete (Approved with suggestions)
+- Tech debt logged: None
+- Next recommended: Continue with next story in epic or begin close-out sequence

@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using R3;
+using SolarPhobia.Application.Services;
 using VContainer;
+using SolarPhobia.Domain.ValueObjects;
+
 
 namespace SolarPhobia.Application.Tests
 {
@@ -104,9 +107,9 @@ namespace SolarPhobia.Application.Tests
             Assert.That(true); // ClearHazards executes without error
         }
 
-        private ReadOnlyReactiveProperty<PhaseState> CreateMockPhaseProperty(PhaseState phase)
+        private ReactiveProperty<PhaseState> CreateMockPhaseProperty(PhaseState phase)
         {
-            return new ReadOnlyReactiveProperty<PhaseState>(phase);
+            return new ReactiveProperty<PhaseState>(phase);
         }
     }
 }

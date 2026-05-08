@@ -21,7 +21,7 @@ namespace SolarPhobia.Application.Services
 
     public class PhaseStateMachine : IPhaseStateMachine
     {
-        private readonly ReactiveProperty<PhaseState> _currentPhase = new(PhaseState.Bootstrapping);
+        private readonly ReactiveProperty<PhaseState> _currentPhase = new(PhaseState.Boot);
         private readonly Subject<PhaseChangedEvent> _phaseChangedSubject = new();
         private readonly Subject<DayStartEvent> _dayStartSubject = new();
         private readonly Subject<NightStartEvent> _nightStartSubject = new();
@@ -71,7 +71,7 @@ namespace SolarPhobia.Application.Services
                 case PhaseState.NightSurvival:
                     _nightStartSubject.OnNext(new NightStartEvent());
                     break;
-                case PhaseState.Resolve:
+                case PhaseState.EndingEvaluation:
                     _resolveSubject.OnNext(new ResolveEvent());
                     break;
             }
@@ -87,12 +87,15 @@ namespace SolarPhobia.Application.Services
         {
             return to switch
             {
-                PhaseState.DayService => from == PhaseState.Bootstrapping || from == PhaseState.Reset,
-                PhaseState.ChoiceLock => from == PhaseState.DayService,
-                PhaseState.NightSurvival => from == PhaseState.ChoiceLock,
-                PhaseState.Resolve => from == PhaseState.NightSurvival,
-                PhaseState.Reset => from == PhaseState.Resolve,
-                PhaseState.FatalError => from == PhaseState.ChoiceLock || from == PhaseState.NightSurvival,
+                PhaseState.DayService => from == PhaseState.Boot || from == PhaseState.ChoiceLock,
+                PhaseState.Dialogue => from == PhaseState.DayService,
+                PhaseState.Order => from == PhaseState.Dialogue,
+                PhaseState.SunsetWarning => from == PhaseState.Order,
+                PhaseState.NightTravel => from == PhaseState.SunsetWarning,
+                PhaseState.ShrineArrival => from == PhaseState.NightTravel,
+                PhaseState.NightSurvival => from == PhaseState.ShrineArrival,
+                PhaseState.EndingEvaluation => from == PhaseState.NightSurvival,
+                PhaseState.ChoiceLock => from == PhaseState.EndingEvaluation,
                 _ => false
             };
         }
@@ -103,27 +106,37 @@ namespace SolarPhobia.Application.Services
             {
                 [PhaseState.DayService] = new()
                 {
-                    GameAction.InspectSoul,
-                    GameAction.AssignRitual,
-                    GameAction.ConfirmSelection,
-                    GameAction.CancelSelection
+                    GameAction.StartGame,
+                    GameAction.CompleteDayPrep,
+                    GameAction.FinishDialogue,
+                    GameAction.CompleteOrder
                 },
-                [PhaseState.ChoiceLock] = new()
+                [PhaseState.Dialogue] = new()
                 {
-                    GameAction.LockIn
+                    GameAction.SunsetWarningTimeout
+                },
+                [PhaseState.Order] = new()
+                {
+                    GameAction.ArriveAtShrine
+                },
+                [PhaseState.SunsetWarning] = new()
+                {
+                    GameAction.CompleteEndingEvaluation
+                },
+                [PhaseState.NightTravel] = new()
+                {
+                    GameAction.SurviveNight
+                },
+                [PhaseState.ShrineArrival] = new()
+                {
+                    GameAction.MakeChoice
                 },
                 [PhaseState.NightSurvival] = new()
                 {
-                    GameAction.Move,
-                    GameAction.Sprint,
-                    GameAction.Dash,
-                    GameAction.Swing,
-                    GameAction.Glide,
-                    GameAction.Crouch,
-                    GameAction.InteractShrine
+                    GameAction.ResetGame
                 },
-                [PhaseState.Resolve] = new(),
-                [PhaseState.Reset] = new()
+                [PhaseState.EndingEvaluation] = new(),
+                [PhaseState.ChoiceLock] = new()
             };
         }
     }

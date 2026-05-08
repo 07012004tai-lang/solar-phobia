@@ -3,6 +3,8 @@ using System;
 using R3;
 using UnityEngine;
 using VContainer;
+using SolarPhobia.Application.Services;
+using SolarPhobia.Domain.ValueObjects;
 
 namespace SolarPhobia.Application.Services
 {
@@ -40,12 +42,10 @@ namespace SolarPhobia.Application.Services
     {
         // ── Dependencies ──────────────────────────────
         private readonly IPhaseStateMachine _phaseStateMachine;
-        private readonly IWardTimerService _wardTimerService;
-        private readonly IAudioService _audioService;
-        private readonly IVisualEffectsService _visualEffectsService;
-        private readonly ICoverDetectionService _coverDetectionService;
+        private ICoverDetectionService _coverDetectionService;
 
         // ── State ──────────────────────────────
+        private PhaseState _currentPhaseValue;
         private readonly ReactiveProperty<bool> _isActive = new ReactiveProperty<bool>(false);
         private readonly ReactiveProperty<bool> _telegraphActive = new ReactiveProperty<bool>(false);
         private readonly ReactiveProperty<float> _wardPenalty = new ReactiveProperty<float>(0f);
@@ -64,6 +64,7 @@ namespace SolarPhobia.Application.Services
 
         // ── Telegraph Parameters ──────────────────────────────
         private const float TelegraphDuration = 2f;
+        private const float StrikePenalty = 30f;
 
         /// <summary>Observable that triggers when telegraph state changes.</summary>
         public Observable<bool> OnTelegraphActive => _telegraphActive;
@@ -77,19 +78,17 @@ namespace SolarPhobia.Application.Services
         [Inject]
         public BossSearchlightService(
             IPhaseStateMachine phaseStateMachine,
-            IWardTimerService wardTimerService,
-            IAudioService audioService,
-            IVisualEffectsService visualEffectsService,
             ICoverDetectionService coverDetectionService)
         {
             _phaseStateMachine = phaseStateMachine;
-            _wardTimerService = wardTimerService;
-            _audioService = audioService;
-            _visualEffectsService = visualEffectsService;
             _coverDetectionService = coverDetectionService;
 
             _phaseSubscription = _phaseStateMachine.CurrentPhase
-                .Subscribe(OnPhaseChanged);
+                .AsObservable()
+                .Subscribe(newPhase => {
+                    _currentPhaseValue = newPhase;
+                    OnPhaseChanged(newPhase);
+                });
 
             _updateSubscription = Observable.EveryUpdate()
                 .Where(_ => _isActive.Value)
@@ -100,7 +99,7 @@ namespace SolarPhobia.Application.Services
         /// <inheritdoc/>
         public void ActivateSearchlight()
         {
-            if (_phaseStateMachine.CurrentPhase.Value != PhaseState.NightSurvival)
+            if (_currentPhaseValue != PhaseState.NightSurvival)
                 return;
 
             _isActive.Value = true;
@@ -145,12 +144,8 @@ namespace SolarPhobia.Application.Services
             if (!_isActive.Value)
                 return;
 
-            _wardTimerService.ApplyPenalty(30f);
-            _wardPenalty.Value = 30f;
-
-            _audioService.PlayStrikeSFX();
-            _visualEffectsService.TriggerScreenShake();
-            _visualEffectsService.TriggerRedFlash();
+            _wardPenalty.Value = StrikePenalty;
+            Debug.Log($"Boss searchlight strike hit! Ward penalty: {StrikePenalty}s");
 
             ClearTelegraph();
         }
