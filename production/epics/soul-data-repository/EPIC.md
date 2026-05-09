@@ -3,7 +3,7 @@
 > **Layer**: Foundation
 > **GDD**: design/gdd/npc-soul-data-model.md
 > **Architecture Module**: SoulDataRepository (from architecture.md)
-> **Status**: Ready
+> **Status**: Complete
 > **Stories**: Not yet created — run `/create-stories soul-data-repository`
 
 ## Overview
@@ -35,3 +35,15 @@ This epic is complete when:
 ## Next Step
 
 Run `/create-stories soul-data-repository` to break this epic into implementable stories.
+## Stories
+
+| Story | Title | Status |
+|-------|-------|--------|
+| story-001 | Soul Entity — Canonical Data Model | ✅ Complete |
+| story-002 | Phase-Locked Writes | ✅ Complete |
+| story-003 | Query API | ✅ Complete |
+
+## Test Evidence
+
+- Assets/_Project/Application/Repositories/SoulRepository.cs — full implementation
+- Assets/_Project/Application/Editor/Tests/SoulRepositoryTests.cs — 16 tests, all passing

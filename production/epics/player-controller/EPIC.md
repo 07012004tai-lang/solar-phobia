@@ -3,8 +3,8 @@
 > **Layer**: Core
 > **GDD**: design/gdd/player-controller.md
 > **Architecture Module**: PlayerController (from architecture.md)
-> **Status**: Ready
-> **Stories**: Not yet created — run `/create-stories player-controller`
+> **Status**: In Progress (2D Refactor — ADR-0003-v2)
+> **Stories**: 8 stories created — see below
 
 ## Overview
 
@@ -24,6 +24,27 @@ Player Controller is the input and movement system that translates player action
 |-------|-------------|--------------|
 | TR-player-001 | WASD movement with sprint, dash, glide, swing actions (phase-gated) | ADR-0003 ✅ |
 
+## Stories
+
+| Story | Title | Type | Priority | Status |
+|-------|-------|------|----------|--------|
+| story-001 | Phase-Gated Input | Logic | P0 | ✅ Complete (reused) |
+| story-002 | WASD Movement (3D) | Logic | P0 | 📦 Superseded |
+| story-003 | Sprint (3D) | Logic | P1 | 📦 Superseded |
+| story-004 | Cover Detection (3D) | Logic | P1 | 📦 Superseded |
+| story-005 | E-Key Interact | Logic | P1 | ✅ Complete (reused) |
+| story-006 | Cursor Visibility | UI | P1 | ✅ Complete (reused) |
+| story-002-v2 | A/D Movement 2D | Logic | P0 | Ready |
+| story-003-v2 | Spirit Dash (-5s Ward) | Logic | P1 | Ready |
+| story-004-v2 | Swing + Glide Skills | Logic | P1 | Ready |
+| story-005-v2 | Coyote Time + Jump Buffer | Logic | P1 | Ready |
+| story-006-v2 | Cover Detection 2D (Mộ Gió) | Logic | P1 | Ready |
+| story-007-v2 | Day Phase Swap + Shove | Logic | P1 | Ready |
+| story-007 | Strike Warning Integration | Integration | P1 | Ready |
+| story-008 | Relic Pickup Integration | Integration | P2 | Ready |
+
+**Implementation order**: 002-v2 → 003-v2 → 004-v2 → 005-v2 → 006-v2 → 007-v2 → 007 → 008
+
 ## Definition of Done
 
 This epic is complete when:
@@ -34,4 +55,4 @@ This epic is complete when:
 
 ## Next Step
 
-Run `/create-stories player-controller` to break this epic into implementable stories.
+Run `/dev-story production/epics/player-controller/story-001-phase-gated-input.md` to begin implementation.
