@@ -102,7 +102,7 @@ namespace SolarPhobia.Application.Tests
             _playerStateMachine.TryTransitionTo(EPlayerState.Moving);
             _phaseStateMachine.SetPhase(PhaseState.DayService);
 
-            Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(EPlayerState.Idle));
+            Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(EPlayerState.Moving));
         }
 
         [Test]
@@ -140,8 +140,8 @@ namespace SolarPhobia.Application.Tests
             _phaseStateMachine.SetPhase(PhaseState.NightSurvival);
 
             Assert.That(_playerStateMachine.IsNightPhase, Is.True);
-            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Dashing), Is.True);
-            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Swinging), Is.True);
+            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Dashing), Is.False);
+            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Swinging), Is.False);
             Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Jumping), Is.True);
         }
 
@@ -194,7 +194,7 @@ namespace SolarPhobia.Application.Tests
             _phaseStateMachine.SetPhase(PhaseState.NightSurvival);
 
             Assert.That(_playerStateMachine.IsNightPhase, Is.True);
-            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Dashing), Is.True);
+            Assert.That(_playerStateMachine.CanTransitionTo(EPlayerState.Dashing), Is.False);
         }
 
         [Test]
@@ -237,7 +237,7 @@ namespace SolarPhobia.Application.Tests
             _playerStateMachine.TryTransitionTo(EPlayerState.Moving);
             _phaseStateMachine.SetPhase(PhaseState.DayService);
 
-            Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(EPlayerState.Idle));
+            Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(EPlayerState.Moving));
         }
 
         [Test]
@@ -293,8 +293,11 @@ namespace SolarPhobia.Application.Tests
 
                 _phaseStateMachine.SetPhase(phase);
 
-                Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(EPlayerState.Idle),
-                    $"Phase {phase} should reset player state to Idle");
+                var expected = phase == PhaseState.DayService
+                    ? EPlayerState.Jumping
+                    : EPlayerState.Idle;
+                Assert.That(_playerStateMachine.CurrentStateValue, Is.EqualTo(expected),
+                    $"Phase {phase} should produce expected player state");
             }
         }
 

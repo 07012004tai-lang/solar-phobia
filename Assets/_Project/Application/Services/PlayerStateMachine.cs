@@ -52,9 +52,10 @@ namespace SolarPhobia.Application.Services
         public void Initialize()
         {
             _currentState.Value = EPlayerState.Idle;
+            _isNightMovement = _phaseStateMachine.CurrentState == PhaseState.NightSurvival;
 
-            _phaseStateMachine.CurrentPhase
-                .Subscribe(OnPhaseChanged)
+            _phaseStateMachine.OnPhaseChanged
+                .Subscribe(e => OnPhaseChanged(e.NewPhase))
                 .AddTo(_disposables);
         }
 
@@ -79,6 +80,11 @@ namespace SolarPhobia.Application.Services
 
         public bool CanTransitionTo(EPlayerState targetState)
         {
+            if (_isNightMovement && IsNightSkillState(targetState))
+            {
+                return true;
+            }
+
             var current = _currentState.Value;
             return IsValidTransition(current, targetState);
         }
@@ -178,6 +184,14 @@ namespace SolarPhobia.Application.Services
 
                 _ => false
             };
+        }
+
+        private static bool IsNightSkillState(EPlayerState state)
+        {
+            return state == EPlayerState.Dashing
+                   || state == EPlayerState.Swinging
+                   || state == EPlayerState.Jumping
+                   || state == EPlayerState.Sprinting;
         }
     }
 }

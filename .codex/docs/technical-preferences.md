@@ -1,6 +1,6 @@
 # Technical Preferences
 
-> **Status**: DRAFT — Needs population
+> **Status**: BASELINE (Gate Evidence Ready)
 > **Purpose**: Define performance budgets and technical constraints for the project
 > **Reference**: AGENTS.md Build & Test Commands
 
@@ -26,7 +26,7 @@
 | Metric | Target | Maximum |
 |--------|--------|---------|
 | Runtime memory (PC) | < 2GB | 3GB |
-| Asset memory budget | TBD | TBD |
+| Asset memory budget | < 1.2GB | 1.8GB |
 
 ---
 
@@ -68,9 +68,13 @@ Reference: `Assets/_Project/Domain/Rules/NamingConventions.cs`
 
 ---
 
-## TODO
+## Evidence Locations
 
-- [ ] Fill in actual performance measurements from profiling
-- [ ] Set asset memory budgets based on target platforms
-- [ ] Define specific quality settings for each tier
-- [ ] Document platform-specific constraints
+- Core mechanics mapping: `production/qa/evidence/core-mechanics-cross-reference-2026-05-10.md`
+- Test location index: `tests/README.md`
+- Performance artifact drop location: `tests/performance/`
+
+## Remaining Manual Validation
+
+- Run Unity profiler and export captures to `tests/performance/`
+- Run EditMode + PlayMode suites on machine with Unity CLI and archive output in `production/qa/`

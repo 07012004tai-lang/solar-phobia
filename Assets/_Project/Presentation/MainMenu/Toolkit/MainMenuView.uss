@@ -54,11 +54,14 @@
 }
 
 .mainmenu-title {
-    font-size: 72px;
+    font-size: 129px;
     -unity-font-style: bold;
     color: var(--charcoal-black);
     letter-spacing: 4px;
     margin-bottom: 0;
+    -unity-font-definition: url("project://database/Assets/_Project/_Art/Fonts/3c6d7d07994b48a27be05ae8aaff1646/Besigetz%20VH.ttf?fileID=12800000&guid=8f017a0fb08da5647949a01cfcdbc057&type=3#Besigetz VH");
+    -unity-text-outline-width: 6px;
+    -unity-material: url("");
 }
 
 .mainmenu-subtitle {
