@@ -79,7 +79,7 @@ namespace SolarPhobia.Presentation.MainMenu
         {
             if (_document == null)
             {
-                _document = FindObjectOfType<UIDocument>();
+                _document = FindFirstObjectByType<UIDocument>();
             }
             
             if (_document == null)

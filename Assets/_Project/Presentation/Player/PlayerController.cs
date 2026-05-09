@@ -23,9 +23,9 @@ namespace SolarPhobia.Presentation.Player
     public class PlayerController : MonoBehaviour
     {
         // ── Injected Dependencies ──────────────────────────────────
-        [Inject] private IMapSpawnDirector        _mapDirector;
-        [Inject] private IStrikeWarningController _strikeWarningController;
-        [Inject] private IPlayerInputHandler      _inputHandler;
+        [Inject] internal IMapSpawnDirector        _mapDirector;
+        [Inject] internal IStrikeWarningController _strikeWarningController;
+        [Inject] internal IPlayerInputHandler      _inputHandler;
 
         // ── Private State ──────────────────────────────────────────
         private PlayerInputMode _mode;

@@ -1,7 +1,5 @@
 using SolarPhobia.Domain.ValueObjects;
 
-using SolarPhobia.Domain.ValueObjects;
-
 namespace SolarPhobia.Application.Messages
 {
     /// <summary>

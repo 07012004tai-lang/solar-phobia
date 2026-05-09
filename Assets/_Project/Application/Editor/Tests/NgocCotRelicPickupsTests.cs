@@ -163,7 +163,6 @@ namespace SolarPhobia.Application.Tests
         {
             var service = new TestWardDrainRate();
             service.SetDrainRate(1f, 1, 0.5f);
-            float expected = 1f * (1f + 1f * 0.25f) * (1f + 0.5f);
             Assert.AreEqual(1.875f, service.GetDrainRate());
         }
 

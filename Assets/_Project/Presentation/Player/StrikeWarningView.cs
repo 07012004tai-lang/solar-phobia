@@ -29,7 +29,7 @@ namespace SolarPhobia.Presentation.Player
         private IDisposable   _subscription;
 
         // ── Dependencies (injected via VContainer) ─────────────────
-        [Inject] private IStrikeWarningController _controller;
+        [Inject] internal IStrikeWarningController _controller;
 
         // ── Unity Lifecycle ────────────────────────────────────────
         private void Start()
