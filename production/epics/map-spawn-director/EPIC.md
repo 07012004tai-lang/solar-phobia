@@ -3,8 +3,8 @@
 > **Layer**: Foundation
 > **GDD**: design/gdd/map-and-spawn-director.md
 > **Architecture Module**: MapSpawnDirector (from architecture.md)
-> **Status**: Ready
-> **Stories**: Not yet created — run `/create-stories map-spawn-director`
+> **Status**: In Progress
+> **Stories**: 7 stories created — see below
 
 ## Overview
 
@@ -38,3 +38,30 @@ This epic is complete when:
 
 1. Run `/architecture_decision` to create ADR-0006 (Map Generation Strategy)
 2. Then run `/create-stories map-spawn-director` to break this epic into implementable stories
+## Stories
+
+| Story | Title | Type | Priority | Status |
+|-------|-------|------|----------|--------|
+| story-001 | Deterministic Seed + Chunk Generation | Logic | P0 | Ready |
+| story-002 | Sweep Exposure Check | Logic | P0 | Ready |
+| story-003 | Strike Telegraph + Penalty | Logic | P0 | Ready |
+| story-004 | Route Viability Check | Logic | P1 | Ready |
+| story-005 | Cover Density Validation | Logic | P1 | Ready |
+| story-006 | IMapSpawnDirector Interface (Player Controller signals) | Logic | P0 | Ready |
+| story-007 | Bone Relic Time Drain Event | Integration | P1 | Ready |
+
+**Implementation order**: 001 → 002 → 003 → 006 → 004 → 005 → 007
+
+## Stories
+
+| Story | Title | Type | Priority | Status |
+|-------|-------|------|----------|--------|
+| story-001 | Deterministic Seed + Chunk Generation | Logic | P0 | Ready |
+| story-002 | Sweep Exposure Check | Logic | P0 | Ready |
+| story-003 | Strike Telegraph + Penalty | Logic | P0 | Ready |
+| story-004 | Route Viability Check | Logic | P1 | Ready |
+| story-005 | Cover Density Validation | Logic | P1 | Ready |
+| story-006 | IMapSpawnDirector Interface | Logic | P0 | Ready |
+| story-007 | Bone Relic Time Drain Event | Integration | P1 | Ready |
+
+**Implementation order**: 001 → 002 → 003 → 006 → 004 → 005 → 007

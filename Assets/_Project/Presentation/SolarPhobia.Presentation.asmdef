@@ -6,7 +6,9 @@
     "SolarPhobia.Application",
     "SolarPhobia.Shared",
     "Unity.InputSystem",
-    "UnityEngine.UIElements"
+    "UnityEngine.UIElements",
+    "VContainer",
+    "R3.Unity"
   ],
   "autoReferenced": false
 }

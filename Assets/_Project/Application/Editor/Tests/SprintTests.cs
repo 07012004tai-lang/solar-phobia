@@ -10,24 +10,24 @@ namespace SolarPhobia.Application.Tests
 {
     /// <summary>
     /// Validates: TR-player-003 — Sprint — Shift Key Speed Multiplier + Stamina Integration.
-    /// Story 003: Sprint.
+    /// Story 003-v2: Sprint (2D Rigidbody).
     ///
-    /// Tests SprintController state machine and MovementCalculator sprint formula.
+    /// Tests SprintController state machine and Movement2DCalculator sprint formula.
     /// </summary>
     [TestFixture]
     public class SprintTests
     {
-        private SprintController _sprint;
-        private MovementCalculator _calc;
-        private List<bool> _sprintEvents;
+        private SprintController       _sprint;
+        private Movement2DCalculator   _calc;
+        private List<bool>             _sprintEvents;
 
         private const float DeltaTime1s = 1.0f;
 
         [SetUp]
         public void Setup()
         {
-            _sprint = new SprintController();
-            _calc   = new MovementCalculator();
+            _sprint       = new SprintController();
+            _calc         = new Movement2DCalculator();
             _sprintEvents = new List<bool>();
             _sprint.OnSprintChanged.Subscribe(v => _sprintEvents.Add(v));
         }
@@ -55,18 +55,17 @@ namespace SolarPhobia.Application.Tests
         public void AC1_SprintSpeed_IsBase_Times_Multiplier()
         {
             // base=5.0, multiplier=1.8 → effective=9.0
-            _calc.BaseMoveSpeed    = 5.0f;
+            _calc.NightMoveSpeed   = 5.0f;
             _calc.SprintMultiplier = 1.8f;
 
-            var result = _calc.CalculateMovement(
-                new Vector2(0f, 1f),
-                DeltaTime1s,
+            float velocity = _calc.CalculateNightVelocityX(
+                inputX: 1f,
                 PlayerInputMode.NightMovement,
                 isSprinting: true
             );
 
-            Assert.AreEqual(9.0f, result.z, 0.001f,
-                "Sprint speed must be base_move_speed * sprint_multiplier");
+            Assert.AreEqual(9.0f, velocity, 0.001f,
+                "Sprint speed must be nightMoveSpeed * sprintMultiplier");
         }
 
         // ── AC-2: Releasing Shift returns to base speed ───────────
@@ -93,16 +92,15 @@ namespace SolarPhobia.Application.Tests
         [Test]
         public void AC2_BaseSpeed_WhenNotSprinting()
         {
-            _calc.BaseMoveSpeed = 5.0f;
+            _calc.NightMoveSpeed = 5.0f;
 
-            var result = _calc.CalculateMovement(
-                new Vector2(0f, 1f),
-                DeltaTime1s,
+            float velocity = _calc.CalculateNightVelocityX(
+                inputX: 1f,
                 PlayerInputMode.NightMovement,
                 isSprinting: false
             );
 
-            Assert.AreEqual(5.0f, result.z, 0.001f,
+            Assert.AreEqual(5.0f, velocity, 0.001f,
                 "Base speed must be used when not sprinting");
         }
 
@@ -134,14 +132,13 @@ namespace SolarPhobia.Application.Tests
             _sprint.NotifyStaminaDepleted();
 
             // After depletion, isSprinting = false → base speed
-            var result = _calc.CalculateMovement(
-                new Vector2(0f, 1f),
-                DeltaTime1s,
+            float velocity = _calc.CalculateNightVelocityX(
+                inputX: 1f,
                 PlayerInputMode.NightMovement,
                 isSprinting: _sprint.IsSprinting
             );
 
-            Assert.AreEqual(5.0f, result.z, 0.001f);
+            Assert.AreEqual(5.0f, velocity, 0.001f);
         }
 
         // ── AC-4: Sprint blocked with 0 stamina ───────────────────
@@ -220,23 +217,22 @@ namespace SolarPhobia.Application.Tests
         [Test]
         public void AC6_DefaultMultiplier_Is1d8()
         {
-            Assert.AreEqual(MovementCalculator.DefaultSprintMultiplier, _calc.SprintMultiplier);
+            Assert.AreEqual(Movement2DCalculator.DefaultSprintMultiplier, _calc.SprintMultiplier);
         }
 
         [Test]
         public void AC6_CustomMultiplier_2d0_ProducesCorrectSpeed()
         {
-            _calc.BaseMoveSpeed    = 5.0f;
+            _calc.NightMoveSpeed   = 5.0f;
             _calc.SprintMultiplier = 2.0f;
 
-            var result = _calc.CalculateMovement(
-                new Vector2(0f, 1f),
-                DeltaTime1s,
+            float velocity = _calc.CalculateNightVelocityX(
+                inputX: 1f,
                 PlayerInputMode.NightMovement,
                 isSprinting: true
             );
 
-            Assert.AreEqual(10.0f, result.z, 0.001f);
+            Assert.AreEqual(10.0f, velocity, 0.001f);
         }
 
         [Test]
@@ -244,7 +240,7 @@ namespace SolarPhobia.Application.Tests
         {
             _calc.SprintMultiplier = 0.5f;
 
-            Assert.AreEqual(MovementCalculator.MinSprintMultiplier, _calc.SprintMultiplier);
+            Assert.AreEqual(Movement2DCalculator.MinSprintMultiplier, _calc.SprintMultiplier);
         }
 
         [Test]
@@ -252,7 +248,7 @@ namespace SolarPhobia.Application.Tests
         {
             _calc.SprintMultiplier = 99f;
 
-            Assert.AreEqual(MovementCalculator.MaxSprintMultiplier, _calc.SprintMultiplier);
+            Assert.AreEqual(Movement2DCalculator.MaxSprintMultiplier, _calc.SprintMultiplier);
         }
 
         // ── No duplicate events ───────────────────────────────────

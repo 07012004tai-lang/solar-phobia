@@ -29,6 +29,12 @@ namespace SolarPhobia.Application.Services
         float DayMoveSpeed { get; set; }
 
         /// <summary>
+        /// Sprint speed multiplier applied when sprinting is active.
+        /// Default: 1.8, safe range: 1.5–3.0 (per GDD Tuning Knobs).
+        /// </summary>
+        float SprintMultiplier { get; set; }
+
+        /// <summary>
         /// Calculates the horizontal X-axis displacement for one frame.
         /// Returns 0 when <paramref name="mode"/> is <see cref="PlayerInputMode.Disabled"/>.
         /// </summary>
@@ -48,5 +54,11 @@ namespace SolarPhobia.Application.Services
         /// Returns 0 when mode is not NightMovement.
         /// </summary>
         float CalculateNightVelocityX(float inputX, PlayerInputMode mode);
+
+        /// <summary>
+        /// Calculates the target horizontal velocity for Rigidbody2D with optional sprint multiplier.
+        /// Returns 0 when mode is not NightMovement.
+        /// </summary>
+        float CalculateNightVelocityX(float inputX, PlayerInputMode mode, bool isSprinting);
     }
 }

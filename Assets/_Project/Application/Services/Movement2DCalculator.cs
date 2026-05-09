@@ -40,9 +40,19 @@ namespace SolarPhobia.Application.Services
         /// <summary>Maximum day speed.</summary>
         public const float MaxDayMoveSpeed = 4.0f;
 
+        /// <summary>Default sprint speed multiplier (per GDD Tuning Knobs).</summary>
+        public const float DefaultSprintMultiplier = 1.8f;
+
+        /// <summary>Minimum allowed sprint multiplier (per GDD Tuning Knobs).</summary>
+        public const float MinSprintMultiplier = 1.5f;
+
+        /// <summary>Maximum allowed sprint multiplier (per GDD Tuning Knobs).</summary>
+        public const float MaxSprintMultiplier = 3.0f;
+
         // ── State ─────────────────────────────────────────────────
-        private float _nightMoveSpeed = DefaultNightMoveSpeed;
-        private float _dayMoveSpeed   = DefaultDayMoveSpeed;
+        private float _nightMoveSpeed    = DefaultNightMoveSpeed;
+        private float _dayMoveSpeed      = DefaultDayMoveSpeed;
+        private float _sprintMultiplier  = DefaultSprintMultiplier;
 
         // ── Public Interface ───────────────────────────────────────
         /// <inheritdoc/>
@@ -57,6 +67,13 @@ namespace SolarPhobia.Application.Services
         {
             get => _dayMoveSpeed;
             set => _dayMoveSpeed = Mathf.Clamp(value, MinDayMoveSpeed, MaxDayMoveSpeed);
+        }
+
+        /// <inheritdoc/>
+        public float SprintMultiplier
+        {
+            get => _sprintMultiplier;
+            set => _sprintMultiplier = Mathf.Clamp(value, MinSprintMultiplier, MaxSprintMultiplier);
         }
 
         // ── Constructor ────────────────────────────────────────────
@@ -84,6 +101,18 @@ namespace SolarPhobia.Application.Services
             }
 
             return inputX * _nightMoveSpeed;
+        }
+
+        /// <inheritdoc/>
+        public float CalculateNightVelocityX(float inputX, PlayerInputMode mode, bool isSprinting)
+        {
+            if (mode != PlayerInputMode.NightMovement)
+            {
+                return 0f;
+            }
+
+            float speed = _nightMoveSpeed * (isSprinting ? _sprintMultiplier : 1f);
+            return inputX * speed;
         }
     }
 }
