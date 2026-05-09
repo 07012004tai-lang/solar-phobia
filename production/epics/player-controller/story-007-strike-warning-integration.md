@@ -12,7 +12,7 @@
 
 **GDD**: `design/gdd/player-controller.md`
 **TR-ID**: `TR-player-011`
-**ADR Governing Implementation**: ADR-0003: Player Controller Pattern
+**ADR Governing Implementation**: ADR-0003-v2: Player Controller Pattern (2D)
 **ADR Decision Summary**: Player Controller receives `OnStrikeWarning` from Map Director and displays warning icon near reticle. Icon must have z-order priority above Tier 4 panic effects (chromatic aberration). Player position + collider bounds sent to Map Director each frame during NightSurvival.
 
 **Engine**: Unity 6000.3.11f1 (Unity 6) | **Risk**: HIGH
@@ -22,7 +22,7 @@
 ## Acceptance Criteria
 
 - [ ] On receiving `OnStrikeWarning` from Map Director, warning icon appears near reticle.
-- [ ] Warning icon z-order is above Tier 4 panic effects (chromatic aberration, screen shake).
+- [ ] Warning icon z-order is above Tier 4 panic effects (chromatic aberration, screen shake). Note: Tier 4 = DeathSpiral sensory state (ward ≤ 10s).
 - [ ] Multiple overlapping strike warnings display only the nearest/highest-priority icon (no UI clutter).
 - [ ] Warning icon clears when strike resolves — no lingering icon after strike ends.
 - [ ] Player position + collider bounds sent to Map Director each frame during `NightSurvival`.
@@ -34,9 +34,8 @@
 *Derived from ADR-0003 Implementation Guidelines:*
 
 - Subscribe to `IMapSpawnDirector.OnStrikeWarning` observable
-- Warning icon: Screen Space — Overlay canvas, highest sort order
+- Warning icon: Screen Space — Overlay canvas, highest sort order (2D screen-space chosen for UI consistency)
 - Send position via `IMapSpawnDirector.UpdatePlayerPosition(Vector3, Bounds)` each frame in `Update()`
-- Open question (GDD): 3D world-space vs 2D screen-space icon — default to 2D screen-space until UX decision resolved
 - Multiple warnings: track list, display only nearest by distance to player
 
 ---
@@ -91,5 +90,5 @@
 
 ## Dependencies
 
-- Depends on: Story 004 (Cover Detection), Map & Spawn Director epic (partial — `IMapSpawnDirector` interface)
+- Depends on: story-006-v2 (Cover Detection 2D), Map & Spawn Director epic (partial — `IMapSpawnDirector` interface)
 - Unlocks: None (leaf story)

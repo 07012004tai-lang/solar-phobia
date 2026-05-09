@@ -73,7 +73,7 @@ namespace SolarPhobia.Application.Services
             foreach (var hazard in _activeHazards)
             {
                 if (hazard != null)
-                    GameObject.DestroyImmediate(hazard, true);
+                    GameObject.Destroy(hazard);
             }
             _activeHazards.Clear();
         }

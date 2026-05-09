@@ -347,29 +347,31 @@ namespace SolarPhobia.Application.Tests
             Assert.That(_playerStateMachine.IsNightPhase, Is.False);
         }
 
-        // ── Additional: Null PhaseStateMachine ─────────────────────
+        // ── Additional: Constructor Dependency Behavior ────────────
 
         [Test]
-        public void NullPhaseStateMachine_IsNightPhase_False()
+        public void Constructor_WithBootPhase_IsNightPhase_False()
         {
-            var playerWithoutPhase = new PlayerStateMachine(null);
-            playerWithoutPhase.Initialize();
+            var phase = new TestPhaseStateMachine(PhaseState.Boot);
+            var player = new PlayerStateMachine(phase);
+            player.Initialize();
 
-            Assert.That(playerWithoutPhase.IsNightPhase, Is.False);
-            playerWithoutPhase.Dispose();
+            Assert.That(player.IsNightPhase, Is.False);
+            player.Dispose();
         }
 
         [Test]
-        public void NullPhaseStateMachine_TransitionsWork()
+        public void Constructor_WithPhaseMachine_TransitionsWork()
         {
-            var playerWithoutPhase = new PlayerStateMachine(null);
-            playerWithoutPhase.Initialize();
+            var phase = new TestPhaseStateMachine(PhaseState.Boot);
+            var player = new PlayerStateMachine(phase);
+            player.Initialize();
 
-            var canMove = playerWithoutPhase.TryTransitionTo(EPlayerState.Moving);
+            var canMove = player.TryTransitionTo(EPlayerState.Moving);
             Assert.That(canMove, Is.True);
-            Assert.That(playerWithoutPhase.CurrentStateValue, Is.EqualTo(EPlayerState.Moving));
+            Assert.That(player.CurrentStateValue, Is.EqualTo(EPlayerState.Moving));
 
-            playerWithoutPhase.Dispose();
+            player.Dispose();
         }
     }
 }

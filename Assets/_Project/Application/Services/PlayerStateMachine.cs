@@ -24,7 +24,7 @@ namespace SolarPhobia.Application.Services
     /// </remarks>
     public sealed class PlayerStateMachine : IPlayerStateMachine, IInitializable, IDisposable
     {
-        private readonly IPhaseStateMachine? _phaseStateMachine;
+        private readonly IPhaseStateMachine _phaseStateMachine;
         private readonly ReactiveProperty<EPlayerState> _currentState = new(EPlayerState.Idle);
         private readonly Subject<PlayerStateChangedEvent> _stateChangedSubject = new();
         private readonly List<IDisposable> _disposables = new();
@@ -43,7 +43,7 @@ namespace SolarPhobia.Application.Services
 
         // ── Constructor ───────────────────────────────────────────
         [Inject]
-        public PlayerStateMachine(IPhaseStateMachine? phaseStateMachine = null)
+        public PlayerStateMachine(IPhaseStateMachine phaseStateMachine)
         {
             _phaseStateMachine = phaseStateMachine;
         }
@@ -53,12 +53,9 @@ namespace SolarPhobia.Application.Services
         {
             _currentState.Value = EPlayerState.Idle;
 
-            if (_phaseStateMachine != null)
-            {
-                _phaseStateMachine.CurrentPhase
-                    .Subscribe(OnPhaseChanged)
-                    .AddTo(_disposables);
-            }
+            _phaseStateMachine.CurrentPhase
+                .Subscribe(OnPhaseChanged)
+                .AddTo(_disposables);
         }
 
         private void OnPhaseChanged(PhaseState phase)

@@ -37,15 +37,15 @@ Player Controller is the input and movement system that translates player action
 | story-005 | E-Key Interact | Logic | P1 | ✅ Complete (reused) |
 | story-006 | Cursor Visibility | UI | P1 | ✅ Complete (reused) |
 | story-002-v2 | A/D Movement 2D | Logic | P0 | ✅ Complete |
-| story-003-v2 | Spirit Dash (-5s Ward) | Logic | P1 | Ready |
-| story-004-v2 | Swing + Glide Skills | Logic | P1 | Ready |
-| story-005-v2 | Coyote Time + Jump Buffer | Logic | P1 | Ready |
-| story-006-v2 | Cover Detection 2D (Mộ Gió) | Logic | P1 | Ready |
-| story-007-v2 | Day Phase Swap + Shove | Logic | P1 | Ready |
+| story-003-v2 | Spirit Dash (-5s Ward) | Logic | P1 | ✅ Complete |
+| story-004-v2 | Swing + Glide Skills | Logic | P1 | ✅ Complete |
+| story-005-v2 | Coyote Time + Jump Buffer | Logic | P1 | ✅ Complete |
+| story-006-v2 | Cover Detection 2D (Mộ Gió) | Logic | P1 | ✅ Complete |
+| story-007-v2 | Day Phase Swap + Shove | Logic | P1 | ✅ Complete |
 | story-007 | Strike Warning Integration | Integration | P1 | Ready |
 | story-008 | Relic Pickup Integration | Integration | P2 | Ready |
-| **story-009** | **PlayerStateMachine Core (FSM)** | **Logic** | **P0** | **Not Started** |
-| **story-010** | **PlayerStateMachine Phase Integration** | **Integration** | **P0** | **Not Started** |
+| **story-009** | **PlayerStateMachine Core (FSM)** | **Logic** | **P0** | **✅ Complete** |
+| **story-010** | **PlayerStateMachine Phase Integration** | **Integration** | **P0** | **✅ Complete** |
 
 **Implementation order**: 009 → 010 → 002-v2 → 003-v2 → 004-v2 → 005-v2 → 006-v2 → 007-v2 → 007 → 008
 

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using R3;
+using SolarPhobia.Application.Messages;
 using SolarPhobia.Application.Services;
 using SolarPhobia.Domain.Events;
 using SolarPhobia.Domain.ValueObjects;
@@ -18,12 +19,27 @@ namespace SolarPhobia.Application.Tests
     [TestFixture]
     public class PlayerStateMachineTests
     {
+        private class TestPhaseStateMachine : IPhaseStateMachine
+        {
+            private readonly ReactiveProperty<PhaseState> _phase = new(PhaseState.Boot);
+
+            public PhaseState CurrentState => _phase.Value;
+            public ReadOnlyReactiveProperty<PhaseState> CurrentPhase => _phase;
+            public Observable<PhaseChangedEvent> OnPhaseChanged => Observable.Empty<PhaseChangedEvent>();
+            public Observable<DayStartEvent> OnDayStart => Observable.Empty<DayStartEvent>();
+            public Observable<NightStartEvent> OnNightStart => Observable.Empty<NightStartEvent>();
+            public Observable<ResolveEvent> OnResolve => Observable.Empty<ResolveEvent>();
+            public bool TryTransition(PhaseState newPhase) => true;
+            public bool IsActionAllowed(GameAction action) => true;
+            public void Initialize() { }
+        }
+
         private PlayerStateMachine _fsm;
 
         [SetUp]
         public void SetUp()
         {
-            _fsm = new PlayerStateMachine();
+            _fsm = new PlayerStateMachine(new TestPhaseStateMachine());
             _fsm.Initialize();
         }
 

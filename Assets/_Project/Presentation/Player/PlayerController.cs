@@ -31,11 +31,14 @@ namespace SolarPhobia.Presentation.Player
         private PlayerInputMode _mode;
         private IDisposable     _modeSubscription;
         private IDisposable     _strikeWarningSubscription;
+        private Collider2D      _cachedCollider;
 
         // ── Unity Lifecycle ────────────────────────────────────────
 
         private void Start()
         {
+            _cachedCollider = GetComponent<Collider2D>();
+
             // Cache initial mode
             _mode = _inputHandler.CurrentMode.CurrentValue;
 
@@ -57,10 +60,9 @@ namespace SolarPhobia.Presentation.Player
                 return;
             }
 
-            var col = GetComponent<Collider2D>();
             _strikeWarningController.ReportPlayerPosition(
                 (Vector2)transform.position,
-                col != null ? col.bounds : new Bounds(transform.position, Vector3.zero),
+                _cachedCollider != null ? _cachedCollider.bounds : new Bounds(transform.position, Vector3.zero),
                 _mode);
         }
 
@@ -103,6 +105,7 @@ namespace SolarPhobia.Presentation.Player
         /// </summary>
         private void SubscribeToStrikeWarning()
         {
+            _strikeWarningSubscription?.Dispose();
             _strikeWarningSubscription = _mapDirector.OnStrikeWarning
                 .Subscribe(active =>
                     _strikeWarningController.OnStrikeWarningReceived(
