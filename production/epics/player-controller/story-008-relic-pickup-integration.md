@@ -11,7 +11,7 @@
 ## Context
 
 **GDD**: `design/gdd/player-controller.md`
-**TR-ID**: `TR-player-010`
+**TR-ID**: `TR-player-012`
 **ADR Governing Implementation**: ADR-0003: Player Controller Pattern
 **ADR Decision Summary**: E-key on CursedMound fires `OnInteract("relic")` which the Resource Effects system subscribes to, triggering Time Drain modifier and hallucination package. Cross-system event delivery via R3 Subject / MessagePipe.
 

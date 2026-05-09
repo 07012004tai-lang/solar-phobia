@@ -3,7 +3,7 @@
 # Purpose: Trace GDD requirements to ADRs for implementation tracking
 
 schema_version: "1.0"
-last_updated: "2026-05-07"
+last_updated: "2026-05-09"
 
 systems:
   - id: "phase-state-machine"
@@ -65,10 +65,45 @@ systems:
     layer: "Foundation"
     requirements: []
 
+  - id: "player-controller"
+    name: "Player Controller & Skills"
+    gdd: "design/gdd/player-controller.md"
+    layer: "Core"
+    requirements:
+      - tr_id: "TR-player-001"
+        description: "WASD movement with sprint, dash, glide, swing actions (phase-gated)"
+        status: "active"
+        adr: "ADR-0003-v2"
+        gdd_section: "Movement & Skills"
+        
+      - tr_id: "TR-player-009"
+        description: "PlayerStateMachine FSM with ReactiveProperty<EPlayerState>"
+        status: "active"
+        adr: "ADR-0003-v2"
+        gdd_section: "State Machine"
+        
+      - tr_id: "TR-player-010"
+        description: "Phase integration: subscribe to IPhaseStateMachine for Day/Night behavior"
+        status: "active"
+        adr: "ADR-0003-v2"
+        gdd_section: "Phase-Gated Input"
+
+      - tr_id: "TR-player-011"
+        description: "Strike Warning Integration — boss searchlight telegraph"
+        status: "active"
+        adr: "ADR-0003-v2"
+        gdd_section: "Skills"
+
+      - tr_id: "TR-player-012"
+        description: "Relic Pickup Integration — Ngọc Cốt collection during night"
+        status: "active"
+        adr: "ADR-0003-v2"
+        gdd_section: "Skills"
+
 # Coverage Summary
 coverage:
-  total_systems: 5
-  systems_with_requirements: 1
-  total_requirements: 5
-  covered_by_adr: 5
+  total_systems: 6
+  systems_with_requirements: 2
+  total_requirements: 7
+  covered_by_adr: 7
   uncovered: 0

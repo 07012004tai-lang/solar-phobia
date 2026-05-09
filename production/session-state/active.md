@@ -333,3 +333,25 @@ design/gdd/shadow-spatial-management.md (approved)
 - MainMenu UI redesign with UI Toolkit identified as next priority
 - Smoke report: production/qa/smoke-2026-05-08.md
 - Next: MainMenu UI redesign, Stories 008+009 implementation, sprint review
+
+## Session Extract — /dev-story 2026-05-09
+- **Story**: production/epics/player-controller/story-009-player-state-machine-core.md — PlayerStateMachine Core — FSM Foundation
+- **Files created**:
+  - Assets/_Project/Domain/ValueObjects/EPlayerState.cs (enum)
+  - Assets/_Project/Domain/Events/PlayerStateChangedEvent.cs (event)
+  - Assets/_Project/Application/Services/Interfaces/IPlayerStateMachine.cs (interface)
+  - Assets/_Project/Application/Services/PlayerStateMachine.cs (R3 FSM)
+  - Assets/_Project/Application/Editor/Tests/PlayerStateMachineTests.cs (30+ tests)
+- **Acceptance criteria**: 5/5 covered
+- **Blockers**: None
+- **Next**: /code-review then /story-done
+
+## Session Extract — /dev-story 2026-05-09 (Story 010)
+- **Story**: production/epics/player-controller/story-010-player-state-machine-phase-integration.md — PlayerStateMachine Phase Integration
+- **Files modified**:
+  - Assets/_Project/Application/Services/Interfaces/IPlayerStateMachine.cs (added IsNightPhase)
+  - Assets/_Project/Application/Services/PlayerStateMachine.cs (added IPhaseStateMachine subscription)
+- **Test created**: Assets/_Project/Application/Editor/Tests/PlayerStateMachinePhaseTests.cs (integration tests)
+- **Acceptance criteria**: 6/6 covered
+- **Blockers**: None
+- **Next**: /code-review then /story-done

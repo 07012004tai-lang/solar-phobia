@@ -22,6 +22,24 @@ namespace SolarPhobia.Application.Installers
             
             // ── Day Phase Timeline ─────────────────────────────────────────────
             builder.Register<DayPhaseTimelineService>(Lifetime.Singleton).As<IDayPhaseTimelineService>();
+
+            // ── Core Gameplay Services ────────────────────────────────────────
+            builder.Register<PlayerInputHandler>(Lifetime.Singleton).As<IPlayerInputHandler>();
+            builder.Register<PlayerStateMachine>(Lifetime.Singleton).As<IPlayerStateMachine>();
+            builder.Register<MapSpawnDirector>(Lifetime.Singleton).As<IMapSpawnDirector>();
+            builder.Register<StrikeWarningController>(Lifetime.Singleton).As<IStrikeWarningController>();
+            builder.Register<StrikeController>(Lifetime.Singleton).As<IStrikeController>();
+            builder.Register<SprintController>(Lifetime.Singleton).As<ISprintController>();
+            builder.Register<SwingGlideController>(Lifetime.Singleton).As<ISwingGlideController>();
+            builder.Register<DashController>(Lifetime.Singleton).As<IDashController>();
+            builder.Register<DayActionController>(Lifetime.Singleton).As<IDayActionController>();
+            builder.Register<InteractHandler>(Lifetime.Singleton).As<IInteractHandler>();
+            builder.Register<CoverDetector2D>(Lifetime.Singleton).As<ICoverDetector2D>();
+            builder.Register<CursorController>(Lifetime.Singleton).As<ICursorController>();
+            builder.Register<Movement2DCalculator>(Lifetime.Singleton).As<IMovement2DCalculator>();
+            builder.Register<PlatformerFeelController>(Lifetime.Singleton).As<IPlatformerFeelController>();
+            builder.Register<KarmaHazardService>(Lifetime.Singleton).As<IKarmaHazardService>();
+
         }
     }
 }

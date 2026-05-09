@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 using NUnit.Framework;
 using R3;
+using UnityEngine;
+using SolarPhobia.Application.Messages;
 using SolarPhobia.Application.Services;
 using SolarPhobia.Domain.ValueObjects;
 
@@ -20,7 +21,7 @@ namespace SolarPhobia.Application.Tests
         [SetUp]
         public void SetUp()
         {
-            _service = new KarmaHazardService(CreateMockPhaseProperty(PhaseState.NightSurvival));
+            _service = new KarmaHazardService(CreateMockPhaseStateMachine(PhaseState.NightSurvival));
             _testHazards = new List<GameObject>();
         }
 
@@ -103,9 +104,41 @@ namespace SolarPhobia.Application.Tests
             Assert.That(true);
         }
 
-        private ReactiveProperty<PhaseState> CreateMockPhaseProperty(PhaseState phase)
+        private static IPhaseStateMachine CreateMockPhaseStateMachine(PhaseState phase)
         {
-            return new ReactiveProperty<PhaseState>(phase);
+            return new TestPhaseStateMachine(phase);
+        }
+
+        private class TestPhaseStateMachine : IPhaseStateMachine
+        {
+            private readonly ReactiveProperty<PhaseState> _phase;
+            private readonly Subject<PhaseChangedEvent> _phaseChangedSubject = new();
+            private readonly Subject<DayStartEvent> _dayStartSubject = new();
+            private readonly Subject<NightStartEvent> _nightStartSubject = new();
+            private readonly Subject<ResolveEvent> _resolveSubject = new();
+
+            public TestPhaseStateMachine(PhaseState phase)
+            {
+                _phase = new ReactiveProperty<PhaseState>(phase);
+            }
+
+            public PhaseState CurrentState => _phase.Value;
+            public ReadOnlyReactiveProperty<PhaseState> CurrentPhase => _phase;
+            public Observable<PhaseChangedEvent> OnPhaseChanged => _phaseChangedSubject;
+            public Observable<DayStartEvent> OnDayStart => _dayStartSubject;
+            public Observable<NightStartEvent> OnNightStart => _nightStartSubject;
+            public Observable<ResolveEvent> OnResolve => _resolveSubject;
+
+            public bool TryTransition(PhaseState newPhase)
+            {
+                var previousPhase = _phase.Value;
+                _phase.Value = newPhase;
+                _phaseChangedSubject.OnNext(new PhaseChangedEvent(previousPhase, newPhase));
+                return true;
+            }
+
+            public bool IsActionAllowed(GameAction action) => true;
+            public void Initialize() { }
         }
     }
 }

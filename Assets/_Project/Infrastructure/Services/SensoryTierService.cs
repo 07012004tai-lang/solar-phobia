@@ -16,7 +16,7 @@ namespace SolarPhobia.Infrastructure.Services
     /// Emits NightFailedEvent exactly once when Ward reaches 0 (AC-5 compliance).
     /// Implements IDisposable — dispose when the night phase ends to release the Ward subscription.
     /// </summary>
-    public class SensoryTierService : ISensoryTierService, IInitializable
+    public class SensoryTierService : ISensoryTierService, IInitializable, IDisposable
     {
         // ── R3 Reactive State ──────────────────────────────────────
         private readonly ReactiveProperty<SensoryTier> _currentTier = new(SensoryTier.Stable);

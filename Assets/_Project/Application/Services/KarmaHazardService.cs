@@ -33,10 +33,9 @@ namespace SolarPhobia.Application.Services
         /// Initializes a new instance of the KarmaHazardService class.
         /// </summary>
         [Inject]
-        public KarmaHazardService(ReadOnlyReactiveProperty<PhaseState> currentPhase)
+        public KarmaHazardService(IPhaseStateMachine phaseStateMachine)
         {
-            _phaseSubscription = currentPhase
-                .AsObservable()
+            _phaseSubscription = phaseStateMachine.CurrentPhase
                 .Subscribe(newPhase => _currentPhaseValue = newPhase);
         }
 
@@ -74,7 +73,7 @@ namespace SolarPhobia.Application.Services
             foreach (var hazard in _activeHazards)
             {
                 if (hazard != null)
-                    GameObject.DestroyImmediate(hazard, true);
+                    GameObject.Destroy(hazard);
             }
             _activeHazards.Clear();
         }
