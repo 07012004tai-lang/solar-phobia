@@ -20,7 +20,7 @@ namespace SolarPhobia.Application.Services
     /// Mode switches synchronously on phase change — no frame delay.
     /// No combat inputs exist in any mode (flight-only survival design).
     /// </summary>
-    public class PlayerInputHandler : IPlayerInputHandler, IInitializable
+    public class PlayerInputHandler : IPlayerInputHandler, IInitializable, IDisposable
     {
         // ── R3 Reactive State ──────────────────────────────────────
         private readonly ReactiveProperty<PlayerInputMode> _currentMode
@@ -75,6 +75,13 @@ namespace SolarPhobia.Application.Services
                 PhaseState.DayService    => PlayerInputMode.DayUI,
                 _                        => PlayerInputMode.Disabled
             };
+        }
+
+        // ── IDisposable ───────────────────────────────────────────────
+        public void Dispose()
+        {
+            _phaseSubscription?.Dispose();
+            _currentMode.Dispose();
         }
     }
 }

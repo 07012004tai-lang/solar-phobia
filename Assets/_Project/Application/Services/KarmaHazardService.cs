@@ -33,10 +33,9 @@ namespace SolarPhobia.Application.Services
         /// Initializes a new instance of the KarmaHazardService class.
         /// </summary>
         [Inject]
-        public KarmaHazardService(ReadOnlyReactiveProperty<PhaseState> currentPhase)
+        public KarmaHazardService(IPhaseStateMachine phaseStateMachine)
         {
-            _phaseSubscription = currentPhase
-                .AsObservable()
+            _phaseSubscription = phaseStateMachine.CurrentPhase
                 .Subscribe(newPhase => _currentPhaseValue = newPhase);
         }
 

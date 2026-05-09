@@ -11,7 +11,7 @@
 ## Context
 
 **GDD**: `design/gdd/player-controller.md`
-**TR-ID**: `TR-player-009`
+**TR-ID**: `TR-player-011`
 **ADR Governing Implementation**: ADR-0003: Player Controller Pattern
 **ADR Decision Summary**: Player Controller receives `OnStrikeWarning` from Map Director and displays warning icon near reticle. Icon must have z-order priority above Tier 4 panic effects (chromatic aberration). Player position + collider bounds sent to Map Director each frame during NightSurvival.
 

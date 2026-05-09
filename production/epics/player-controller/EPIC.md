@@ -3,8 +3,8 @@
 > **Layer**: Core
 > **GDD**: design/gdd/player-controller.md
 > **Architecture Module**: PlayerController (from architecture.md)
-> **Status**: In Progress (2D Refactor — ADR-0003-v2)
-> **Stories**: 8 stories created — see below
+> **Status**: In Progress (2D Refactor + FSM Gap Fix — ADR-0003-v2)
+> **Stories**: 14 stories total — 2 new stories added to address FSM gap
 
 ## Overview
 
@@ -23,6 +23,8 @@ Player Controller is the input and movement system that translates player action
 | TR-ID | Requirement | ADR Coverage |
 |-------|-------------|--------------|
 | TR-player-001 | WASD movement with sprint, dash, glide, swing actions (phase-gated) | ADR-0003 ✅ |
+| TR-player-009 | PlayerStateMachine FSM with ReactiveProperty<EPlayerState> (Idle, Moving, Sprinting, etc.) | ADR-0003-v2 ✅ |
+| TR-player-010 | Phase integration: subscribe to IPhaseStateMachine for Day/Night behavior changes | ADR-0003-v2 ✅ |
 
 ## Stories
 
@@ -34,7 +36,7 @@ Player Controller is the input and movement system that translates player action
 | story-004 | Cover Detection (3D) | Logic | P1 | 📦 Superseded |
 | story-005 | E-Key Interact | Logic | P1 | ✅ Complete (reused) |
 | story-006 | Cursor Visibility | UI | P1 | ✅ Complete (reused) |
-| story-002-v2 | A/D Movement 2D | Logic | P0 | Ready |
+| story-002-v2 | A/D Movement 2D | Logic | P0 | ✅ Complete |
 | story-003-v2 | Spirit Dash (-5s Ward) | Logic | P1 | Ready |
 | story-004-v2 | Swing + Glide Skills | Logic | P1 | Ready |
 | story-005-v2 | Coyote Time + Jump Buffer | Logic | P1 | Ready |
@@ -42,8 +44,12 @@ Player Controller is the input and movement system that translates player action
 | story-007-v2 | Day Phase Swap + Shove | Logic | P1 | Ready |
 | story-007 | Strike Warning Integration | Integration | P1 | Ready |
 | story-008 | Relic Pickup Integration | Integration | P2 | Ready |
+| **story-009** | **PlayerStateMachine Core (FSM)** | **Logic** | **P0** | **Not Started** |
+| **story-010** | **PlayerStateMachine Phase Integration** | **Integration** | **P0** | **Not Started** |
 
-**Implementation order**: 002-v2 → 003-v2 → 004-v2 → 005-v2 → 006-v2 → 007-v2 → 007 → 008
+**Implementation order**: 009 → 010 → 002-v2 → 003-v2 → 004-v2 → 005-v2 → 006-v2 → 007-v2 → 007 → 008
+
+> **Critical Gap Fixed**: Stories 009-010 address the missing PlayerStateMachine FSM that was not covered in the original story list.
 
 ## Definition of Done
 
