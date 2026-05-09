@@ -81,8 +81,10 @@ namespace SolarPhobia.Application.Services
             if (_elapsedTime >= CollapseEnd)
                 return TimelinePhase.ChoiceLock;
             if (_elapsedTime >= CrisisEnd)
-                return TimelinePhase.Crisis;
+                return TimelinePhase.Collapse;
             if (_elapsedTime >= TensionEnd)
+                return TimelinePhase.Crisis;
+            if (_elapsedTime >= StabilityEnd)
                 return TimelinePhase.Tension;
             return TimelinePhase.Stability;
         }

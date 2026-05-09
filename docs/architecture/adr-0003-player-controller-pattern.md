@@ -1,6 +1,18 @@
 # ADR-0003: Player Controller Pattern
 
 ## Status
+**Superseded** — replaced by ADR-0003-v2 (2026-05-09)
+
+> Master GDD V5.0 confirmed the game is a **2D side-scrolling precision platformer**.
+> See `adr-0003-v2-player-controller-2d.md` for the current decision.
+> Code derived from this ADR (MovementCalculator, SprintController, CoverDetector)
+> is **archived** — do not delete, do not extend.
+
+---
+
+## Original Decision (Archived — 2026-05-07)
+
+## Status (Original)
 Accepted
 
 ## Date

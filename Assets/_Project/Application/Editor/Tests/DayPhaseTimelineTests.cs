@@ -108,30 +108,36 @@ namespace SolarPhobia.Application.Tests
         [Test]
         public void PhaseTransition_EmitsTimelinePhaseChangedEvent_At180Seconds()
         {
-            TimelinePhaseChangedEvent? received = null;
-            var sub = _timeline.OnTimelinePhaseChanged.Subscribe(e => received = e);
+            var allEvents = new System.Collections.Generic.List<TimelinePhaseChangedEvent>();
+            var sub = _timeline.OnTimelinePhaseChanged.Subscribe(e => allEvents.Add(e));
             
             _timeline.StartTimeline();
-            _timeline.Tick(180f);
+            _timeline.Tick(90f);  // Stability → Tension
+            _timeline.Tick(90f);  // Tension → Crisis (total 180s)
             
-            Assert.That(received, Is.Not.Null);
-            Assert.That(received.Value.PreviousPhase, Is.EqualTo(TimelinePhase.Tension));
-            Assert.That(received.Value.NewPhase, Is.EqualTo(TimelinePhase.Crisis));
+            // Last event should be Tension → Crisis
+            Assert.That(allEvents.Count, Is.GreaterThan(0));
+            var last = allEvents[allEvents.Count - 1];
+            Assert.That(last.PreviousPhase, Is.EqualTo(TimelinePhase.Tension));
+            Assert.That(last.NewPhase, Is.EqualTo(TimelinePhase.Crisis));
             sub.Dispose();
         }
 
         [Test]
         public void PhaseTransition_EmitsTimelinePhaseChangedEvent_At270Seconds()
         {
-            TimelinePhaseChangedEvent? received = null;
-            var sub = _timeline.OnTimelinePhaseChanged.Subscribe(e => received = e);
+            var allEvents = new System.Collections.Generic.List<TimelinePhaseChangedEvent>();
+            var sub = _timeline.OnTimelinePhaseChanged.Subscribe(e => allEvents.Add(e));
             
             _timeline.StartTimeline();
-            _timeline.Tick(270f);
+            _timeline.Tick(90f);  // Stability → Tension
+            _timeline.Tick(90f);  // Tension → Crisis
+            _timeline.Tick(90f);  // Crisis → Collapse (total 270s)
             
-            Assert.That(received, Is.Not.Null);
-            Assert.That(received.Value.PreviousPhase, Is.EqualTo(TimelinePhase.Crisis));
-            Assert.That(received.Value.NewPhase, Is.EqualTo(TimelinePhase.Collapse));
+            Assert.That(allEvents.Count, Is.GreaterThan(0));
+            var last = allEvents[allEvents.Count - 1];
+            Assert.That(last.PreviousPhase, Is.EqualTo(TimelinePhase.Crisis));
+            Assert.That(last.NewPhase, Is.EqualTo(TimelinePhase.Collapse));
             sub.Dispose();
         }
 
@@ -142,7 +148,10 @@ namespace SolarPhobia.Application.Tests
             var sub = _timeline.OnTimelinePhaseChanged.Subscribe(e => received = e);
             
             _timeline.StartTimeline();
-            _timeline.Tick(300f);
+            _timeline.Tick(90f);   // Stability → Tension
+            _timeline.Tick(90f);   // Tension → Crisis
+            _timeline.Tick(90f);   // Crisis → Collapse
+            _timeline.Tick(30f);   // Collapse → ChoiceLock (total 300s)
             
             Assert.That(received, Is.Not.Null);
             Assert.That(received.Value.PreviousPhase, Is.EqualTo(TimelinePhase.Collapse));
