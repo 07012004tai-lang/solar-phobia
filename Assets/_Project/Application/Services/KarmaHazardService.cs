@@ -73,7 +73,16 @@ namespace SolarPhobia.Application.Services
             foreach (var hazard in _activeHazards)
             {
                 if (hazard != null)
+                {
+#if UNITY_EDITOR
+                    if (!UnityEngine.Application.isPlaying)
+                    {
+                        GameObject.DestroyImmediate(hazard);
+                        continue;
+                    }
+#endif
                     GameObject.Destroy(hazard);
+                }
             }
             _activeHazards.Clear();
         }

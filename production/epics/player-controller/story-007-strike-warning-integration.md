@@ -1,12 +1,12 @@
 # Story 007: Strike Warning Integration — Map Director Event → Reticle Icon
 
 > **Epic**: player-controller
-> **Status**: Ready
+> **Status**: Complete (documentation fixed)
 > **Layer**: Core
 > **Type**: Integration
 > **Priority**: P1
 > **Estimate**: 5 hours
-> **Manifest Version**: N/A
+> **Manifest Version**: N/A — manifest not yet created (see docs/architecture/control-manifest.md)
 
 ## Context
 
@@ -84,7 +84,7 @@
 **Story Type**: Integration
 **Required evidence**: `tests/integration/player-controller/strike-warning_test.cs` OR documented playtest in `production/qa/evidence/strike-warning-playtest.md`
 
-**Status**: [ ] Not yet created
+**Status**: [x] Created (`tests/integration/player-controller/strike-warning_test.cs`)
 
 ---
 
@@ -92,3 +92,7 @@
 
 - Depends on: story-006-v2 (Cover Detection 2D), Map & Spawn Director epic (partial — `IMapSpawnDirector` interface)
 - Unlocks: None (leaf story)
+
+**Control Manifest Rules**: N/A — manifest not yet created (see docs/architecture/control-manifest.md)
+
+**Performance Budget**: UI icon update must complete within 1ms per frame; warning icon render must not exceed 0.5ms. Position update to Map Director via R3 Subject must complete within 0.5ms.

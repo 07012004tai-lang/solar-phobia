@@ -3,7 +3,7 @@
 > **Layer**: Foundation
 > **GDD**: design/gdd/game-state-phase-state-machine.md
 > **Architecture Module**: PhaseStateMachine (from architecture.md)
-> **Status**: In Progress
+> **Status**: Complete
 > **Stories**: 9 stories created
 
 ## Overview
@@ -37,15 +37,15 @@ This epic is complete when:
 
 | # | Title | Layer | Type | Status |
 |---|-------|-------|------|--------|
-| 001 | Day Phase Timeline — 4 Pressure Phases | Foundation | Logic | Ready |
-| 002 | Day Phase Mechanics (Light/Shadows) | Core | Logic | Ready |
-| 003 | Night Phase Movement (Speed Reduction) | Core | Logic | Ready |
-| 004 | Cover Detection (Mound Colliders) | Feature | Logic | Ready |
-| 005 | Boss Searchlight (Detection Sweep) | Feature | Integration | Ready |
-| 006 | Karma Hazards (Curse Spawning) | Feature | Logic + Integration | Ready |
-| 007 | Ngọc Cốt Relic Pickups | Feature | Logic | Ready |
-| 008 | Ward Timer Initialization | Feature | Logic | Ready |
-| 009 | Sensory Tiles (Detection Thresholds) | Presentation | Logic + UI | Ready |
+| 001 | Day Phase Timeline — 4 Pressure Phases | Foundation | Logic | ✅ Complete |
+| 002 | Day Phase Mechanics (Light/Shadows) | Core | Logic | ✅ Complete |
+| 003 | Night Phase Movement (Speed Reduction) | Core | Logic | ✅ Complete |
+| 004 | Cover Detection (Mound Colliders) | Feature | Logic | ✅ Complete |
+| 005 | Boss Searchlight (Detection Sweep) | Feature | Integration | ✅ Complete |
+| 006 | Karma Hazards (Curse Spawning) | Feature | Logic + Integration | ✅ Complete |
+| 007 | Ngọc Cốt Relic Pickups | Feature | Logic | ✅ Complete |
+| 008 | Ward Timer Initialization | Feature | Logic | ✅ Complete |
+| 009 | Sensory Tiles (Detection Thresholds) | Presentation | Logic + UI | ✅ Complete |
 
 ## Next Step
 

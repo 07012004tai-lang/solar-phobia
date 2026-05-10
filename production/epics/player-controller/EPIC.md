@@ -42,8 +42,8 @@ Player Controller is the input and movement system that translates player action
 | story-005-v2 | Coyote Time + Jump Buffer | Logic | P1 | ✅ Complete |
 | story-006-v2 | Cover Detection 2D (Mộ Gió) | Logic | P1 | ✅ Complete |
 | story-007-v2 | Day Phase Swap + Shove | Logic | P1 | ✅ Complete |
-| story-007 | Strike Warning Integration | Integration | P1 | Ready |
-| story-008 | Relic Pickup Integration | Integration | P2 | Ready |
+| story-007 | Strike Warning Integration | Integration | P1 | ✅ Complete |
+| story-008 | Relic Pickup Integration | Integration | P2 | ✅ Complete |
 | **story-009** | **PlayerStateMachine Core (FSM)** | **Logic** | **P0** | **✅ Complete** |
 | **story-010** | **PlayerStateMachine Phase Integration** | **Integration** | **P0** | **✅ Complete** |
 

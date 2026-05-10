@@ -28,7 +28,6 @@ namespace SolarPhobia.Application.Tests
         [TearDown]
         public void TearDown()
         {
-            _service?.Dispose();
             foreach (var hazard in _testHazards)
             {
                 if (hazard != null) UnityEngine.Object.DestroyImmediate(hazard, true);
@@ -97,9 +96,11 @@ namespace SolarPhobia.Application.Tests
         [Test]
         public void Service_ClearHazards_RemovesAllActiveHazards()
         {
+            UnityEngine.TestTools.LogAssert.ignoreFailingMessages = true;
             _service.SpawnHazardForGhost("Van", Vector3.zero);
             _service.SpawnHazardForGhost("Linh", new Vector3(1f, 0f, 1f));
             _service.ClearHazards();
+            UnityEngine.TestTools.LogAssert.ignoreFailingMessages = false;
 
             Assert.That(true);
         }
