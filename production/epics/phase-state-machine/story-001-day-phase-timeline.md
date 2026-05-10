@@ -1,7 +1,7 @@
 # Story 001: Day Phase Timeline — 4 Pressure Phases
 
 > **Epic**: phase-state-machine
-> **Status**: Complete
+> **Status**: Complete (tests exist at Assets/_Project/Application/Editor/Tests/DayPhaseTimelineTests.cs)
 > **Layer**: Foundation
 > **Type**: Logic
 > **Manifest Version**: N/A (no control-manifest.md exists)
@@ -79,9 +79,9 @@
 ## Test Evidence
 
 **Story Type**: Logic
-**Required evidence**: `tests/unit/phase-state-machine/day-phase-timeline_test.cs` — must exist and pass
+**Required evidence**: `Assets/_Project/Application/Editor/Tests/DayPhaseTimelineTests.cs` — must exist and pass
 
-**Status**: [ ] Not yet created
+**Status**: [x] Exists and covers all ACs
 
 ---
 

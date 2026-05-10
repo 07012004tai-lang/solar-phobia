@@ -1,4 +1,3 @@
-// Assets/_Project/Presentation/Player/StrikeWarningUI.cs
 using System;
 using R3;
 using SolarPhobia.Application.Services;
@@ -104,11 +103,11 @@ namespace SolarPhobia.Presentation.Player
             // Optional: Add pulsing animation when active
             if (isActive)
             {
-                _warningIcon.EnableInClassList("pulse-animation");
+                _warningIcon.EnableInClassList("pulse-animation", true);
             }
             else
             {
-                _warningIcon.RemoveFromClassList("pulse-animation");
+                _warningIcon.EnableInClassList("pulse-animation", false);
             }
         }
     }
